@@ -1,0 +1,106 @@
+.projects {
+  padding: 110px 20px;
+  background: linear-gradient(135deg, #200000, #4a0000, #6a0000);
+  color: #fff;
+  min-height: 100vh;
+}
+
+.projects-title {
+  text-align: center;
+  font-size: 3rem;
+  font-weight: 800;
+  margin-bottom: 50px;
+}
+
+/* GRID */
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
+  gap: 32px;
+  max-width: 1300px;
+  margin: 0 auto;
+}
+
+/* CARD */
+.project-card {
+  background: rgba(255, 255, 255, 0.07);
+  border-radius: 16px;
+  overflow: hidden;
+  padding-bottom: 20px;
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  transition: 0.35s;
+}
+
+/* IMAGE + Glow */
+.project-img-wrapper {
+  position: relative;
+}
+.project-img {
+  width: 100%;
+  height: 210px;
+  object-fit: cover;
+  border-bottom: 1px solid rgba(255,255,255,0.12);
+  transition: 0.35s;
+}
+.project-card:hover .project-img {
+  filter: brightness(1.08) saturate(1.1);
+}
+
+/* TEXT */
+.project-card h2 {
+  margin: 16px 16px 6px;
+  font-size: 1.4rem;
+  font-weight: 700;
+}
+.desc {
+  margin: 0 16px 14px;
+  opacity: 0.85;
+  line-height: 1.55;
+}
+
+/* TECH BADGES */
+.tech-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 0 16px;
+  margin-bottom: 18px;
+}
+.tech-row span {
+  padding: 5px 12px;
+  background: rgba(255,255,255,0.12);
+  border-radius: 8px;
+  font-size: 0.85rem;
+}
+
+/* BUTTONS */
+.links {
+  display: flex;
+  gap: 14px;
+  padding: 0 16px;
+}
+.btn {
+  flex: 1;
+  text-align: center;
+  padding: 10px 16px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: .95rem;
+  text-decoration: none;
+  transition: 0.3s;
+}
+.live {
+  background: #d33;
+  color: #fff;
+}
+.live:hover {
+  background: #ff4f4f;
+}
+.github {
+  border: 1px solid #fff;
+  color: #fff;
+}
+.github:hover {
+  background: rgba(255,255,255,0.18);
+}
