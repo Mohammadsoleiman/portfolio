@@ -1,11 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
-import FloatingIcons from "../components/FloatingIcons";
 import { profile } from "../data/profile";
 import "../styles/home.css";
 
 export default function Home() {
-  const skillList = [
+  const [loading, setLoading] = useState(false);
+
+  const orbitIcons = [
     "/icons/html.png",
     "/icons/css.png",
     "/icons/js.png",
@@ -13,104 +14,92 @@ export default function Home() {
     "/icons/node.png",
     "/icons/laravel.png",
   ];
-const titleContainer = {
-  hidden: { opacity: 0 },
-  show: {
-    opacity: 1,
-    transition: { staggerChildren: 0.2 }
-  }
-};
 
-const wordAnim = {
-  hidden: { opacity: 0, y: 20 },
-  show: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.6, ease: "easeOut" }
-  }
-};
+  const handleDownload = () => {
+    if (loading) return;
+    setLoading(true);
+
+    setTimeout(() => {
+      const link = document.createElement("a");
+      link.href = profile.links.cv;
+      link.download = "CV.pdf";
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      setLoading(false);
+    }, 1800);
+  };
 
   return (
-    <motion.section
-      initial={{ opacity: 0, y: 35 }}
-      animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: -35 }}
-      transition={{ duration: 0.45, ease: "easeOut" }}
-      className="home"
-    >
-      {/* خلفية الأيقونات */}
-      <FloatingIcons />
-
+    <section className="home">
       <div className="home-inner">
 
-        {/* ----- LEFT TEXT ----- */}
+        {/* LEFT TEXT */}
         <div className="home-text">
           <p className="hello">
             Hello, I'm <span className="name">{profile.name.split(" ")[0]}</span> 👋
           </p>
-<motion.h1
-  className="big-title"
-  variants={titleContainer}
-  initial="hidden"
-  animate="show"
->
-  {["Code.", "Build.", "Deliver."].map((word, i) => (
-    <motion.span key={i} variants={wordAnim} className="word">
-      {word}
-    </motion.span>
-  ))}
-</motion.h1>
 
+          <h1 className="big-title">
+            <span className="word">Code.</span>
+            <span className="word">Build.</span>
+            <span className="word">Deliver.</span>
+          </h1>
 
           <p className="subtitle">
             Full-stack developer specializing in modern, fast and scalable web applications.
           </p>
 
+          {/* DOWNLOAD BUTTON */}
           <div className="buttons">
-            <a href="/projects" className="btn btn-red">View Projects</a>
-            <a href={profile.links.cv} className="btn btn-outline">Download CV</a>
+            <motion.button
+              className={`download-btn ${loading ? "loading" : ""}`}
+              onClick={handleDownload}
+              disabled={loading}
+              whileTap={{ scale: 0.97 }}
+            >
+              {!loading ? (
+                <>
+                  <span className="btn-text">Download CV</span>
+                  <span className="btn-icon">
+                    <svg viewBox="0 0 24 24">
+                      <path d="M12 16l4-5h-3V4h-2v7H8z" />
+                    </svg>
+                  </span>
+                </>
+              ) : (
+                <span className="circle-loader"></span>
+              )}
+            </motion.button>
           </div>
         </div>
 
-        {/* ----- PROFILE + ICONS ----- */}
+        {/* RIGHT PROFILE + ORBIT ICONS */}
         <div className="profile-area">
+          <div className="orbit-container">
 
-          <div className="profile-box">
-            <span className="glow"></span>
-<div className="profile-shine-wrapper">
-  <motion.img
-    src="/img/me.png"
-    alt="profile"
-    className="profile-img"
-    initial={{ opacity: 0, scale: 0.88 }}
-    animate={{ opacity: 1, scale: 1 }}
-    transition={{ duration: 0.6 }}
-  />
-  <span className="shine"></span>
-</div>
-
-          </div>
-
-          {/* skill icons under profile */}
-          <div className="skill-icons">
-            {skillList.map((src, i) => (
-              <motion.img
+            {orbitIcons.map((icon, i) => (
+              <span
                 key={i}
-                src={src}
-                className="skill-icon"
-                animate={{ y: ["0px", "-8px", "0px"] }}
-                transition={{
-                  duration: 1.5 + i * 0.25,
-                  repeat: Infinity,
-                  ease: "easeInOut"
-                }}
-              />
+                className="orbit-icon"
+                style={{ "--i": i }}
+              >
+                <img src={icon} alt="" />
+              </span>
             ))}
-          </div>
 
+            <div className="profile-box">
+              <img
+                src="/img/me.png"
+                alt="profile"
+                className="profile-img"
+              />
+            </div>
+
+          </div>
         </div>
 
       </div>
-    </motion.section>
+    </section>
   );
 }
