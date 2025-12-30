@@ -1,24 +1,63 @@
-import { Link, NavLink } from "react-router-dom";
-
 export default function Navbar() {
-  return (
-    <nav className="navbar navbar-expand-md navbar-dark fixed-top" style={{ background: "rgba(0,0,0,0.4)", backdropFilter: "blur(10px)" }}>
-      <div className="container">
-        <Link className="navbar-brand fw-bold" to="/">
-          <span className="text-white">Mohammad</span><span className="text-danger">.dev</span>
-        </Link>
+  const scrollTo = (id) => {
+    const el = document.getElementById(id);
+    if (el) {
+      el.scrollIntoView({ behavior: "smooth" });
+    }
+  };
 
-        <button className="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#nav">
+  return (
+    <nav
+      className="navbar navbar-expand-md navbar-dark fixed-top"
+      style={{
+        background: "rgba(0,0,0,0.4)",
+        backdropFilter: "blur(10px)"
+      }}
+    >
+      <div className="container">
+        <button
+          className="navbar-brand btn btn-link p-0 text-decoration-none"
+          onClick={() => scrollTo("home")}
+        >
+          <span className="text-white fw-bold">Mohammad</span>
+          <span className="text-danger fw-bold">.dev</span>
+        </button>
+
+        <button
+          className="navbar-toggler"
+          data-bs-toggle="collapse"
+          data-bs-target="#nav"
+        >
           <span className="navbar-toggler-icon"></span>
         </button>
 
         <div id="nav" className="collapse navbar-collapse">
-          <ul className="navbar-nav ms-auto gap-2">
-            <li><NavLink className="nav-link" to="/">Home</NavLink></li>
-            <li><NavLink className="nav-link" to="/about">About</NavLink></li>
-            <li><NavLink className="nav-link" to="/skills">Skills</NavLink></li>
-            <li><NavLink className="nav-link" to="/projects">Projects</NavLink></li>
-            <li><NavLink className="nav-link" to="/contact">Contact</NavLink></li>
+          <ul className="navbar-nav ms-auto gap-2 text-center">
+            <li className="nav-item">
+              <button className="nav-link btn btn-link" onClick={() => scrollTo("home")}>
+                Home
+              </button>
+            </li>
+            <li className="nav-item">
+              <button className="nav-link btn btn-link" onClick={() => scrollTo("about")}>
+                About
+              </button>
+            </li>
+            <li className="nav-item">
+              <button className="nav-link btn btn-link" onClick={() => scrollTo("skills")}>
+                Skills
+              </button>
+            </li>
+            <li className="nav-item">
+              <button className="nav-link btn btn-link" onClick={() => scrollTo("projects")}>
+                Projects
+              </button>
+            </li>
+            <li className="nav-item">
+              <button className="nav-link btn btn-link" onClick={() => scrollTo("contact")}>
+                Contact
+              </button>
+            </li>
           </ul>
         </div>
       </div>

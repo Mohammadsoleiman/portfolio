@@ -1,5 +1,3 @@
-import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
-import { AnimatePresence } from "framer-motion";
 import { useEffect, useState } from "react";
 
 import Navbar from "./components/Navbar";
@@ -12,37 +10,43 @@ import Skills from "./pages/Skills";
 import Projects from "./pages/Projects";
 import Contact from "./pages/Contact";
 
-function AnimatedRoutes() {
-  const location = useLocation();
-
-  return (
-    <AnimatePresence mode="wait">
-      <Routes location={location} key={location.pathname}>
-        <Route path="/" element={<Home />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/skills" element={<Skills />} />
-        <Route path="/projects" element={<Projects />} />
-        <Route path="/contact" element={<Contact />} />
-      </Routes>
-    </AnimatePresence>
-  );
-}
-
 export default function App() {
-  const location = useLocation();
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     setLoading(true);
-    const timer = setTimeout(() => setLoading(false), 800);
+    const timer = setTimeout(() => setLoading(false), 600);
     return () => clearTimeout(timer);
-  }, [location.pathname]);
+  }, []);
 
   return (
     <>
       {loading && <Loader />}
       <Navbar />
-      <AnimatedRoutes />
+
+      {/* ONE PAGE SCROLL */}
+      <main>
+        <section id="home">
+          <Home />
+        </section>
+
+        <section id="about">
+          <About />
+        </section>
+
+        <section id="skills">
+          <Skills />
+        </section>
+
+        <section id="projects">
+          <Projects />
+        </section>
+
+        <section id="contact">
+          <Contact />
+        </section>
+      </main>
+
       <Footer />
     </>
   );
