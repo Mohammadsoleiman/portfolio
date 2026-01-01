@@ -255,7 +255,7 @@ const handleDownloadCV = () => {
             transition={{ duration: 1, type: "spring" }}
           >
             <div className="profile-3d">
-              <img src="/img/me.png" alt="Mohammad Soleiman" className="profile-image" />
+              <img src="/portfolio/img/me.png" alt="Mohammad Soleiman" className="profile-image" />
               <div className="profile-glow" />
               <div className="profile-reflection" />
             </div>
