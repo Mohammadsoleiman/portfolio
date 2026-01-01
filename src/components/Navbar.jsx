@@ -1,66 +1,97 @@
-export default function Navbar() {
-  const scrollTo = (id) => {
-    const el = document.getElementById(id);
-    if (el) {
-      el.scrollIntoView({ behavior: "smooth" });
-    }
+import { motion } from "framer-motion";
+import { useState } from "react";
+import "../styles/navbar.css";
+
+const navItems = [
+  { id: "home", label: "Home" },
+  { id: "about", label: "About" },
+  { id: "experience", label: "Experience" },
+  { id: "education", label: "Education" },
+  { id: "skills", label: "Skills" },
+  { id: "projects", label: "Projects" },
+  { id: "contact", label: "Contact" }
+];
+
+export default function Navbar({ activeSection, setActiveSection }) {
+  const [hovered, setHovered] = useState(null);
+
+  const handleClick = (id) => {
+    setActiveSection(id);
+    const element = document.getElementById(id);
+    element?.scrollIntoView({ behavior: "smooth" });
   };
 
   return (
-    <nav
-      className="navbar navbar-expand-md navbar-dark fixed-top"
-      style={{
-        background: "rgba(0,0,0,0.4)",
-        backdropFilter: "blur(10px)"
-      }}
+    <motion.nav 
+      className="navbar"
+      initial={{ y: -100 }}
+      animate={{ y: 0 }}
+      transition={{ duration: 0.8, type: "spring" }}
     >
-      <div className="container">
-        <button
-          className="navbar-brand btn btn-link p-0 text-decoration-none"
-          onClick={() => scrollTo("home")}
+      <div className="nav-container">
+        <motion.div 
+          className="nav-logo"
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.95 }}
         >
-          <span className="text-white fw-bold">Mohammad</span>
-          <span className="text-danger fw-bold">.dev</span>
-        </button>
+          <span className="logo-text">MS</span>
+          <div className="logo-glow" />
+        </motion.div>
 
-        <button
-          className="navbar-toggler"
-          data-bs-toggle="collapse"
-          data-bs-target="#nav"
-        >
-          <span className="navbar-toggler-icon"></span>
-        </button>
-
-        <div id="nav" className="collapse navbar-collapse">
-          <ul className="navbar-nav ms-auto gap-2 text-center">
-            <li className="nav-item">
-              <button className="nav-link btn btn-link" onClick={() => scrollTo("home")}>
-                Home
+        <div className="nav-items">
+          {navItems.map((item, i) => (
+            <motion.div
+              key={item.id}
+              className="nav-item-wrapper"
+              onMouseEnter={() => setHovered(item.id)}
+              onMouseLeave={() => setHovered(null)}
+              animate={{ y: 0, opacity: 1 }}
+              initial={{ y: -20, opacity: 0 }}
+              transition={{ delay: i * 0.05 }}
+            >
+              <button
+                className={`nav-link ${activeSection === item.id ? "active" : ""}`}
+                onClick={() => handleClick(item.id)}
+              >
+                {item.label}
+                {(hovered === item.id || activeSection === item.id) && (
+                  <motion.div
+                    className="nav-highlight"
+                    layoutId="nav-highlight"
+                    transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                  />
+                )}
               </button>
-            </li>
-            <li className="nav-item">
-              <button className="nav-link btn btn-link" onClick={() => scrollTo("about")}>
-                About
-              </button>
-            </li>
-            <li className="nav-item">
-              <button className="nav-link btn btn-link" onClick={() => scrollTo("skills")}>
-                Skills
-              </button>
-            </li>
-            <li className="nav-item">
-              <button className="nav-link btn btn-link" onClick={() => scrollTo("projects")}>
-                Projects
-              </button>
-            </li>
-            <li className="nav-item">
-              <button className="nav-link btn btn-link" onClick={() => scrollTo("contact")}>
-                Contact
-              </button>
-            </li>
-          </ul>
+              {activeSection === item.id && (
+                <motion.div
+                  className="nav-indicator"
+                  layoutId="nav-indicator"
+                  transition={{ type: "spring", stiffness: 500 }}
+                />
+              )}
+            </motion.div>
+          ))}
         </div>
+
+        <motion.div 
+          className="nav-cta"
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+        >
+          <a href="#contact" className="hire-btn">
+            <span>Hire Me</span>
+            <div className="btn-sparkle" />
+          </a>
+        </motion.div>
       </div>
-    </nav>
+
+      {/* Animated Line */}
+      <motion.div 
+        className="nav-line"
+        initial={{ scaleX: 0 }}
+        animate={{ scaleX: 1 }}
+        transition={{ duration: 1.5, ease: "easeInOut" }}
+      />
+    </motion.nav>
   );
 }
