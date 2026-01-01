@@ -6,6 +6,10 @@ import "../styles/home.css";
 export default function Home({ setActiveSection }) {
   const [textIndex, setTextIndex] = useState(0);
   const [cursorVisible, setCursorVisible] = useState(true);
+  const [isDownloading, setIsDownloading] = useState(false);
+  const [downloadProgress, setDownloadProgress] = useState(0);
+  const [showSuccess, setShowSuccess] = useState(false);
+  
   const controls = useAnimation();
   
   const roles = [
@@ -38,6 +42,67 @@ export default function Home({ setActiveSection }) {
     };
   }, [controls]);
 
+const handleDownloadCV = () => {
+  if (isDownloading) return;
+  
+  setIsDownloading(true);
+  setDownloadProgress(0);
+  setShowSuccess(false);
+  
+  const interval = setInterval(() => {
+    setDownloadProgress(prev => {
+      const newProgress = prev + Math.random() * 15 + 5;
+      
+      if (newProgress >= 100) {
+        clearInterval(interval);
+        setShowSuccess(true);
+        
+        setTimeout(() => {
+          try {
+            // اسم الملف الجديد
+            const cvFileName = 'MohammadSoleimanCV.pdf';
+            const cvUrl = `/${cvFileName}`;
+            
+            console.log('Attempting to download:', cvUrl);
+            
+            // الطريقة الأساسية - تحميل مباشر
+            const link = document.createElement('a');
+            link.href = cvUrl;
+            link.download = 'Mohammad_Soleiman_CV.pdf'; // الاسم الذي سيظهر للمستخدم
+            link.target = '_blank';
+            
+            // إضافة للصفحة والنقر
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            
+            // طريقة احتياطية بعد 300ms
+            setTimeout(() => {
+              window.open(cvUrl, '_blank');
+            }, 300);
+            
+          } catch (error) {
+            console.error('Download error:', error);
+            
+            // رابط مباشر للتجربة
+            const testUrl = 'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf';
+            window.open(testUrl, '_blank');
+          }
+          
+          // إعادة الزر بعد 2 ثانية
+          setTimeout(() => {
+            setIsDownloading(false);
+            setDownloadProgress(0);
+            setShowSuccess(false);
+          }, 2000);
+        }, 800);
+        
+        return 100;
+      }
+      return newProgress;
+    });
+  }, 120);
+};
   const floatingIcons = [
     { icon: "/icons/react.png", delay: 0, size: 60 },
     { icon: "/icons/laravel.png", delay: 0.2, size: 55 },
@@ -50,6 +115,7 @@ export default function Home({ setActiveSection }) {
   return (
     <motion.section 
       animate={controls}
+      initial={{ opacity: 0, y: 20 }}
     >
       <div className="home-container">
         {/* Left Content */}
@@ -101,6 +167,7 @@ export default function Home({ setActiveSection }) {
             animate={{ y: 0, opacity: 1 }}
             transition={{ delay: 1.1 }}
           >
+            {/* Button 1: Get In Touch - Normal Button */}
             <motion.a 
               href="#contact"
               className="btn-primary"
@@ -112,18 +179,49 @@ export default function Home({ setActiveSection }) {
               <div className="btn-spark" />
             </motion.a>
             
-            <motion.a 
-              href={profile.links.cv}
-              className="btn-secondary"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              download
+            {/* Button 2: Download CV - Advanced Animation Button */}
+            <motion.div 
+              className={`download-btn-custom ${isDownloading ? 'loading' : ''} ${showSuccess ? 'success' : ''}`}
+              whileHover={!isDownloading ? { scale: 1.05 } : {}}
+              whileTap={!isDownloading ? { scale: 0.95 } : {}}
+              onClick={handleDownloadCV}
+              style={{ position: 'relative' }}
             >
-              <span>Download CV</span>
-              <svg className="download-icon" viewBox="0 0 24 24">
-                <path d="M12 16L8 11H11V4H13V11H16L12 16Z" />
-              </svg>
-            </motion.a>
+              {/* Normal State */}
+              <div className="btn-download-content">
+                <svg className="download-icon" viewBox="0 0 24 24">
+                  <path d="M12 16L8 11H11V4H13V11H16L12 16Z" />
+                </svg>
+                <span>Download CV</span>
+              </div>
+              
+              {/* Loading State */}
+              {isDownloading && !showSuccess && (
+                <div className="loading-state">
+                  <div className="spinner-dots">
+                    <div className="spinner-dot"></div>
+                    <div className="spinner-dot"></div>
+                    <div className="spinner-dot"></div>
+                  </div>
+                  <span className="progress-text">{Math.round(downloadProgress)}%</span>
+                </div>
+              )}
+              
+              {/* Success State */}
+              {showSuccess && (
+                <div className="success-state">
+                  <div className="success-icon">
+                    <svg viewBox="0 0 24 24">
+                      <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" />
+                    </svg>
+                  </div>
+                  <span>Opening CV...</span>
+                </div>
+              )}
+              
+              {/* Progress Bar */}
+              <div className="download-progress" style={{ width: `${downloadProgress}%` }} />
+            </motion.div>
           </motion.div>
 
           {/* Stats */}

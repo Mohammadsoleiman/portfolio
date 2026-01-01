@@ -9,7 +9,7 @@ export const profile = {
   links: {
     github: "https://github.com/Mohammadsoleiman",
     linkedin: "https://linkedin.com/in/mohammad-soleiman",
-    cv: "/cv.pdf",
+    cv: "/MohammadSoleimanCV.pdf", // ← غيرت هنا
     portfolio: "#"
   },
   
