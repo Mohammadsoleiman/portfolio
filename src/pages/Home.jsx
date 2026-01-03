@@ -89,7 +89,6 @@ const handleDownloadCV = () => {
             window.open(testUrl, '_blank');
           }
           
-          // إعادة الزر بعد 2 ثانية
           setTimeout(() => {
             setIsDownloading(false);
             setDownloadProgress(0);
@@ -103,14 +102,15 @@ const handleDownloadCV = () => {
     });
   }, 120);
 };
-  const floatingIcons = [
-    { icon: "/icons/react.png", delay: 0, size: 60 },
-    { icon: "/icons/laravel.png", delay: 0.2, size: 55 },
-    { icon: "/icons/nextjs.png", delay: 0.4, size: 58 },
-    { icon: "/icons/node.png", delay: 0.6, size: 52 },
-    { icon: "/icons/typescript.png", delay: 0.8, size: 56 },
-    { icon: "/icons/docker.png", delay: 1, size: 54 },
-  ];
+ const floatingIcons = [
+  { icon: import.meta.env.BASE_URL + "icons/react.png", delay: 0, size: 60 },
+  { icon: import.meta.env.BASE_URL + "icons/laravel.png", delay: 0.2, size: 55 },
+  { icon: import.meta.env.BASE_URL + "icons/nextjs.png", delay: 0.4, size: 58 },
+  { icon: import.meta.env.BASE_URL + "icons/node.png", delay: 0.6, size: 52 },
+  { icon: import.meta.env.BASE_URL + "icons/typescript.png", delay: 0.8, size: 56 },
+  { icon: import.meta.env.BASE_URL + "icons/docker.png", delay: 1, size: 54 },
+];
+
 
   return (
     <motion.section 
