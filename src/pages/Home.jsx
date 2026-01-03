@@ -29,7 +29,6 @@ export default function Home({ setActiveSection }) {
       setTextIndex((prev) => (prev + 1) % roles.length);
     }, 3000);
     
-    // Animated entrance
     controls.start({
       opacity: 1,
       y: 0,
@@ -42,75 +41,46 @@ export default function Home({ setActiveSection }) {
     };
   }, [controls]);
 
-const handleDownloadCV = () => {
-  if (isDownloading) return;
-  
-  setIsDownloading(true);
-  setDownloadProgress(0);
-  setShowSuccess(false);
-  
-  const interval = setInterval(() => {
-    setDownloadProgress(prev => {
-      const newProgress = prev + Math.random() * 15 + 5;
-      
-      if (newProgress >= 100) {
-        clearInterval(interval);
-        setShowSuccess(true);
+  const handleDownloadCV = () => {
+    if (isDownloading) return;
+    
+    setIsDownloading(true);
+    setDownloadProgress(0);
+    setShowSuccess(false);
+    
+    const interval = setInterval(() => {
+      setDownloadProgress(prev => {
+        const newProgress = prev + Math.random() * 15 + 5;
         
-        setTimeout(() => {
-          try {
-            // اسم الملف الجديد
-            const cvFileName = 'MohammadSoleimanCV.pdf';
-            const cvUrl = `/${cvFileName}`;
-            
-            console.log('Attempting to download:', cvUrl);
-            
-            // الطريقة الأساسية - تحميل مباشر
-            const link = document.createElement('a');
-            link.href = cvUrl;
-            link.download = 'Mohammad_Soleiman_CV.pdf'; // الاسم الذي سيظهر للمستخدم
-            link.target = '_blank';
-            
-            // إضافة للصفحة والنقر
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
-            
-            // طريقة احتياطية بعد 300ms
-            setTimeout(() => {
-              window.open(cvUrl, '_blank');
-            }, 300);
-            
-          } catch (error) {
-            console.error('Download error:', error);
-            
-            // رابط مباشر للتجربة
-            const testUrl = 'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf';
-            window.open(testUrl, '_blank');
-          }
+        if (newProgress >= 100) {
+          clearInterval(interval);
+          setShowSuccess(true);
           
           setTimeout(() => {
-            setIsDownloading(false);
-            setDownloadProgress(0);
-            setShowSuccess(false);
-          }, 2000);
-        }, 800);
-        
-        return 100;
-      }
-      return newProgress;
-    });
-  }, 120);
-};
- const floatingIcons = [
-  { icon: import.meta.env.BASE_URL + "icons/react.png", delay: 0, size: 60 },
-  { icon: import.meta.env.BASE_URL + "icons/laravel.png", delay: 0.2, size: 55 },
-  { icon: import.meta.env.BASE_URL + "icons/nextjs.png", delay: 0.4, size: 58 },
-  { icon: import.meta.env.BASE_URL + "icons/node.png", delay: 0.6, size: 52 },
-  { icon: import.meta.env.BASE_URL + "icons/typescript.png", delay: 0.8, size: 56 },
-  { icon: import.meta.env.BASE_URL + "icons/docker.png", delay: 1, size: 54 },
-];
+            window.open("https://mohammadsoleiman.github.io/MohammadSoleimanCV.pdf", "_blank");
+            
+            setTimeout(() => {
+              setIsDownloading(false);
+              setDownloadProgress(0);
+              setShowSuccess(false);
+            }, 2000);
+          }, 800);
+          
+          return 100;
+        }
+        return newProgress;
+      });
+    }, 120);
+  };
 
+  const floatingIcons = [
+    { icon: "/icons/react.png", delay: 0, size: 60 },
+    { icon: "/icons/laravel.png", delay: 0.2, size: 55 },
+    { icon: "/icons/nextjs.png", delay: 0.4, size: 58 },
+    { icon: "/icons/node.png", delay: 0.6, size: 52 },
+    { icon: "/icons/typescript.png", delay: 0.8, size: 56 },
+    { icon: "/icons/docker.png", delay: 1, size: 54 },
+  ];
 
   return (
     <motion.section 
@@ -118,7 +88,6 @@ const handleDownloadCV = () => {
       initial={{ opacity: 0, y: 20 }}
     >
       <div className="home-container">
-        {/* Left Content */}
         <div className="home-left">
           <motion.div 
             className="intro-badge"
@@ -167,7 +136,6 @@ const handleDownloadCV = () => {
             animate={{ y: 0, opacity: 1 }}
             transition={{ delay: 1.1 }}
           >
-            {/* Button 1: Get In Touch - Normal Button */}
             <motion.a 
               href="#contact"
               className="btn-primary"
@@ -179,7 +147,6 @@ const handleDownloadCV = () => {
               <div className="btn-spark" />
             </motion.a>
             
-            {/* Button 2: Download CV - Advanced Animation Button */}
             <motion.div 
               className={`download-btn-custom ${isDownloading ? 'loading' : ''} ${showSuccess ? 'success' : ''}`}
               whileHover={!isDownloading ? { scale: 1.05 } : {}}
@@ -187,7 +154,6 @@ const handleDownloadCV = () => {
               onClick={handleDownloadCV}
               style={{ position: 'relative' }}
             >
-              {/* Normal State */}
               <div className="btn-download-content">
                 <svg className="download-icon" viewBox="0 0 24 24">
                   <path d="M12 16L8 11H11V4H13V11H16L12 16Z" />
@@ -195,7 +161,6 @@ const handleDownloadCV = () => {
                 <span>Download CV</span>
               </div>
               
-              {/* Loading State */}
               {isDownloading && !showSuccess && (
                 <div className="loading-state">
                   <div className="spinner-dots">
@@ -207,7 +172,6 @@ const handleDownloadCV = () => {
                 </div>
               )}
               
-              {/* Success State */}
               {showSuccess && (
                 <div className="success-state">
                   <div className="success-icon">
@@ -219,12 +183,10 @@ const handleDownloadCV = () => {
                 </div>
               )}
               
-              {/* Progress Bar */}
               <div className="download-progress" style={{ width: `${downloadProgress}%` }} />
             </motion.div>
           </motion.div>
 
-          {/* Stats */}
           <motion.div 
             className="stats-grid"
             initial={{ opacity: 0 }}
@@ -246,7 +208,6 @@ const handleDownloadCV = () => {
           </motion.div>
         </div>
 
-        {/* Right Content - 3D Profile */}
         <div className="home-right">
           <motion.div 
             className="profile-3d-container"
@@ -260,7 +221,6 @@ const handleDownloadCV = () => {
               <div className="profile-reflection" />
             </div>
             
-            {/* Floating Icons */}
             {floatingIcons.map((item, i) => (
               <motion.div 
                 key={i}
@@ -282,7 +242,6 @@ const handleDownloadCV = () => {
               </motion.div>
             ))}
 
-            {/* Animated Rings */}
             <motion.div 
               className="ring ring-1"
               animate={{ rotate: 360 }}
@@ -295,7 +254,6 @@ const handleDownloadCV = () => {
             />
           </motion.div>
 
-          {/* Tech Stack Carousel */}
           <motion.div 
             className="tech-carousel"
             animate={{ x: [0, -1000] }}
@@ -314,7 +272,6 @@ const handleDownloadCV = () => {
         </div>
       </div>
 
-      {/* Scroll Indicator */}
       <motion.div 
         className="scroll-indicator"
         animate={{ y: [0, 10, 0] }}
