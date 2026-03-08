@@ -59,24 +59,20 @@ const handleDownloadCV = () => {
         
         setTimeout(() => {
           try {
-            // اسم الملف الجديد
             const cvFileName = 'MohammadSoleimanCV.pdf';
 const cvUrl = `${import.meta.env.BASE_URL}${cvFileName}`;
             
             console.log('Attempting to download:', cvUrl);
             
-            // الطريقة الأساسية - تحميل مباشر
             const link = document.createElement('a');
             link.href = cvUrl;
             link.download = 'Mohammad_Soleiman_CV.pdf'; // الاسم الذي سيظهر للمستخدم
             link.target = '_blank';
             
-            // إضافة للصفحة والنقر
             document.body.appendChild(link);
             link.click();
             document.body.removeChild(link);
             
-            // طريقة احتياطية بعد 300ms
             setTimeout(() => {
               window.open(cvUrl, '_blank');
             }, 300);
@@ -84,12 +80,10 @@ const cvUrl = `${import.meta.env.BASE_URL}${cvFileName}`;
           } catch (error) {
             console.error('Download error:', error);
             
-            // رابط مباشر للتجربة
             const testUrl = 'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf';
             window.open(testUrl, '_blank');
           }
           
-          // إعادة الزر بعد 2 ثانية
           setTimeout(() => {
             setIsDownloading(false);
             setDownloadProgress(0);
@@ -106,7 +100,7 @@ const cvUrl = `${import.meta.env.BASE_URL}${cvFileName}`;
   const floatingIcons = [
     { icon: `${import.meta.env.BASE_URL}icons/react.png`, delay: 0, size: 60 },
     { icon: `${import.meta.env.BASE_URL}icons/laravel.png`, delay: 0.2, size: 55 },
-    { icon: `${import.meta.env.BASE_URL}icons/nextjs.png`, delay: 0.4, size: 58 },
+    { icon: `${import.meta.env.BASE_URL}icons/node.png`, delay: 0.4, size: 58 },
     { icon: `${import.meta.env.BASE_URL}icons/node.png`, delay: 0.6, size: 52 },
     { icon: `${import.meta.env.BASE_URL}icons/typescript.png`, delay: 0.8, size: 56 },
     { icon: `${import.meta.env.BASE_URL}icons/docker.png`, delay: 1, size: 54 },
@@ -255,7 +249,7 @@ const cvUrl = `${import.meta.env.BASE_URL}${cvFileName}`;
             transition={{ duration: 1, type: "spring" }}
           >
             <div className="profile-3d">
-              <img src={`${import.meta.env.BASE_URL}img/me.png`} alt="Mohammad Soleiman" className="profile-image" />
+              <img src={`${import.meta.env.BASE_URL}img/MohammadSoleiman.png`} alt="Mohammad Soleiman" className="profile-image" />
               <div className="profile-glow" />
               <div className="profile-reflection" />
             </div>
