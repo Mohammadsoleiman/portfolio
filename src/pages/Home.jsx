@@ -99,13 +99,14 @@ const cvUrl = `${import.meta.env.BASE_URL}${cvFileName}`;
   }, 120);
 };
   const floatingIcons = [
-    { icon: `${import.meta.env.BASE_URL}icons/react.png`, delay: 0, size: 60 },
-    { icon: `${import.meta.env.BASE_URL}icons/laravel.png`, delay: 0.2, size: 55 },
-    { icon: `${import.meta.env.BASE_URL}icons/node.png`, delay: 0.4, size: 58 },
-    { icon: `${import.meta.env.BASE_URL}icons/node.png`, delay: 0.6, size: 52 },
-    { icon: `${import.meta.env.BASE_URL}icons/typescript.png`, delay: 0.8, size: 56 },
-    { icon: `${import.meta.env.BASE_URL}icons/docker.png`, delay: 1, size: 54 },
+    { icon: `${import.meta.env.BASE_URL}icons/react.png`, delay: 0, size: 60, top: "10%", left: "50%", orbit: "16s", drift: "7s" },
+    { icon: `${import.meta.env.BASE_URL}icons/laravel.png`, delay: 0.2, size: 55, top: "22%", left: "88%", orbit: "19s", drift: "8s" },
+    { icon: `${import.meta.env.BASE_URL}icons/node.png`, delay: 0.4, size: 58, top: "74%", left: "14%", orbit: "18s", drift: "6.5s" },
+    { icon: `${import.meta.env.BASE_URL}icons/typescript.png`, delay: 0.6, size: 52, top: "82%", left: "74%", orbit: "21s", drift: "7.4s" },
+    { icon: `${import.meta.env.BASE_URL}icons/docker.png`, delay: 0.8, size: 56, top: "52%", left: "6%", orbit: "17s", drift: "7.2s" },
+    { icon: `${import.meta.env.BASE_URL}icons/mongodb.png`, delay: 1, size: 54, top: "52%", left: "94%", orbit: "22s", drift: "8.2s" },
   ];
+  const techStack = ["React", "Next.js", "Laravel", "Node.js", "TypeScript", "MySQL", "MongoDB", "Docker", "Kubernetes", "AWS"];
 
   return (
     <motion.section 
@@ -219,26 +220,6 @@ const cvUrl = `${import.meta.env.BASE_URL}${cvFileName}`;
             </motion.div>
           </motion.div>
 
-          {/* Stats */}
-          <motion.div 
-            className="stats-grid"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 1.3 }}
-          >
-            <div className="stat-item">
-              <h3>20+</h3>
-              <p>Projects Completed</p>
-            </div>
-            <div className="stat-item">
-              <h3>10+</h3>
-              <p>Technologies</p>
-            </div>
-            <div className="stat-item">
-              <h3>3+</h3>
-              <p>Years Experience</p>
-            </div>
-          </motion.div>
         </div>
 
         {/* Right Content - 3D Profile */}
@@ -260,16 +241,13 @@ const cvUrl = `${import.meta.env.BASE_URL}${cvFileName}`;
               <motion.div 
                 key={i}
                 className="floating-icon-3d"
-                style={{ '--delay': item.delay, '--size': `${item.size}px` }}
-                animate={{
-                  y: [0, -20, 0],
-                  rotateY: [0, 180, 360],
-                }}
-                transition={{
-                  duration: 3,
-                  delay: item.delay,
-                  repeat: Infinity,
-                  ease: "easeInOut"
+                style={{
+                  '--delay': `${item.delay}s`,
+                  '--size': `${item.size}px`,
+                  '--orbit-duration': item.orbit,
+                  '--drift-duration': item.drift,
+                  top: item.top,
+                  left: item.left
                 }}
               >
                 <img src={item.icon} alt="" />
@@ -289,25 +267,45 @@ const cvUrl = `${import.meta.env.BASE_URL}${cvFileName}`;
               transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
             />
           </motion.div>
+        </div>
+      </div>
 
-          {/* Tech Stack Carousel */}
-          <motion.div 
-            className="tech-carousel"
-            animate={{ x: [0, -1000] }}
-            transition={{ 
-              x: { 
-                repeat: Infinity, 
-                duration: 20, 
-                ease: "linear" 
-              }
-            }}
+      <motion.div 
+        className="hero-bottom"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 1.25 }}
+      >
+        {/* Stats */}
+        <div className="stats-grid">
+          <div className="stat-item">
+            <h3>20+</h3>
+            <p>Projects Completed</p>
+          </div>
+          <div className="stat-item">
+            <h3>10+</h3>
+            <p>Technologies</p>
+          </div>
+          <div className="stat-item">
+            <h3>3+</h3>
+            <p>Years Experience</p>
+          </div>
+        </div>
+
+        <div className="hero-tech-carousel">
+          <motion.div
+            className="hero-tech-track"
+            animate={{ x: ["0%", "-50%"] }}
+            transition={{ duration: 24, repeat: Infinity, ease: "linear" }}
           >
-            {["React", "Next.js", "Laravel", "Node.js", "TypeScript", "MySQL", "MongoDB", "Docker", "Kubernetes", "AWS"].map((tech, i) => (
-              <span key={i} className="tech-tag">{tech}</span>
+            {[...techStack, ...techStack].map((tech, i) => (
+              <span key={`${tech}-${i}`} className="tech-tag">
+                {tech}
+              </span>
             ))}
           </motion.div>
         </div>
-      </div>
+      </motion.div>
 
       {/* Scroll Indicator */}
       <motion.div 
