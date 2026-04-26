@@ -6,8 +6,9 @@
   z-index: 1000;
   padding: 20px 5%;
   backdrop-filter: blur(20px);
-  background: rgba(15, 23, 42, 0.8);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  background: var(--nav-bg);
+  border-bottom: 1px solid var(--border-soft);
+  transition: background-color 300ms ease, border-color 300ms ease;
 }
 
 .nav-container {
@@ -56,7 +57,7 @@
 .nav-link {
   background: none;
   border: none;
-  color: rgba(255, 255, 255, 0.7);
+  color: var(--text-secondary);
   font-size: 1rem;
   font-weight: 500;
   cursor: pointer;
@@ -67,7 +68,7 @@
 
 .nav-link:hover,
 .nav-link.active {
-  color: white;
+  color: var(--text-primary);
 }
 
 .nav-highlight {
@@ -75,11 +76,12 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 40px;
-  height: 40px;
-  background: rgba(59, 130, 246, 0.1);
+  width: 28px;
+  height: 28px;
+  background: var(--highlight-soft);
   border-radius: 50%;
   z-index: -1;
+  filter: blur(0.5px);
 }
 
 .nav-indicator {
@@ -95,20 +97,52 @@
 
 .nav-cta {
   position: relative;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.theme-toggle-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border-radius: 999px;
+  border: 1px solid var(--border-soft);
+  background: var(--surface-raised);
+  color: var(--text-primary);
+  cursor: pointer;
+  font-weight: 600;
+  box-shadow: none;
+}
+
+.theme-toggle-btn:hover {
+  background: var(--surface-hover);
+  border-color: var(--border-strong);
+}
+
+.theme-icon {
+  font-size: 1.05rem;
+  line-height: 1;
 }
 
 .hire-btn {
   display: inline-flex;
   align-items: center;
-  gap: 10px;
-  padding: 12px 28px;
-  background: linear-gradient(135deg, #ff3b5c, #8b5cf6);
-  border-radius: 10px;
+  gap: 8px;
+  padding: 10px 18px;
+  background: linear-gradient(180deg, #1f2937, #111827);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 12px;
   color: white;
   text-decoration: none;
   font-weight: 600;
+  font-size: 0.9rem;
   position: relative;
   overflow: hidden;
+  min-height: 40px;
 }
 
 .btn-sparkle {
@@ -127,6 +161,11 @@
 
 .hire-btn:hover .btn-sparkle {
   animation: sparkleMove 0.6s ease;
+}
+
+html.light .hire-btn {
+  background: linear-gradient(180deg, #1e293b, #0f172a);
+  color: #f8fafc;
 }
 
 @keyframes sparkleMove {
@@ -169,7 +208,7 @@
     top: 80px;
     left: 0;
     width: 100%;
-    background: rgba(15, 23, 42, 0.95);
+    background: var(--nav-bg-solid);
     flex-direction: column;
     padding: 20px;
     gap: 15px;

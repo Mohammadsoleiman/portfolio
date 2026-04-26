@@ -35,7 +35,7 @@ export default function App() {
   }, []);
 
   return (
-    <>
+    <div className="bg-white dark:bg-gray-900 text-gray-900 dark:text-white transition-colors duration-300">
       {loading && <Loader />}
       
       {/* Animated Background Elements */}
@@ -86,6 +86,6 @@ export default function App() {
       </AnimatePresence>
       
       <Footer />
-    </>
+    </div>
   );
 }

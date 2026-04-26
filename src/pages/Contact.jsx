@@ -75,7 +75,7 @@ export default function Contact() {
 
   return (
     <motion.section 
-      className="contact-section"
+      className="contact-section text-gray-900 dark:text-white transition-colors duration-300"
       initial={{ opacity: 0 }}
       whileInView={{ opacity: 1 }}
       viewport={{ once: true, margin: "-100px" }}
@@ -279,10 +279,10 @@ export default function Contact() {
       {/* Map Visualization */}
       <div className="map-visualization">
         <svg viewBox="0 0 100 100">
-          <circle cx="50" cy="50" r="40" fill="none" stroke="rgba(59,130,246,0.1)" strokeWidth="1"/>
-          <circle cx="60" cy="40" r="3" fill="rgba(255,59,92,0.3)"/>
-          <circle cx="40" cy="60" r="3" fill="rgba(139,92,246,0.3)"/>
-          <path d="M60,40 Q50,50 40,60" stroke="rgba(59,130,246,0.2)" fill="none" strokeWidth="0.5"/>
+          <circle cx="50" cy="50" r="40" fill="none" stroke="var(--map-stroke)" strokeWidth="1"/>
+          <circle cx="60" cy="40" r="3" fill="var(--map-accent-a)"/>
+          <circle cx="40" cy="60" r="3" fill="var(--map-accent-b)"/>
+          <path d="M60,40 Q50,50 40,60" stroke="var(--map-link)" fill="none" strokeWidth="0.5"/>
         </svg>
       </div>
     </motion.section>

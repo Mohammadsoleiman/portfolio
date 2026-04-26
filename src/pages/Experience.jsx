@@ -89,7 +89,7 @@ export default function Experience() {
 
   return (
     <motion.section 
-      className="experience-section"
+      className="experience-section text-gray-900 dark:text-white transition-colors duration-300"
       initial={{ opacity: 0 }}
       whileInView={{ opacity: 1 }}
       viewport={{ once: true, margin: "-100px" }}

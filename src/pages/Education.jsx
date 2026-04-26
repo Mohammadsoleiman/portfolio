@@ -57,7 +57,7 @@ const certifications = [
 export default function Education() {
   return (
     <motion.section 
-      className="education-section"
+      className="education-section text-gray-900 dark:text-white transition-colors duration-300"
       initial={{ opacity: 0 }}
       whileInView={{ opacity: 1 }}
       viewport={{ once: true, margin: "-100px" }}

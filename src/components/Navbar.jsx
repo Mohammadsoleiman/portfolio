@@ -1,5 +1,7 @@
 import { motion } from "framer-motion";
 import { useState } from "react";
+import { useTheme } from "../context/ThemeContext";
+import Button from "./Button";
 import "../styles/navbar.css";
 
 const navItems = [
@@ -14,6 +16,7 @@ const navItems = [
 
 export default function Navbar({ activeSection, setActiveSection }) {
   const [hovered, setHovered] = useState(null);
+  const { isDark, toggleTheme } = useTheme();
 
   const handleClick = (id) => {
     setActiveSection(id);
@@ -78,10 +81,24 @@ export default function Navbar({ activeSection, setActiveSection }) {
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
         >
-          <a href="#contact" className="hire-btn">
-            <span>Hire Me</span>
+          <motion.button
+            type="button"
+            className="theme-toggle-btn transition-colors duration-300"
+            onClick={toggleTheme}
+            aria-label={`Switch to ${isDark ? "light" : "dark"} mode`}
+            title={`Switch to ${isDark ? "light" : "dark"} mode`}
+            whileHover={{ y: -1 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            <span className="theme-icon" aria-hidden>
+              {isDark ? "☀️" : "🌙"}
+            </span>
+          </motion.button>
+
+          <Button as="a" href="#contact" className="hire-btn">
+            <span>Let's Talk</span>
             <div className="btn-sparkle" />
-          </a>
+          </Button>
         </motion.div>
       </div>
 

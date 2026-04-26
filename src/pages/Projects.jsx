@@ -1,5 +1,6 @@
 import { motion, AnimatePresence } from "framer-motion";  // FIXED: Added AnimatePresence
 import { useState } from "react";
+import Button from "../components/Button";
 import "../styles/projects.css";
 
 const projects = [
@@ -133,7 +134,7 @@ export default function Projects() {
 
   return (
     <motion.section 
-      className="projects-section"
+      className="projects-section text-gray-900 dark:text-white transition-colors duration-300"
       initial={{ opacity: 0 }}
       whileInView={{ opacity: 1 }}
       viewport={{ once: true, margin: "-100px" }}
@@ -359,14 +360,9 @@ export default function Projects() {
           Let's work together to bring your ideas to life!
         </p>
         
-        <motion.a 
-          href="#contact"
-          className="btn-primary"
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-        >
+        <Button as="a" href="#contact" className="btn-primary">
           Let's Collaborate
-        </motion.a>
+        </Button>
       </motion.div>
 
       {/* Animated Elements */}

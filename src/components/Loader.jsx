@@ -1,10 +1,12 @@
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
+import { useTheme } from "../context/ThemeContext";
 import "../styles/loader.css";
 
 export default function Loader() {
   const [progress, setProgress] = useState(0);
   const [loadingText, setLoadingText] = useState("Loading portfolio...");
+  const { isDark } = useTheme();
 
   useEffect(() => {
     const progressInterval = setInterval(() => {
@@ -39,7 +41,7 @@ export default function Loader() {
 
   return (
     <motion.div 
-      className="loader-overlay"
+      className={`loader-overlay ${isDark ? "theme-dark" : "theme-light"}`}
       initial={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.5 }}
@@ -82,6 +84,12 @@ export default function Loader() {
             repeat: Infinity,
             ease: "easeInOut"
           }}
+        />
+
+        <motion.div
+          className="loader-pulse-ring"
+          animate={{ scale: [0.9, 1.3], opacity: [0.5, 0] }}
+          transition={{ duration: 1.6, repeat: Infinity, ease: "easeOut" }}
         />
 
         {/* Rings */}

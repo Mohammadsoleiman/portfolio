@@ -23,7 +23,7 @@ export default function About() {
 
   return (
     <motion.section 
-      className="about-section"
+      className="about-section text-gray-900 dark:text-white transition-colors duration-300"
       initial={{ opacity: 0 }}
       whileInView={{ opacity: 1 }}
       viewport={{ once: true, margin: "-100px" }}

@@ -1,6 +1,7 @@
 import { motion, useAnimation } from "framer-motion";
 import { useEffect, useState } from "react";
 import { profile } from "../data/profile";
+import Button from "../components/Button";
 import "../styles/home.css";
 
 export default function Home({ setActiveSection }) {
@@ -108,6 +109,7 @@ const cvUrl = `${import.meta.env.BASE_URL}${cvFileName}`;
 
   return (
     <motion.section 
+      className="text-gray-900 dark:text-white transition-colors duration-300"
       animate={controls}
       initial={{ opacity: 0, y: 20 }}
     >
@@ -162,16 +164,15 @@ const cvUrl = `${import.meta.env.BASE_URL}${cvFileName}`;
             transition={{ delay: 1.1 }}
           >
             {/* Button 1: Get In Touch - Normal Button */}
-            <motion.a 
+            <Button
+              as="a"
               href="#contact"
               className="btn-primary"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
               onClick={() => setActiveSection("contact")}
             >
               <span>Get In Touch</span>
               <div className="btn-spark" />
-            </motion.a>
+            </Button>
             
             {/* Button 2: Download CV - Advanced Animation Button */}
             <motion.div 
