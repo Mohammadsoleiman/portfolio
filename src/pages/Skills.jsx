@@ -1,4 +1,20 @@
 import { motion } from "framer-motion";
+import {
+  SiAmazonaws,
+  SiDocker,
+  SiFigma,
+  SiGit,
+  SiJira,
+  SiLaravel,
+  SiMongodb,
+  SiNextdotjs,
+  SiNodedotjs,
+  SiPostgresql,
+  SiReact,
+  SiSupabase,
+  SiTrello,
+  SiTypescript,
+} from "react-icons/si";
 import "../styles/skills.css";
 
 export default function Skills() {
@@ -22,18 +38,20 @@ export default function Skills() {
   ];
 
   const techStack = [
-    { name: "React", icon: "/icons/react.png" },
-    { name: "Next.js", icon: "/icons/nextjs.png" },
-    { name: "Laravel", icon: "/icons/laravel.png" },
-    { name: "Node.js", icon: "/icons/node.png" },
-    { name: "TypeScript", icon: "/icons/typescript.png" },
-    { name: "MongoDB", icon: "/icons/mongodb.png" },
-    { name: "PostgreSQL", icon: "/icons/postgresql.png" },
-    { name: "Docker", icon: "/icons/docker.png" },
-    { name: "AWS", icon: "/icons/aws.png" },
-    { name: "Git", icon: "/icons/git.png" },
-    { name: "Figma", icon: "/icons/figma.png" },
-    { name: "Jira", icon: "/icons/jira.png" }
+    { name: "React", Icon: SiReact, tone: "tone-react" },
+    { name: "Next.js", Icon: SiNextdotjs, tone: "tone-next" },
+    { name: "Laravel", Icon: SiLaravel, tone: "tone-laravel" },
+    { name: "Node.js", Icon: SiNodedotjs, tone: "tone-node" },
+    { name: "TypeScript", Icon: SiTypescript, tone: "tone-ts" },
+    { name: "MongoDB", Icon: SiMongodb, tone: "tone-mongo" },
+    { name: "PostgreSQL", Icon: SiPostgresql, tone: "tone-postgres" },
+    { name: "Docker", Icon: SiDocker, tone: "tone-docker" },
+    { name: "AWS", Icon: SiAmazonaws, tone: "tone-aws" },
+    { name: "Git", Icon: SiGit, tone: "tone-git" },
+    { name: "Trello", Icon: SiTrello, tone: "tone-trello" },
+    { name: "Supabase", Icon: SiSupabase, tone: "tone-supabase" },
+    { name: "Figma", Icon: SiFigma, tone: "tone-figma" },
+    { name: "Jira", Icon: SiJira, tone: "tone-jira" }
   ];
 
   const devopsSkills = [
@@ -226,7 +244,7 @@ export default function Skills() {
                 transition={{ delay: 0.3 + i * 0.05 }}
                 whileHover={{ y: -10 }}
               >
-                <img src={tech.icon} alt={tech.name} className="tech-icon" />
+                <tech.Icon className={`tech-icon-svg ${tech.tone}`} aria-hidden />
                 <span className="tech-name">{tech.name}</span>
               </motion.div>
             ))}

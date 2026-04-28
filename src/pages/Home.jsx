@@ -1,6 +1,21 @@
 import { motion, useAnimation } from "framer-motion";
 import { useEffect, useState } from "react";
-import { profile } from "../data/profile";
+import {
+  SiAmazonaws,
+  SiDocker,
+  SiGit,
+  SiJira,
+  SiKubernetes,
+  SiLaravel,
+  SiMongodb,
+  SiMysql,
+  SiNextdotjs,
+  SiNodedotjs,
+  SiReact,
+  SiSupabase,
+  SiTrello,
+  SiTypescript,
+} from "react-icons/si";
 import Button from "../components/Button";
 import "../styles/home.css";
 
@@ -99,14 +114,36 @@ const cvUrl = `${import.meta.env.BASE_URL}${cvFileName}`;
   }, 120);
 };
   const floatingIcons = [
-    { icon: `${import.meta.env.BASE_URL}icons/react.png`, delay: 0, size: 60, top: "10%", left: "50%", orbit: "16s", drift: "7s" },
-    { icon: `${import.meta.env.BASE_URL}icons/laravel.png`, delay: 0.2, size: 55, top: "22%", left: "88%", orbit: "19s", drift: "8s" },
-    { icon: `${import.meta.env.BASE_URL}icons/node.png`, delay: 0.4, size: 58, top: "74%", left: "14%", orbit: "18s", drift: "6.5s" },
-    { icon: `${import.meta.env.BASE_URL}icons/typescript.png`, delay: 0.6, size: 52, top: "82%", left: "74%", orbit: "21s", drift: "7.4s" },
-    { icon: `${import.meta.env.BASE_URL}icons/docker.png`, delay: 0.8, size: 56, top: "52%", left: "6%", orbit: "17s", drift: "7.2s" },
-    { icon: `${import.meta.env.BASE_URL}icons/mongodb.png`, delay: 1, size: 54, top: "52%", left: "94%", orbit: "22s", drift: "8.2s" },
+    { Icon: SiReact, label: "React", tone: "tone-react", size: 56, top: "8%", left: "50%", xDrift: 10, yDrift: 10, spin: 7, duration: 6.4, delay: 0.1 },
+    { Icon: SiNextdotjs, label: "Next.js", tone: "tone-next", size: 54, top: "18%", left: "82%", xDrift: -10, yDrift: 8, spin: -5, duration: 7.2, delay: 0.35 },
+    { Icon: SiTypescript, label: "TypeScript", tone: "tone-ts", size: 52, top: "50%", left: "92%", xDrift: -12, yDrift: 10, spin: -7, duration: 7.6, delay: 0.75 },
+    { Icon: SiLaravel, label: "Laravel", tone: "tone-laravel", size: 54, top: "82%", left: "76%", xDrift: -8, yDrift: 10, spin: -6, duration: 7.8, delay: 0.6 },
+    { Icon: SiDocker, label: "Docker", tone: "tone-docker", size: 54, top: "84%", left: "24%", xDrift: 8, yDrift: 10, spin: 6, duration: 6.6, delay: 0.2 },
+    { Icon: SiNodedotjs, label: "Node.js", tone: "tone-node", size: 56, top: "50%", left: "8%", xDrift: 12, yDrift: 10, spin: 8, duration: 6.8, delay: 0.5 },
+    { Icon: SiMongodb, label: "MongoDB", tone: "tone-mongo", size: 52, top: "18%", left: "20%", xDrift: 9, yDrift: 8, spin: 5, duration: 7.1, delay: 0.45 },
   ];
-  const techStack = ["React", "Next.js", "Laravel", "Node.js", "TypeScript", "MySQL", "MongoDB", "Docker", "Kubernetes", "AWS"];
+  const bgFlyers = [
+    { Icon: SiReact, tone: "tone-react", top: "18%", duration: 18, delay: 0 },
+    { Icon: SiDocker, tone: "tone-docker", top: "36%", duration: 20, delay: 2 },
+    { Icon: SiNodedotjs, tone: "tone-node", top: "56%", duration: 22, delay: 4 },
+    { Icon: SiTypescript, tone: "tone-ts", top: "74%", duration: 24, delay: 1.5 },
+  ];
+  const techStack = [
+    { label: "React", Icon: SiReact, tone: "tone-react" },
+    { label: "Next.js", Icon: SiNextdotjs, tone: "tone-next" },
+    { label: "Laravel", Icon: SiLaravel, tone: "tone-laravel" },
+    { label: "Node.js", Icon: SiNodedotjs, tone: "tone-node" },
+    { label: "TypeScript", Icon: SiTypescript, tone: "tone-ts" },
+    { label: "MySQL", Icon: SiMysql, tone: "tone-mysql" },
+    { label: "MongoDB", Icon: SiMongodb, tone: "tone-mongo" },
+    { label: "Docker", Icon: SiDocker, tone: "tone-docker" },
+    { label: "Kubernetes", Icon: SiKubernetes, tone: "tone-k8s" },
+    { label: "AWS", Icon: SiAmazonaws, tone: "tone-aws" },
+    { label: "Git", Icon: SiGit, tone: "tone-git" },
+    { label: "Trello", Icon: SiTrello, tone: "tone-trello" },
+    { label: "Supabase", Icon: SiSupabase, tone: "tone-supabase" },
+    { label: "Jira", Icon: SiJira, tone: "tone-jira" },
+  ];
 
   return (
     <motion.section 
@@ -114,6 +151,25 @@ const cvUrl = `${import.meta.env.BASE_URL}${cvFileName}`;
       animate={controls}
       initial={{ opacity: 0, y: 20 }}
     >
+      <div className="hero-bg-flyers" aria-hidden>
+        {bgFlyers.map((item, i) => (
+          <motion.div
+            key={`${item.top}-${i}`}
+            className="hero-bg-flyer"
+            style={{ top: item.top }}
+            animate={{ x: ["-8vw", "80vw", "-8vw"], y: [0, -10, 0, 8, 0], rotate: [0, 6, 0, -6, 0] }}
+            transition={{
+              duration: item.duration,
+              repeat: Infinity,
+              ease: "easeInOut",
+              delay: item.delay,
+            }}
+          >
+            <item.Icon className={`hero-bg-flyer-icon ${item.tone}`} />
+          </motion.div>
+        ))}
+      </div>
+
       <div className="home-container">
         {/* Left Content */}
         <div className="home-left">
@@ -238,21 +294,33 @@ const cvUrl = `${import.meta.env.BASE_URL}${cvFileName}`;
             
             {/* Floating Icons */}
             {floatingIcons.map((item, i) => (
-              <motion.div 
-                key={i}
-                className="floating-icon-3d"
-                style={{
-                  '--delay': `${item.delay}s`,
-                  '--size': `${item.size}px`,
-                  '--orbit-duration': item.orbit,
-                  '--drift-duration': item.drift,
-                  top: item.top,
-                  left: item.left
-                }}
+              <div
+                key={item.label}
+                className="floating-icon-anchor"
+                style={{ top: item.top, left: item.left }}
               >
-                <img src={item.icon} alt="" />
-                <div className="icon-trail" />
-              </motion.div>
+                <motion.div 
+                  className="floating-icon-3d"
+                  style={{ "--size": `${item.size}px` }}
+                  title={item.label}
+                  animate={{
+                    x: [0, item.xDrift, 0, -item.xDrift, 0],
+                    y: [0, -item.yDrift, 0, item.yDrift, 0],
+                    rotate: [0, item.spin, 0, -item.spin, 0],
+                    scale: [1, 1.05, 1, 0.98, 1],
+                  }}
+                  transition={{
+                    duration: item.duration,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                    delay: item.delay,
+                  }}
+                  whileHover={{ scale: 1.12 }}
+                >
+                  <item.Icon className={`floating-tech-icon ${item.tone}`} aria-hidden />
+                  <div className="icon-trail" />
+                </motion.div>
+              </div>
             ))}
 
             {/* Animated Rings */}
@@ -299,8 +367,9 @@ const cvUrl = `${import.meta.env.BASE_URL}${cvFileName}`;
             transition={{ duration: 24, repeat: Infinity, ease: "linear" }}
           >
             {[...techStack, ...techStack].map((tech, i) => (
-              <span key={`${tech}-${i}`} className="tech-tag">
-                {tech}
+              <span key={`${tech.label}-${i}`} className="tech-tag">
+                <tech.Icon className={`tech-tag-icon ${tech.tone}`} aria-hidden />
+                <span>{tech.label}</span>
               </span>
             ))}
           </motion.div>

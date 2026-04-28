@@ -16,10 +16,12 @@ const navItems = [
 
 export default function Navbar({ activeSection, setActiveSection }) {
   const [hovered, setHovered] = useState(null);
+  const [menuOpen, setMenuOpen] = useState(false);
   const { isDark, toggleTheme } = useTheme();
 
   const handleClick = (id) => {
     setActiveSection(id);
+    setMenuOpen(false);
     const element = document.getElementById(id);
     element?.scrollIntoView({ behavior: "smooth" });
   };
@@ -41,7 +43,19 @@ export default function Navbar({ activeSection, setActiveSection }) {
           <div className="logo-glow" />
         </motion.div>
 
-        <div className="nav-items">
+        <button
+          type="button"
+          className={`menu-toggle ${menuOpen ? "open" : ""}`}
+          aria-label="Toggle navigation menu"
+          aria-expanded={menuOpen}
+          onClick={() => setMenuOpen((prev) => !prev)}
+        >
+          <span className="menu-line" />
+          <span className="menu-line" />
+          <span className="menu-line" />
+        </button>
+
+        <div className={`nav-items ${menuOpen ? "open" : ""}`}>
           {navItems.map((item, i) => (
             <motion.div
               key={item.id}
@@ -74,6 +88,13 @@ export default function Navbar({ activeSection, setActiveSection }) {
               )}
             </motion.div>
           ))}
+
+          <div className="mobile-cta">
+            <Button as="a" href="#contact" className="hire-btn" onClick={() => setMenuOpen(false)}>
+              <span>Let's Talk</span>
+              <div className="btn-sparkle" />
+            </Button>
+          </div>
         </div>
 
         <motion.div 

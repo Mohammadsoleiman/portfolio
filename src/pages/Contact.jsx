@@ -11,40 +11,81 @@ export default function Contact() {
     subject: '',
     message: ''
   });
+  const [formErrors, setFormErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState({ success: false, message: '' });
 
+  const emailjsConfig = {
+    serviceId: import.meta.env.VITE_EMAILJS_SERVICE_ID,
+    templateId: import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
+    publicKey: import.meta.env.VITE_EMAILJS_PUBLIC_KEY,
+  };
+
+  const validateForm = () => {
+    const errors = {};
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if (!formData.name.trim()) errors.name = "Name is required.";
+    if (!formData.email.trim()) {
+      errors.email = "Email is required.";
+    } else if (!emailRegex.test(formData.email.trim())) {
+      errors.email = "Please enter a valid email address.";
+    }
+    if (!formData.subject.trim()) errors.subject = "Subject is required.";
+    if (!formData.message.trim()) errors.message = "Message is required.";
+
+    setFormErrors(errors);
+    return Object.keys(errors).length === 0;
+  };
+
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+    setFormErrors((prev) => ({ ...prev, [name]: "" }));
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setSubmitStatus({ success: false, message: '' });
+
+    if (!validateForm()) return;
+
+    if (!emailjsConfig.serviceId || !emailjsConfig.templateId || !emailjsConfig.publicKey) {
+      setSubmitStatus({
+        success: false,
+        message: "Email service is not configured. Please set EmailJS environment variables."
+      });
+      return;
+    }
+
     setIsSubmitting(true);
     
     try {
       await emailjs.send(
-        'service_x7abc8i',
-        'template_x9l2qfr',
+        emailjsConfig.serviceId,
+        emailjsConfig.templateId,
         {
-          from_name: formData.name,
-          from_email: formData.email,
-          subject: formData.subject,
-          message: formData.message,
-          to_name: 'Mohammad Soleiman'
+          from_name: formData.name.trim(),
+          from_email: formData.email.trim(),
+          reply_to: formData.email.trim(),
+          subject: formData.subject.trim(),
+          message: formData.message.trim(),
+          to_name: 'Mohammad Soleiman',
+          to_email: profile.email,
         },
-        'pUblIc_kEy_12345'
+        emailjsConfig.publicKey
       );
       
       setSubmitStatus({
         success: true,
-        message: 'Message sent successfully! I\'ll get back to you soon.'
+        message: "Message sent successfully! I'll get back to you soon."
       });
       setFormData({ name: '', email: '', subject: '', message: '' });
+      setFormErrors({});
     } catch (error) {
       setSubmitStatus({
         success: false,
-        message: 'Failed to send message. Please try again or email me directly.'
+        message: "Failed to send message. Please try again or email me directly."
       });
     } finally {
       setIsSubmitting(false);
@@ -179,6 +220,7 @@ export default function Contact() {
                   required
                 />
                 <label htmlFor="name" className="form-label">Your Name</label>
+                {formErrors.name && <p className="error-message">{formErrors.name}</p>}
               </div>
               
               <div className="form-group">
@@ -193,6 +235,7 @@ export default function Contact() {
                   required
                 />
                 <label htmlFor="email" className="form-label">Email Address</label>
+                {formErrors.email && <p className="error-message">{formErrors.email}</p>}
               </div>
               
               <div className="form-group">
@@ -207,6 +250,7 @@ export default function Contact() {
                   required
                 />
                 <label htmlFor="subject" className="form-label">Subject</label>
+                {formErrors.subject && <p className="error-message">{formErrors.subject}</p>}
               </div>
               
               <div className="form-group">
@@ -220,6 +264,7 @@ export default function Contact() {
                   required
                 />
                 <label htmlFor="message" className="form-label">Your Message</label>
+                {formErrors.message && <p className="error-message">{formErrors.message}</p>}
               </div>
               
               <motion.button
@@ -230,12 +275,15 @@ export default function Contact() {
                 whileTap={{ scale: 0.98 }}
               >
                 {isSubmitting ? (
-                  <motion.span
-                    animate={{ rotate: 360 }}
-                    transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
-                  >
-                    ⏳
-                  </motion.span>
+                  <span className="inline-flex items-center gap-2">
+                    <motion.span
+                      animate={{ rotate: 360 }}
+                      transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+                    >
+                      ⏳
+                    </motion.span>
+                    Sending...
+                  </span>
                 ) : (
                   'Send Message 🚀'
                 )}
