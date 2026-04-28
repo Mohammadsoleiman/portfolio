@@ -61,7 +61,7 @@ export default function About() {
           whileHover={{ y: -10 }}
         >
           <div className="profile-image-wrapper">
-            <img src="/img/MohammadSoleiman.png" alt="Mohammad Soleiman" />
+            <img src={`${import.meta.env.BASE_URL}img/MohammadSoleiman.png`} alt="Mohammad Soleiman" />
             <div className="profile-shine" />
             <div className="profile-dots">
               {[...Array(8)].map((_, i) => (

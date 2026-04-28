@@ -9,7 +9,7 @@ const projects = [
     title: "The Digital Hub Platform",
     description: "End-to-end web platform with admin dashboard featuring RBAC, 2FA, and automated email processes.",
     category: "fullstack",
-    image: "/projects/digital-hub.png",
+    image: `${import.meta.env.BASE_URL}projects/portfolio.webp`,
     features: [
       "Role-based access control (RBAC)",
       "Two-factor authentication (2FA)",
@@ -28,7 +28,7 @@ const projects = [
     title: "Vehicles Management System",
     description: "Complete POS and Accounting System with role-based dashboards for Admin, Accountant, and Clerk.",
     category: "fullstack",
-    image: "/projects/vehicle-pos.png",
+    image: `${import.meta.env.BASE_URL}projects/pos.jpg`,
     features: [
       "Multi-role dashboards (Admin, Accountant, Clerk)",
       "Full inventory management",
@@ -47,7 +47,7 @@ const projects = [
     title: "LAM Online Shopping",
     description: "E-commerce website with role-based CMS for content management and product administration.",
     category: "fullstack",
-    image: "/projects/lam-shopping.png",
+    image: `${import.meta.env.BASE_URL}projects/lam.jpg`,
     features: [
       "Full e-commerce functionality",
       "Role-based content management",
@@ -66,7 +66,7 @@ const projects = [
     title: "Medical Center Management",
     description: "Appointment booking and pharmacy management system for medical centers.",
     category: "fullstack",
-    image: "/projects/medical-system.png",
+    image: `${import.meta.env.BASE_URL}projects/portfolio.webp`,
     features: [
       "Appointment scheduling",
       "Patient management",
@@ -85,7 +85,7 @@ const projects = [
     title: "Portfolio Website",
     description: "Modern portfolio with complex animations, responsive design, and interactive elements.",
     category: "frontend",
-    image: "/projects/portfolio.png",
+    image: `${import.meta.env.BASE_URL}projects/portfolio.webp`,
     features: [
       "Complex animations with Framer Motion",
       "Responsive design",
@@ -104,7 +104,7 @@ const projects = [
     title: "Fintech Dashboard",
     description: "Financial dashboard for tracking investments, expenses, and financial analytics.",
     category: "frontend",
-    image: "/projects/fintech-dashboard.png",
+    image: `${import.meta.env.BASE_URL}projects/pos.jpg`,
     features: [
       "Real-time data visualization",
       "Investment tracking",
