@@ -11,6 +11,7 @@
   justify-content: center;
   z-index: 9999;
   overflow: hidden;
+  padding: 24px 14px;
 }
 
 .loader-overlay.theme-dark {
@@ -27,8 +28,8 @@
 
 .loader-container {
   position: relative;
-  width: 200px;
-  height: 200px;
+  width: min(200px, 64vw);
+  height: min(200px, 64vw);
 }
 
 .loader-orb {
@@ -83,25 +84,29 @@
 .loader-content {
   text-align: center;
   margin-top: 40px;
+  width: min(92vw, 680px);
 }
 
 .loader-title {
-  font-size: 2.5rem;
+  font-size: clamp(1.4rem, 6.8vw, 2.5rem);
   font-weight: 800;
   background: var(--gradient);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
   margin-bottom: 10px;
+  line-height: 1.12;
+  overflow-wrap: anywhere;
 }
 
 .loader-subtitle {
   color: var(--text-secondary);
-  font-size: 1.1rem;
+  font-size: clamp(0.9rem, 3.8vw, 1.1rem);
+  min-height: 1.4em;
 }
 
 .loader-progress {
-  width: 300px;
+  width: min(300px, 86vw);
   height: 4px;
   background: var(--surface-soft);
   border-radius: 2px;
@@ -140,10 +145,75 @@
   100% { transform: translateY(-100px) rotate(360deg); opacity: 0; }
 }
 
+.loader-particles {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.loader-particles .particle {
+  position: absolute;
+  width: 5px;
+  height: 5px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--secondary) 62%, transparent);
+}
+
 .fade-out {
   animation: fadeOut 0.5s ease forwards;
 }
 
 @keyframes fadeOut {
   to { opacity: 0; visibility: hidden; }
+}
+
+@media (max-width: 768px) {
+  .loader-ring {
+    border-width: 2px;
+  }
+
+  .ring-1 { width: min(110px, 34vw); height: min(110px, 34vw); }
+  .ring-2 { width: min(130px, 40vw); height: min(130px, 40vw); }
+  .ring-3 { width: min(150px, 46vw); height: min(150px, 46vw); }
+
+  .loader-orb {
+    width: min(90px, 28vw);
+    height: min(90px, 28vw);
+    filter: blur(16px);
+  }
+
+  .loader-pulse-ring {
+    width: min(110px, 34vw);
+    height: min(110px, 34vw);
+  }
+
+  .floating-icon {
+    font-size: 18px !important;
+  }
+
+  .loader-code {
+    display: none;
+  }
+}
+
+@media (max-width: 430px) {
+  .loader-overlay {
+    padding: 18px 12px;
+  }
+
+  .loader-content {
+    margin-top: 28px;
+  }
+
+  .loader-title {
+    letter-spacing: 0.2px;
+  }
+
+  .loader-progress {
+    margin-top: 20px;
+  }
+
+  .loader-particles .particle:nth-child(n+12) {
+    display: none;
+  }
 }

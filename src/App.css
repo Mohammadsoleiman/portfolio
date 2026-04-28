@@ -69,6 +69,7 @@ html.light {
 
 html {
   scroll-behavior: smooth;
+  overflow-x: clip;
 }
 
 body {
@@ -78,6 +79,17 @@ body {
   overflow-x: hidden;
   position: relative;
   transition: background-color 300ms ease, color 300ms ease;
+}
+
+#root {
+  overflow-x: clip;
+}
+
+img,
+svg,
+video,
+canvas {
+  max-width: 100%;
 }
 
 /* Animated Background */
@@ -386,5 +398,15 @@ html.light .stat-item p {
   
   .section-wrapper {
     padding: 80px 5%;
+  }
+
+  .gradient-orb,
+  .about-bg-elements,
+  .skills-bg-elements,
+  .projects-bg-elements,
+  .education-bg-elements,
+  .contact-particles,
+  .map-visualization {
+    display: none;
   }
 }
