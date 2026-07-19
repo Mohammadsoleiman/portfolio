@@ -47,43 +47,6 @@ const experiences = [
   }
 ];
 
-const projects = [
-  {
-    title: "The Digital Hub – Web Platform & Admin Dashboard",
-    description: "Built an end-to-end web platform with secure admin dashboard featuring RBAC, 2FA, and automated email processes.",
-    tech: ["NestJS", "Next.js", "TypeScript", "Prisma", "PostgreSQL", "Docker"],
-    achievements: [
-      "Role-based access control (RBAC) and protected authentication flows",
-      "Optional two-factor authentication (2FA) implementation",
-      "Automated email processes (password recovery, notifications)",
-      "Student/user management and CV upload/download system",
-      "PDF profile generation and dynamic content management"
-    ]
-  },
-  {
-    title: "Vehicles Management System",
-    description: "Complete POS and Accounting System with role-based dashboards for Admin, Accountant, and Clerk.",
-    tech: ["MERN Stack", "MongoDB", "Express", "React", "Node.js"],
-    achievements: [
-      "Role-based access with separate dashboards",
-      "Full inventory and expense tracking modules",
-      "Financial management and reporting system",
-      "Responsive UI with real-time updates"
-    ]
-  },
-  {
-    title: "LAM Online Shopping",
-    description: "E-commerce website with role-based CMS for content management.",
-    tech: ["Laravel", "Blade", "MySQL", "Bootstrap"],
-    achievements: [
-      "Full-featured e-commerce platform",
-      "Role-based content management system",
-      "Shopping cart and payment integration",
-      "Admin panel for order and user management"
-    ]
-  }
-];
-
 export default function Experience() {
   const [activeExp, setActiveExp] = useState(0);
 
@@ -111,7 +74,7 @@ export default function Experience() {
           viewport={{ once: true }}
           transition={{ delay: 0.2 }}
         >
-          Experience & <span className="gradient-text">Projects</span>
+          Professional <span className="gradient-text">Experience</span>
         </motion.h2>
       </div>
 
@@ -198,55 +161,6 @@ export default function Experience() {
             </motion.div>
           </AnimatePresence>
 
-          {/* Project Showcase */}
-          <motion.div 
-            className="projects-showcase"
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.5 }}
-          >
-            <h3 className="projects-title">Featured Projects</h3>
-            
-            <div className="projects-grid">
-              {projects.map((project, i) => (
-                <motion.div
-                  key={i}
-                  className="project-card"
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: 0.3 + i * 0.1 }}
-                  whileHover={{ y: -10 }}
-                >
-                  <div className="project-header">
-                    <h4>{project.title}</h4>
-                    <div className="project-tech">
-                      {project.tech.map((tech, j) => (
-                        <span key={j} className="tech-badge">{tech}</span>
-                      ))}
-                    </div>
-                  </div>
-                  
-                  <p className="project-desc">{project.description}</p>
-                  
-                  <div className="project-achievements">
-                    <h5>Achievements:</h5>
-                    <ul>
-                      {project.achievements.map((achievement, j) => (
-                        <li key={j}>{achievement}</li>
-                      ))}
-                    </ul>
-                  </div>
-                  
-                  <div className="project-links">
-                    <a href="#" className="link-btn">View Details</a>
-                    <a href="#" className="link-btn github">GitHub</a>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-          </motion.div>
         </div>
       </div>
 
@@ -264,7 +178,7 @@ export default function Experience() {
             ease: "easeInOut"
           }}
         >
-          {`const experience = { years: 3, projects: 20+ }`}
+          {`const experience = { years: 3, projects: 4 }`}
         </motion.div>
       </div>
     </motion.section>

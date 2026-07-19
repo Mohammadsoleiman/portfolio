@@ -7,6 +7,12 @@
   padding: 120px 0 100px 0;
 }
 
+.home-hero {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+}
+
 .hero-bg-flyers {
   position: absolute;
   inset: 0;
@@ -32,6 +38,215 @@
 .hero-bg-flyer-icon {
   width: 16px;
   height: 16px;
+}
+
+/* ============================
+   TECH BUBBLES (HERO BACKGROUND)
+   ============================ */
+
+.tech-bubbles {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.tech-bubble {
+  --repel-x: 0px;
+  --repel-y: 0px;
+  position: absolute;
+  width: var(--bubble-size, 40px);
+  height: var(--bubble-size, 40px);
+  margin: 0;
+  padding: 0;
+  border: none;
+  background: transparent;
+  /* `translate` stays independent of Framer Motion's `transform` (scale) */
+  translate: calc(-50% + var(--repel-x)) calc(-50% + var(--repel-y));
+  transition: translate 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+  pointer-events: auto;
+  cursor: default;
+  z-index: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.tech-bubble-inner {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--secondary) 42%, var(--border-strong));
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 30% 24%, rgba(255, 255, 255, 0.28), transparent 32%),
+    linear-gradient(
+      145deg,
+      color-mix(in srgb, var(--surface-raised) 98%, var(--secondary) 2%),
+      color-mix(in srgb, var(--surface-soft) 92%, var(--app-bg))
+    );
+  box-shadow:
+    0 4px 12px rgba(2, 6, 23, 0.2),
+    inset 1px 1px 0 rgba(255, 255, 255, 0.28),
+    inset -2px -3px 7px rgba(2, 6, 23, 0.14);
+  opacity: var(--bubble-opacity, 0.94);
+  filter: none;
+  animation: techBubbleFloat var(--float-duration, 18s) ease-in-out infinite;
+  animation-delay: var(--float-delay, 0s);
+  will-change: transform;
+}
+
+.tech-bubble-label {
+  display: block;
+  max-width: calc(100% - 8px);
+  overflow: hidden;
+  font-family: "Courier New", Consolas, monospace;
+  font-size: clamp(0.52rem, 1vw, 0.68rem);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: color-mix(in srgb, var(--text-primary) 88%, var(--secondary));
+  white-space: nowrap;
+  text-align: center;
+  text-overflow: clip;
+  user-select: none;
+  line-height: 1;
+}
+
+.tech-bubble.depth-1 .tech-bubble-inner {
+  opacity: var(--bubble-opacity, 0.96);
+}
+
+.tech-bubble.depth-2 .tech-bubble-label {
+  font-size: clamp(0.5rem, 1vw, 0.66rem);
+}
+
+.tech-bubble.depth-3 .tech-bubble-inner {
+  opacity: var(--bubble-opacity, 0.9);
+}
+
+.tech-bubble.depth-3 .tech-bubble-label {
+  font-size: clamp(0.48rem, 0.95vw, 0.6rem);
+}
+
+.tech-bubble-pop-ring {
+  position: absolute;
+  inset: -4px;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--secondary) 35%, transparent);
+  opacity: 0;
+  pointer-events: none;
+  transform: scale(0.85);
+}
+
+.tech-bubble.is-popping {
+  pointer-events: none;
+}
+
+.tech-bubble-particle {
+  --particle-x: 0px;
+  --particle-y: 0px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--secondary) 78%, white);
+  box-shadow: 0 0 7px color-mix(in srgb, var(--secondary) 65%, transparent);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.tech-bubble.is-popping .tech-bubble-particle {
+  animation: techBubbleParticle 0.34s ease-out forwards;
+}
+
+.particle-1 { --particle-x: 28px; --particle-y: 0px; }
+.particle-2 { --particle-x: 15px; --particle-y: 24px; }
+.particle-3 { --particle-x: -15px; --particle-y: 24px; }
+.particle-4 { --particle-x: -28px; --particle-y: 0px; }
+.particle-5 { --particle-x: -15px; --particle-y: -24px; }
+.particle-6 { --particle-x: 15px; --particle-y: -24px; }
+
+@keyframes techBubbleParticle {
+  0% {
+    opacity: 0.9;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(
+      calc(-50% + var(--particle-x)),
+      calc(-50% + var(--particle-y))
+    ) scale(0.35);
+  }
+}
+
+.tech-bubble:hover .tech-bubble-pop-ring {
+  opacity: 0.35;
+  transform: scale(1);
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+@keyframes techBubbleFloat {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+  25% {
+    transform: translate3d(var(--x-drift, 8px), calc(var(--y-drift, 10px) * -1), 0);
+  }
+  50% {
+    transform: translate3d(calc(var(--x-drift, 8px) * -0.4), var(--y-drift, 10px), 0);
+  }
+  75% {
+    transform: translate3d(calc(var(--x-drift, 8px) * -0.8), calc(var(--y-drift, 10px) * -0.5), 0);
+  }
+}
+
+.tech-bubbles.is-mobile .tech-bubble {
+  pointer-events: auto;
+  cursor: default;
+}
+
+.tech-bubbles.is-mobile .tech-bubble-inner {
+  opacity: var(--bubble-opacity, 0.92);
+}
+
+.tech-bubbles.is-reduced-motion .tech-bubble-inner,
+.tech-bubbles.is-reduced-motion .tech-bubble {
+  animation: none !important;
+  transition: none !important;
+}
+
+.tech-bubbles.is-reduced-motion .tech-bubble {
+  pointer-events: auto;
+  cursor: default;
+  --repel-x: 0px !important;
+  --repel-y: 0px !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tech-bubble-inner {
+    animation: none !important;
+  }
+
+  .tech-bubble {
+    transition: none !important;
+    pointer-events: auto;
+  }
+
+  .tech-bubble-particle {
+    animation: none !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .tech-bubble {
+    pointer-events: auto;
+  }
 }
 
 /* ============================
@@ -301,12 +516,20 @@
   padding: 0 5%;
   position: relative;
   z-index: 1;
+  pointer-events: none;
 }
 
 /* Left Content */
 .home-left {
   z-index: 2;
   min-width: 0;
+  pointer-events: none;
+}
+
+.home-left > *,
+.home-right > *,
+.hero-bottom > * {
+  pointer-events: auto;
 }
 
 .intro-badge {
@@ -421,6 +644,9 @@
   padding: 0 5%;
   display: grid;
   gap: 14px;
+  position: relative;
+  z-index: 1;
+  pointer-events: none;
 }
 
 /* Stats */
@@ -453,6 +679,7 @@
 .home-right {
   position: relative;
   z-index: 1;
+  pointer-events: none;
 }
 
 .profile-3d-container {

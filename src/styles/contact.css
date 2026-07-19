@@ -353,30 +353,135 @@
 }
 
 @media (max-width: 768px) {
-  .contact-info,
-  .contact-form-wrapper {
+  .contact-section {
+    width: 100%;
+    min-width: 0;
+    overflow-x: clip;
+  }
+
+  .contact-container {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 24px;
+    width: 100%;
+    max-width: 100%;
     padding: 0;
   }
-  
+
+  .contact-info,
+  .contact-form-wrapper {
+    width: 100%;
+    min-width: 0;
+    padding: 0;
+  }
+
+  .info-card,
+  .form-card {
+    width: 100%;
+    min-width: 0;
+    padding: 24px 18px;
+    border-radius: 18px;
+  }
+
+  .info-header,
+  .form-header {
+    margin-bottom: 24px;
+    text-align: center;
+  }
+
   .info-header h2 {
     font-size: 2rem;
+    overflow-wrap: anywhere;
   }
-  
+
+  .info-header p,
+  .form-header p {
+    max-width: 100%;
+    overflow-wrap: anywhere;
+  }
+
+  .contact-details {
+    gap: 14px;
+    margin-bottom: 24px;
+  }
+
   .contact-item {
+    width: 100%;
+    min-width: 0;
+    gap: 12px;
     padding: 15px;
   }
-  
+
   .contact-icon {
     width: 40px;
     height: 40px;
     font-size: 1.2rem;
   }
-  
+
+  .contact-content {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .contact-content p,
+  .contact-content a {
+    max-width: 100%;
+    overflow-wrap: anywhere;
+    word-break: normal;
+  }
+
   .social-links {
     flex-wrap: wrap;
+    justify-content: center;
   }
-  
+
   .form-header h3 {
     font-size: 1.8rem;
+    overflow-wrap: anywhere;
+  }
+
+  .contact-form,
+  .form-group,
+  .form-input,
+  .form-textarea,
+  .submit-btn {
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+  }
+
+  .form-input,
+  .form-textarea {
+    padding-right: 16px;
+    padding-left: 16px;
+  }
+
+  .form-label {
+    left: 16px;
+    max-width: calc(100% - 32px);
+  }
+
+  .form-status,
+  .form-status p {
+    max-width: 100%;
+    overflow-wrap: anywhere;
+  }
+}
+
+@media (max-width: 480px) {
+  .info-card,
+  .form-card {
+    padding: 22px 14px;
+  }
+
+  .contact-item {
+    padding: 13px 12px;
+  }
+
+  .info-header h2 {
+    font-size: 1.75rem;
+  }
+
+  .form-header h3 {
+    font-size: 1.6rem;
   }
 }

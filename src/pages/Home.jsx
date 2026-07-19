@@ -17,6 +17,7 @@ import {
   SiTypescript,
 } from "react-icons/si";
 import Button from "../components/Button";
+import TechBubbles from "../components/TechBubbles";
 import "../styles/home.css";
 
 export default function Home({ setActiveSection }) {
@@ -146,8 +147,8 @@ const cvUrl = `${import.meta.env.BASE_URL}${cvFileName}`;
   ];
 
   return (
-    <motion.section 
-      className="text-gray-900 dark:text-white transition-colors duration-300"
+      <motion.section
+      className="home-hero text-gray-900 dark:text-white transition-colors duration-300"
       animate={controls}
       initial={{ opacity: 0, y: 20 }}
     >
@@ -169,6 +170,8 @@ const cvUrl = `${import.meta.env.BASE_URL}${cvFileName}`;
           </motion.div>
         ))}
       </div>
+
+      <TechBubbles />
 
       <div className="home-container">
         {/* Left Content */}
@@ -347,7 +350,7 @@ const cvUrl = `${import.meta.env.BASE_URL}${cvFileName}`;
         {/* Stats */}
         <div className="stats-grid">
           <div className="stat-item">
-            <h3>20+</h3>
+            <h3>4</h3>
             <p>Projects Completed</p>
           </div>
           <div className="stat-item">

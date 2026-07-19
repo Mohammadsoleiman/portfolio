@@ -1,5 +1,12 @@
-import { motion, AnimatePresence } from "framer-motion";  // FIXED: Added AnimatePresence
-import { useState } from "react";
+import {
+  AnimatePresence,
+  motion as Motion,
+  useMotionValueEvent,
+  useReducedMotion,
+  useScroll,
+  useTransform,
+} from "framer-motion";
+import { useEffect, useRef, useState } from "react";
 import Button from "../components/Button";
 import "../styles/projects.css";
 
@@ -7,393 +14,418 @@ const projects = [
   {
     id: 1,
     title: "The Digital Hub Platform",
-    description: "End-to-end web platform with admin dashboard featuring RBAC, 2FA, and automated email processes.",
+    description:
+      "A web platform and admin dashboard for managing digital training programs and participant services.",
     category: "fullstack",
-    image: `${import.meta.env.BASE_URL}projects/portfolio.webp`,
+    image: `${import.meta.env.BASE_URL}projects/digital-hub.webp`,
+    imageAlt: "Students collaborating with laptops in a digital learning space",
     features: [
-      "Role-based access control (RBAC)",
-      "Two-factor authentication (2FA)",
-      "Automated email notifications",
-      "Student/user management system",
-      "PDF profile generation",
-      "Dynamic content management"
+      "Role-based access control",
+      "Optional two-factor authentication",
+      "Automated email workflows",
     ],
     tech: ["NestJS", "Next.js", "TypeScript", "Prisma", "PostgreSQL", "Docker"],
-    github: "https://github.com/Mohammadsoleiman",
-    demo: "#",
-    type: "web-app"
   },
   {
     id: 2,
-    title: "Vehicles Management System",
-    description: "Complete POS and Accounting System with role-based dashboards for Admin, Accountant, and Clerk.",
+    title: "Medical Center",
+    description:
+      "A healthcare management system for coordinating appointments and pharmacy services.",
     category: "fullstack",
-    image: `${import.meta.env.BASE_URL}projects/pos.jpg`,
+    image: `${import.meta.env.BASE_URL}projects/medical-center.webp`,
+    imageAlt: "Healthcare professional using a mobile device in a clinic",
     features: [
-      "Multi-role dashboards (Admin, Accountant, Clerk)",
-      "Full inventory management",
-      "Expense tracking system",
-      "Financial reporting",
-      "Real-time updates",
-      "Responsive UI"
+      "Appointment booking",
+      "Pharmacy management",
+      "Patient management",
     ],
-    tech: ["MERN Stack", "React", "Node.js", "Express", "MongoDB", "Redux"],
-    github: "https://github.com/Mohammadsoleiman",
-    demo: "#",
-    type: "web-app"
+    tech: ["Laravel", "JavaScript", "Bootstrap", "MySQL"],
   },
   {
     id: 3,
-    title: "LAM Online Shopping",
-    description: "E-commerce website with role-based CMS for content management and product administration.",
+    title: "Vehicles Management System",
+    description:
+      "A POS and accounting system for managing vehicle inventory, expenses, and financial records.",
     category: "fullstack",
-    image: `${import.meta.env.BASE_URL}projects/lam.jpg`,
+    image: `${import.meta.env.BASE_URL}projects/vehicles-management.webp`,
+    imageAlt: "Rows of vehicles organized in a dealership inventory",
     features: [
-      "Full e-commerce functionality",
-      "Role-based content management",
-      "Shopping cart system",
-      "Payment integration",
-      "Order management",
-      "Admin panel"
+      "Role-based dashboards",
+      "Inventory and expense tracking",
+      "Financial reporting",
     ],
-    tech: ["Laravel", "Blade", "MySQL", "Bootstrap", "JavaScript", "jQuery"],
-    github: "https://github.com/Mohammadsoleiman",
-    demo: "#",
-    type: "web-app"
+    tech: ["MongoDB", "Express", "React", "Node.js"],
   },
   {
     id: 4,
-    title: "Medical Center Management",
-    description: "Appointment booking and pharmacy management system for medical centers.",
+    title: "LAM Online Shopping",
+    description:
+      "An e-commerce website with role-based tools for managing products and store content.",
     category: "fullstack",
-    image: `${import.meta.env.BASE_URL}projects/portfolio.webp`,
+    image: `${import.meta.env.BASE_URL}projects/lam-shopping.webp`,
+    imageAlt: "Modern clothing store interior with fashion products on display",
     features: [
-      "Appointment scheduling",
-      "Patient management",
-      "Pharmacy inventory",
-      "Doctor scheduling",
-      "Billing system",
-      "Medical records"
+      "Role-based content management",
+      "Product and content management",
+      "Shopping cart",
     ],
-    tech: ["Laravel", "HTML", "CSS", "JavaScript", "Bootstrap", "MySQL"],
-    github: "https://github.com/Mohammadsoleiman",
-    demo: "#",
-    type: "web-app"
+    tech: ["Laravel", "Blade", "MySQL", "Bootstrap"],
   },
-  {
-    id: 5,
-    title: "Portfolio Website",
-    description: "Modern portfolio with complex animations, responsive design, and interactive elements.",
-    category: "frontend",
-    image: `${import.meta.env.BASE_URL}projects/portfolio.webp`,
-    features: [
-      "Complex animations with Framer Motion",
-      "Responsive design",
-      "Interactive elements",
-      "Smooth transitions",
-      "Performance optimized",
-      "Modern UI/UX"
-    ],
-    tech: ["React", "Framer Motion", "CSS3", "JavaScript", "Vite", "Tailwind"],
-    github: "https://github.com/Mohammadsoleiman",
-    demo: "#",
-    type: "website"
-  },
-  {
-    id: 6,
-    title: "Fintech Dashboard",
-    description: "Financial dashboard for tracking investments, expenses, and financial analytics.",
-    category: "frontend",
-    image: `${import.meta.env.BASE_URL}projects/pos.jpg`,
-    features: [
-      "Real-time data visualization",
-      "Investment tracking",
-      "Expense analytics",
-      "Financial reports",
-      "Interactive charts",
-      "User authentication"
-    ],
-    tech: ["React", "Chart.js", "Material-UI", "REST API", "Axios", "Context API"],
-    github: "https://github.com/Mohammadsoleiman",
-    demo: "#",
-    type: "web-app"
-  }
 ];
 
-const categories = ["all", "fullstack", "frontend", "web-app", "website"];
-
 export default function Projects() {
-  const [activeCategory, setActiveCategory] = useState("all");
   const [selectedProject, setSelectedProject] = useState(null);
+  const [activeProject, setActiveProject] = useState(0);
+  const [cardStep, setCardStep] = useState(0);
+  const [cardWidth, setCardWidth] = useState(0);
+  const [cardGap, setCardGap] = useState(30);
+  const [trackStart, setTrackStart] = useState(0);
+  const [verticalTravel, setVerticalTravel] = useState(0);
+  const [navbarHeight, setNavbarHeight] = useState(76);
+  const [isDesktop, setIsDesktop] = useState(false);
+  const sectionRef = useRef(null);
+  const viewportRef = useRef(null);
+  const trackRef = useRef(null);
+  const shouldReduceMotion = useReducedMotion();
 
-  const filteredProjects = activeCategory === "all" 
-    ? projects 
-    : projects.filter(project => 
-        project.category === activeCategory || project.type === activeCategory
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start start", "end end"],
+  });
+  const usesPinnedScroll = isDesktop && !shouldReduceMotion;
+  const trackX = useTransform(
+    scrollYProgress,
+    [0, 0.12, 0.25, 0.37, 0.5, 0.62, 0.75, 0.87, 1],
+    [
+      trackStart,
+      trackStart,
+      trackStart - cardStep,
+      trackStart - cardStep,
+      trackStart - cardStep * 2,
+      trackStart - cardStep * 2,
+      trackStart - cardStep * 3,
+      trackStart - cardStep * 3,
+      trackStart - cardStep * 3,
+    ],
+  );
+  useMotionValueEvent(scrollYProgress, "change", (progress) => {
+    if (!usesPinnedScroll) return;
+
+    const nextActive =
+      progress < 0.19 ? 0 :
+      progress < 0.44 ? 1 :
+      progress < 0.69 ? 2 : 3;
+    setActiveProject(nextActive);
+  });
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(min-width: 1px)");
+
+    const measure = () => {
+      const desktop = mediaQuery.matches;
+      setIsDesktop(desktop);
+
+      if (!desktop || shouldReduceMotion || !viewportRef.current || !trackRef.current) {
+        setCardWidth(0);
+        setCardGap(30);
+        setCardStep(0);
+        setTrackStart(0);
+        setVerticalTravel(0);
+        return;
+      }
+
+      const viewportWidth = viewportRef.current.clientWidth;
+      const navbar = document.querySelector(".navbar");
+      const nextCardWidth = Math.round(
+        Math.min(860, Math.max(560, viewportWidth * 0.68), viewportWidth - 32),
       );
+      const nextTrackStart = Math.round((viewportWidth - nextCardWidth) / 2);
+      const nextCardGap = Math.max(30, nextTrackStart + 24);
+      const nextCardStep = nextCardWidth + nextCardGap;
+      setCardWidth(nextCardWidth);
+      setCardGap(nextCardGap);
+      setCardStep(nextCardStep);
+      setTrackStart(nextTrackStart);
+      setNavbarHeight(Math.ceil(navbar?.getBoundingClientRect().height || 76));
+      setVerticalTravel(
+        Math.max(window.innerHeight * 4.2, 2800),
+      );
+    };
+
+    const resizeObserver = new ResizeObserver(measure);
+    if (viewportRef.current) resizeObserver.observe(viewportRef.current);
+    if (trackRef.current) resizeObserver.observe(trackRef.current);
+    const navbar = document.querySelector(".navbar");
+    if (navbar) resizeObserver.observe(navbar);
+
+    mediaQuery.addEventListener("change", measure);
+    window.addEventListener("resize", measure);
+    measure();
+
+    return () => {
+      resizeObserver.disconnect();
+      mediaQuery.removeEventListener("change", measure);
+      window.removeEventListener("resize", measure);
+    };
+  }, [shouldReduceMotion]);
+
+  useEffect(() => {
+    const viewport = viewportRef.current;
+    if (!viewport || usesPinnedScroll) return undefined;
+
+    const updateActiveProject = () => {
+      const firstCard = trackRef.current?.firstElementChild;
+      if (!firstCard) return;
+      const gap = parseFloat(getComputedStyle(trackRef.current).gap) || 0;
+      const step = firstCard.getBoundingClientRect().width + gap;
+      setActiveProject(
+        Math.min(projects.length - 1, Math.max(0, Math.round(viewport.scrollLeft / step))),
+      );
+    };
+
+    viewport.addEventListener("scroll", updateActiveProject, { passive: true });
+    updateActiveProject();
+    return () => viewport.removeEventListener("scroll", updateActiveProject);
+  }, [usesPinnedScroll]);
 
   return (
-    <motion.section 
-      className="projects-section text-gray-900 dark:text-white transition-colors duration-300"
-      initial={{ opacity: 0 }}
-      whileInView={{ opacity: 1 }}
-      viewport={{ once: true, margin: "-100px" }}
-    >
-      <div className="section-header">
-        <motion.div 
-          className="section-badge"
-          initial={{ opacity: 0, x: -30 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true }}
-        >
-          <span>🚀 Featured Projects</span>
-        </motion.div>
-        
-        <motion.h2 
-          className="section-title"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.2 }}
-        >
-          My <span className="gradient-text">Portfolio</span>
-        </motion.h2>
-      </div>
-
-      {/* Filters */}
-      <motion.div 
-        className="projects-filters"
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ delay: 0.3 }}
+    <>
+      <Motion.section
+        ref={sectionRef}
+        className={`projects-section${usesPinnedScroll ? " is-pinned" : " is-static"}`}
+        style={
+          usesPinnedScroll
+            ? {
+                "--projects-scroll-distance": `${verticalTravel}px`,
+                "--project-card-width": `${cardWidth}px`,
+                "--project-card-gap": `${cardGap}px`,
+                "--projects-navbar-height": `${navbarHeight}px`,
+              }
+            : undefined
+        }
+        initial={shouldReduceMotion ? false : { opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true, margin: "-100px" }}
       >
-        {categories.map(category => (
-          <motion.button
-            key={category}
-            className={`filter-btn ${activeCategory === category ? "active" : ""}`}
-            onClick={() => setActiveCategory(category)}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            {category === "all" ? "All Projects" : 
-             category === "fullstack" ? "Full Stack" : 
-             category === "frontend" ? "Frontend" : 
-             category === "web-app" ? "Web Apps" : "Websites"}
-          </motion.button>
-        ))}
-      </motion.div>
+        <div className="projects-sticky">
+          <div className="section-header projects-section-header">
+            <Motion.div
+              className="section-badge"
+              initial={shouldReduceMotion ? false : { opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+            >
+              <span>🚀 Featured Projects</span>
+            </Motion.div>
 
-      {/* Projects Grid */}
-      <div className="projects-grid">
-        {filteredProjects.map((project, index) => (
-          <motion.div
-            key={project.id}
-            className="project-item"
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.2 + index * 0.1 }}
-            whileHover={{ y: -15 }}
-            onClick={() => setSelectedProject(project)}
-          >
-            <div className="project-image">
-              <img src={project.image} alt={project.title} />
-              <div className="project-overlay">
-                <div className="project-tags">
-                  {project.tech.slice(0, 3).map((tech, i) => (
-                    <span key={i} className="project-tag">{tech}</span>
-                  ))}
-                </div>
-              </div>
-            </div>
-            
-            <div className="project-content">
-              <div className="project-header">
-                <h3>{project.title}</h3>
-                <span className="project-type">
-                  {project.category === "fullstack" ? "Full Stack" : "Frontend"}
-                </span>
-              </div>
-              
-              <p className="project-description">{project.description}</p>
-              
-              <div className="project-features">
-                <h4 className="features-title">Key Features:</h4>
-                <ul className="features-list">
-                  {project.features.slice(0, 3).map((feature, i) => (
-                    <li key={i}>{feature}</li>
-                  ))}
-                </ul>
-              </div>
-              
-              <div className="project-tech">
-                {project.tech.map((tech, i) => (
-                  <span key={i} className="tech-stack">{tech}</span>
-                ))}
-              </div>
-              
-              <div className="project-links">
-                <a 
-                  href={project.github} 
-                  className="project-link github"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  onClick={(e) => e.stopPropagation()}
-                >
-                  <span className="link-icon">🐙</span>
-                  GitHub
-                </a>
-                <a 
-                  href={project.demo} 
-                  className="project-link"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    setSelectedProject(project);
-                  }}
-                >
-                  <span className="link-icon">🚀</span>
-                  View Details
-                </a>
-              </div>
-            </div>
-          </motion.div>
-        ))}
-      </div>
+            <Motion.h2
+              className="section-title"
+              initial={shouldReduceMotion ? false : { opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.2 }}
+            >
+              My <span className="gradient-text">Portfolio</span>
+            </Motion.h2>
+          </div>
 
-      {/* Project Modal */}
+          <div className="project-journey" aria-label={`Project ${activeProject + 1} of ${projects.length}`}>
+            <div className="project-journey-line">
+              <span
+                className="project-journey-progress"
+                style={{ transform: `scaleX(${activeProject / (projects.length - 1)})` }}
+              />
+              {projects.map((project, index) => (
+                <span
+                  key={project.id}
+                  className={`project-journey-dot${index === activeProject ? " active" : ""}${index < activeProject ? " complete" : ""}`}
+                  aria-hidden="true"
+                />
+              ))}
+            </div>
+          </div>
+
+          <div className="projects-viewport" ref={viewportRef}>
+            <Motion.div
+              className="projects-track"
+              ref={trackRef}
+              style={{ x: usesPinnedScroll ? trackX : 0 }}
+            >
+              {projects.map((project, index) => (
+                <Motion.article
+                  key={project.id}
+                  className="project-item"
+                  initial={shouldReduceMotion ? false : { opacity: 0, y: 50 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, amount: 0.2 }}
+                  transition={{ delay: 0.1 + index * 0.08 }}
+                  whileHover={shouldReduceMotion ? undefined : { y: -15 }}
+                  onClick={() => setSelectedProject(project)}
+                >
+                  <div className="project-image">
+                    <img
+                      src={project.image}
+                      alt={project.imageAlt}
+                      width="1200"
+                      height="800"
+                      loading="lazy"
+                    />
+                    <div className="project-overlay">
+                      <div className="project-tags">
+                        {project.tech.slice(0, 3).map((tech) => (
+                          <span key={tech} className="project-tag">{tech}</span>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="project-content">
+                    <div className="project-header">
+                      <h3>{project.title}</h3>
+                      <span className="project-type">Full Stack</span>
+                    </div>
+
+                    <p className="project-description">{project.description}</p>
+
+                    <div className="project-features">
+                      <h4 className="features-title">Key Features:</h4>
+                      <ul className="features-list">
+                        {project.features.map((feature) => (
+                          <li key={feature}>{feature}</li>
+                        ))}
+                      </ul>
+                    </div>
+
+                    <div className="project-tech">
+                      {project.tech.map((tech) => (
+                        <span key={tech} className="tech-stack">{tech}</span>
+                      ))}
+                    </div>
+
+                    <div className="project-links">
+                      <button
+                        type="button"
+                        className="project-link"
+                        onClick={(event) => {
+                          event.stopPropagation();
+                          setSelectedProject(project);
+                        }}
+                      >
+                        <span className="link-icon">🚀</span>
+                        View Details
+                      </button>
+                    </div>
+                  </div>
+                </Motion.article>
+              ))}
+            </Motion.div>
+          </div>
+
+          <p className="projects-explore-hint" aria-hidden="true">
+            <span>{usesPinnedScroll ? "Scroll to explore" : "Swipe to explore"}</span>
+            <span className="explore-arrow">→</span>
+          </p>
+        </div>
+
+        <div className="projects-bg-elements" aria-hidden="true">
+          <Motion.div
+            className="floating-project"
+            animate={shouldReduceMotion ? undefined : { y: [0, -30, 0], rotate: [0, 10, 0] }}
+            transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+          />
+          <Motion.div
+            className="floating-project"
+            animate={shouldReduceMotion ? undefined : { y: [0, -40, 0], rotate: [0, -15, 0] }}
+            transition={{ duration: 8, repeat: Infinity, ease: "easeInOut", delay: 2 }}
+          />
+        </div>
+      </Motion.section>
+
       <AnimatePresence>
         {selectedProject && (
-          <motion.div 
+          <Motion.div
             className="project-modal active"
-            initial={{ opacity: 0 }}
+            initial={shouldReduceMotion ? false : { opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={() => setSelectedProject(null)}
           >
-            <motion.div 
+            <Motion.div
               className="modal-content"
-              initial={{ scale: 0.8, y: 50 }}
+              initial={shouldReduceMotion ? false : { scale: 0.8, y: 50 }}
               animate={{ scale: 1, y: 0 }}
               exit={{ scale: 0.8, y: 50 }}
-              onClick={(e) => e.stopPropagation()}
+              onClick={(event) => event.stopPropagation()}
             >
-              <button 
+              <button
+                type="button"
                 className="modal-close"
+                aria-label="Close project details"
                 onClick={() => setSelectedProject(null)}
               >
                 ×
               </button>
-              
+
               <div className="modal-image">
-                <img src={selectedProject.image} alt={selectedProject.title} />
+                <img
+                  src={selectedProject.image}
+                  alt={selectedProject.imageAlt}
+                  width="1200"
+                  height="800"
+                />
               </div>
-              
+
               <div className="modal-body">
                 <div className="modal-header">
                   <h3>{selectedProject.title}</h3>
                   <p>{selectedProject.description}</p>
                 </div>
-                
+
                 <div className="modal-details">
                   <div className="detail-section">
                     <h4>Features</h4>
                     <ul>
-                      {selectedProject.features.map((feature, i) => (
-                        <li key={i}>{feature}</li>
+                      {selectedProject.features.map((feature) => (
+                        <li key={feature}>{feature}</li>
                       ))}
                     </ul>
                   </div>
-                  
+
                   <div className="detail-section">
                     <h4>Technologies Used</h4>
                     <div className="modal-tech">
-                      {selectedProject.tech.map((tech, i) => (
-                        <span key={i} className="tech-stack">{tech}</span>
+                      {selectedProject.tech.map((tech) => (
+                        <span key={tech} className="tech-stack">{tech}</span>
                       ))}
                     </div>
-                    
-                    <h4 style={{ marginTop: '20px' }}>Project Type</h4>
-                    <p>{selectedProject.category === "fullstack" ? "Full Stack Web Application" : "Frontend Application"}</p>
+
+                    <h4 className="project-type-heading">Project Type</h4>
+                    <p>Full Stack Web Application</p>
                   </div>
                 </div>
-                
-                <div className="modal-links">
-                  <a 
-                    href={selectedProject.github} 
-                    className="project-link"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <span className="link-icon">🐙</span>
-                    View on GitHub
-                  </a>
-                  <a 
-                    href={selectedProject.demo} 
-                    className="project-link"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <span className="link-icon">🚀</span>
-                    Live Demo
-                  </a>
-                </div>
               </div>
-            </motion.div>
-          </motion.div>
+            </Motion.div>
+          </Motion.div>
         )}
       </AnimatePresence>
 
-      {/* CTA Section */}
-      <motion.div 
+      <Motion.div
         className="projects-cta"
-        initial={{ opacity: 0, y: 50 }}
+        initial={shouldReduceMotion ? false : { opacity: 0, y: 50 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        transition={{ delay: 0.5 }}
+        transition={{ delay: 0.2 }}
       >
         <div className="cta-glow" />
-        
         <h3 className="cta-title">Have a Project in Mind?</h3>
         <p className="cta-description">
-          I'm always open to discussing new opportunities and interesting projects. 
-          Let's work together to bring your ideas to life!
+          I&apos;m always open to discussing new opportunities and interesting projects.
+          Let&apos;s work together to bring your ideas to life!
         </p>
-        
         <Button as="a" href="#contact" className="btn-primary">
-          Let's Collaborate
+          Let&apos;s Collaborate
         </Button>
-      </motion.div>
-
-      {/* Animated Elements */}
-      <div className="projects-bg-elements">
-        <motion.div 
-          className="floating-project"
-          animate={{ 
-            y: [0, -30, 0],
-            rotate: [0, 10, 0]
-          }}
-          transition={{ 
-            duration: 6,
-            repeat: Infinity,
-            ease: "easeInOut"
-          }}
-        />
-        
-        <motion.div 
-          className="floating-project"
-          animate={{ 
-            y: [0, -40, 0],
-            rotate: [0, -15, 0]
-          }}
-          transition={{ 
-            duration: 8,
-            repeat: Infinity,
-            ease: "easeInOut",
-            delay: 2
-          }}
-        />
-      </div>
-    </motion.section>
+      </Motion.div>
+    </>
   );
 }
