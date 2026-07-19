@@ -8,7 +8,7 @@ import { ThemeProvider } from "./context/ThemeContext";
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <ThemeProvider>
-      <BrowserRouter>
+      <BrowserRouter basename="/portfolio">
         <App />
       </BrowserRouter>
     </ThemeProvider>

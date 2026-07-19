@@ -1,11 +1,9 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 
-// ✅ Auto-detect base path
-export default defineConfig(({ command }) => ({
+export default defineConfig({
   plugins: [react()],
-  // Always use repository subpath for production builds (GitHub Pages)
-  base: command === "build" ? "/portfolio/" : "/",
+  base: "/portfolio/",
   build: {
     outDir: "dist",
     assetsDir: "assets",
@@ -15,7 +13,4 @@ export default defineConfig(({ command }) => ({
     port: 5173,
     open: true,
   },
-}));
-
-
-// https://mohammadsoleiman.github.io/portfolio/
+});
