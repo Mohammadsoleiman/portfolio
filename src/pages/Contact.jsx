@@ -1,8 +1,33 @@
 import { motion } from "framer-motion";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import emailjs from '@emailjs/browser';
 import { profile } from "../data/profile";
 import "../styles/contact.css";
+
+const EMAILJS_CONFIG = {
+  serviceId: import.meta.env.VITE_EMAILJS_SERVICE_ID,
+  templateId: import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
+  publicKey: import.meta.env.VITE_EMAILJS_PUBLIC_KEY,
+};
+
+function getSendErrorMessage(error) {
+  const status = error?.status;
+  const text = typeof error?.text === "string" ? error.text : "";
+
+  if (status === 412 || /invalid grant|reconnect your gmail/i.test(text)) {
+    return `Could not send email right now (mail provider authorization expired). Please email me directly at ${profile.email}.`;
+  }
+
+  if (status === 403 || /API access from non-browser|blocked/i.test(text)) {
+    return "Could not send email due to EmailJS security settings. Please email me directly.";
+  }
+
+  if (!EMAILJS_CONFIG.serviceId || !EMAILJS_CONFIG.templateId || !EMAILJS_CONFIG.publicKey) {
+    return "Email service is not configured. Please set EmailJS environment variables.";
+  }
+
+  return "Failed to send message. Please try again or email me directly.";
+}
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -14,12 +39,8 @@ export default function Contact() {
   const [formErrors, setFormErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState({ success: false, message: '' });
-
-  const emailjsConfig = {
-    serviceId: import.meta.env.VITE_EMAILJS_SERVICE_ID,
-    templateId: import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
-    publicKey: import.meta.env.VITE_EMAILJS_PUBLIC_KEY,
-  };
+  const isSubmittingRef = useRef(false);
+  const statusTimeoutRef = useRef(null);
 
   const validateForm = () => {
     const errors = {};
@@ -46,11 +67,23 @@ export default function Contact() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    e.stopPropagation();
+
+    // Sync lock blocks double-submit before React re-renders disabled state
+    if (isSubmittingRef.current || isSubmitting) return;
+
+    if (statusTimeoutRef.current) {
+      clearTimeout(statusTimeoutRef.current);
+      statusTimeoutRef.current = null;
+    }
     setSubmitStatus({ success: false, message: '' });
 
     if (!validateForm()) return;
 
-    if (!emailjsConfig.serviceId || !emailjsConfig.templateId || !emailjsConfig.publicKey) {
+    if (!EMAILJS_CONFIG.serviceId || !EMAILJS_CONFIG.templateId || !EMAILJS_CONFIG.publicKey) {
+      if (import.meta.env.DEV) {
+        console.error("[Contact] Missing EmailJS env vars (VITE_EMAILJS_SERVICE_ID / TEMPLATE_ID / PUBLIC_KEY).");
+      }
       setSubmitStatus({
         success: false,
         message: "Email service is not configured. Please set EmailJS environment variables."
@@ -58,12 +91,13 @@ export default function Contact() {
       return;
     }
 
+    isSubmittingRef.current = true;
     setIsSubmitting(true);
-    
+
     try {
       await emailjs.send(
-        emailjsConfig.serviceId,
-        emailjsConfig.templateId,
+        EMAILJS_CONFIG.serviceId,
+        EMAILJS_CONFIG.templateId,
         {
           from_name: formData.name.trim(),
           from_email: formData.email.trim(),
@@ -73,9 +107,9 @@ export default function Contact() {
           to_name: 'Mohammad Soleiman',
           to_email: profile.email,
         },
-        emailjsConfig.publicKey
+        { publicKey: EMAILJS_CONFIG.publicKey }
       );
-      
+
       setSubmitStatus({
         success: true,
         message: "Message sent successfully! I'll get back to you soon."
@@ -83,13 +117,23 @@ export default function Contact() {
       setFormData({ name: '', email: '', subject: '', message: '' });
       setFormErrors({});
     } catch (error) {
+      if (import.meta.env.DEV) {
+        console.error("[Contact] EmailJS send failed", {
+          status: error?.status,
+          text: typeof error?.text === "string" ? error.text : undefined,
+        });
+      }
       setSubmitStatus({
         success: false,
-        message: "Failed to send message. Please try again or email me directly."
+        message: getSendErrorMessage(error),
       });
     } finally {
+      isSubmittingRef.current = false;
       setIsSubmitting(false);
-      setTimeout(() => setSubmitStatus({ success: false, message: '' }), 5000);
+      statusTimeoutRef.current = setTimeout(() => {
+        setSubmitStatus({ success: false, message: '' });
+        statusTimeoutRef.current = null;
+      }, 8000);
     }
   };
 
@@ -271,8 +315,9 @@ export default function Contact() {
                 type="submit"
                 className="submit-btn"
                 disabled={isSubmitting}
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
+                aria-busy={isSubmitting}
+                whileHover={isSubmitting ? undefined : { scale: 1.02 }}
+                whileTap={isSubmitting ? undefined : { scale: 0.98 }}
               >
                 {isSubmitting ? (
                   <span className="inline-flex items-center gap-2">

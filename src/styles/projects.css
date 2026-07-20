@@ -281,12 +281,12 @@
   flex: 1;
   padding: 12px;
   text-align: center;
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: var(--surface-raised);
+  border: 1px solid var(--border-strong);
   border-radius: 12px;
-  color: white;
+  color: var(--text-primary);
   text-decoration: none;
-  font-weight: 500;
+  font-weight: 600;
   transition: all 0.3s ease;
   display: flex;
   align-items: center;
@@ -299,20 +299,36 @@
 .project-link:hover {
   background: var(--gradient);
   border-color: transparent;
+  color: #ffffff;
   transform: translateY(-3px);
+}
+
+.project-link:focus-visible {
+  outline: 2px solid var(--secondary);
+  outline-offset: 2px;
+  color: var(--text-primary);
+}
+
+.project-link:hover:focus-visible {
+  color: #ffffff;
 }
 
 .project-link.github {
   background: transparent;
-  border-color: rgba(255, 255, 255, 0.1);
+  border-color: var(--border-soft);
+  color: var(--text-primary);
 }
 
 .project-link.github:hover {
-  background: rgba(255, 255, 255, 0.2);
+  background: var(--surface-hover);
+  border-color: var(--border-strong);
+  color: var(--text-primary);
 }
 
 .link-icon {
   font-size: 1.2rem;
+  line-height: 1;
+  color: inherit;
 }
 
 /* Project Modal */

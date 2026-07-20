@@ -93,8 +93,8 @@ export default function Experience() {
                 key={i}
                 className={`timeline-dot ${activeExp === i ? "active" : ""} ${exp.type}`}
                 onClick={() => setActiveExp(i)}
-                whileHover={{ scale: 1.2 }}
-                whileTap={{ scale: 0.9 }}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.97 }}
               >
                 <div className="dot-core" />
                 <div className="dot-glow" />

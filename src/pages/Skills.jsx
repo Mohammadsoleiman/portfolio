@@ -299,7 +299,7 @@ export default function Skills() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: 0.5 + i * 0.1 }}
-                whileHover={{ y: -10 }}
+                whileHover={{ y: -6 }}
               >
                 <div className="soft-skill-icon">{skill.icon}</div>
                 <h4>{skill.name}</h4>

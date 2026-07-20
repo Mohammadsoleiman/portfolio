@@ -40,6 +40,13 @@ html.dark {
   --map-accent-a: rgba(255, 99, 132, 0.35);
   --map-accent-b: rgba(167, 139, 250, 0.36);
   --map-link: rgba(96, 165, 250, 0.28);
+  --code-accent: #93c5fd;
+  --btn-surface: rgba(255, 255, 255, 0.1);
+  --btn-surface-border: rgba(255, 255, 255, 0.28);
+  --tab-inactive-bg: rgba(255, 255, 255, 0.04);
+  --tab-inactive-text: rgba(248, 250, 252, 0.72);
+  --tab-active-bg: rgba(59, 130, 246, 0.18);
+  --tab-active-text: #f8fafc;
 }
 
 html.light {
@@ -65,6 +72,13 @@ html.light {
   --map-accent-a: rgba(236, 72, 153, 0.35);
   --map-accent-b: rgba(139, 92, 246, 0.35);
   --map-link: rgba(59, 130, 246, 0.3);
+  --code-accent: #1d4ed8;
+  --btn-surface: #ffffff;
+  --btn-surface-border: rgba(15, 23, 42, 0.22);
+  --tab-inactive-bg: #ffffff;
+  --tab-inactive-text: #475569;
+  --tab-active-bg: rgba(59, 130, 246, 0.14);
+  --tab-active-text: #0f172a;
 }
 
 html {
@@ -76,13 +90,20 @@ body {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   background: var(--app-bg);
   color: var(--text-primary);
-  overflow-x: hidden;
+  overflow-x: clip;
   position: relative;
   transition: background-color 300ms ease, color 300ms ease;
 }
 
 #root {
   overflow-x: clip;
+  max-width: 100%;
+}
+
+.main-content,
+.section-wrapper {
+  max-width: 100%;
+  box-sizing: border-box;
 }
 
 img,
@@ -137,12 +158,25 @@ canvas {
 }
 
 .section-wrapper {
-  min-height: 100vh;
+  min-height: 0;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  padding: 84px 5%;
+  justify-content: flex-start;
+  padding: 64px 5%;
   position: relative;
+}
+
+/* Hero keeps a full first viewport; other sections flow tightly */
+#home.section-wrapper {
+  min-height: 100vh;
+  justify-content: center;
+  padding-top: 88px;
+  padding-bottom: 48px;
+}
+
+#projects.section-wrapper:has(.projects-section.is-pinned) {
+  min-height: 0;
+  padding-block: 0;
 }
 
 /* Common Components */
@@ -162,7 +196,7 @@ canvas {
 
 .section-header {
   text-align: center;
-  margin-bottom: 60px;
+  margin-bottom: 40px;
 }
 
 .section-badge {
@@ -290,8 +324,72 @@ html body * {
 .contact-content h4,
 .project-link,
 .link-btn,
-.modal-close {
+.modal-close,
+.tab-btn.active,
+.period {
   color: var(--text-primary) !important;
+}
+
+.tab-btn {
+  color: var(--tab-inactive-text) !important;
+  background: var(--tab-inactive-bg) !important;
+  border-color: var(--border-soft) !important;
+}
+
+.tab-btn:hover,
+.tab-btn.active {
+  color: var(--tab-active-text) !important;
+  background: var(--tab-active-bg) !important;
+  border-color: var(--border-strong) !important;
+}
+
+.project-link,
+.link-btn {
+  background: var(--btn-surface) !important;
+  border-color: var(--btn-surface-border) !important;
+  color: var(--text-primary) !important;
+}
+
+.project-link:hover,
+.project-link:focus-visible,
+.link-btn:hover,
+.link-btn:focus-visible {
+  color: #ffffff !important;
+  background: var(--gradient) !important;
+  border-color: transparent !important;
+}
+
+.project-link.github:hover,
+.project-link.github:focus-visible {
+  color: var(--text-primary) !important;
+  background: var(--surface-hover) !important;
+  border-color: var(--border-strong) !important;
+}
+
+.project-link .link-icon,
+.project-link span {
+  color: inherit !important;
+}
+
+.floating-code,
+.floating-code-block {
+  color: var(--code-accent) !important;
+  background: var(--surface-raised) !important;
+  border-color: var(--border-strong) !important;
+}
+
+.scroll-indicator span {
+  color: var(--text-muted) !important;
+}
+
+.mouse {
+  border-color: var(--border-strong) !important;
+}
+
+.tech-stack {
+  color: var(--text-secondary) !important;
+  background: var(--surface-soft) !important;
+  border: 1px solid var(--border-soft);
 }
 
 .btn-primary,
@@ -352,10 +450,70 @@ html.light .hire-btn,
 html.light .cta-button,
 html.light .submit-btn,
 html.light .newsletter-btn,
-html.light .project-link,
-html.light .link-btn,
 html.light .back-to-top {
   color: #ffffff !important;
+}
+
+html.light .project-link,
+html.light .link-btn {
+  color: #0f172a !important;
+  background: #ffffff !important;
+  border: 1px solid rgba(15, 23, 42, 0.22) !important;
+}
+
+html.light .project-link:hover,
+html.light .project-link:focus-visible,
+html.light .link-btn:hover,
+html.light .link-btn:focus-visible {
+  color: #ffffff !important;
+  background: var(--gradient) !important;
+  border-color: transparent !important;
+}
+
+html.light .project-link .link-icon,
+html.light .project-link span {
+  color: inherit !important;
+}
+
+html.light .tab-btn {
+  color: #475569 !important;
+  background: #ffffff !important;
+  border: 1px solid rgba(15, 23, 42, 0.16) !important;
+}
+
+html.light .tab-btn:hover,
+html.light .tab-btn.active {
+  color: #0f172a !important;
+  background: rgba(59, 130, 246, 0.14) !important;
+  border-color: rgba(59, 130, 246, 0.4) !important;
+}
+
+html.light .floating-code,
+html.light .floating-code-block {
+  color: #1d4ed8 !important;
+  background: rgba(255, 255, 255, 0.96) !important;
+  border-color: rgba(37, 99, 235, 0.35) !important;
+}
+
+html.light .profile-card .contact-email,
+.profile-card .contact-email {
+  white-space: nowrap !important;
+  word-break: keep-all !important;
+  overflow-wrap: normal !important;
+}
+
+html.light .scroll-indicator span {
+  color: #475569 !important;
+}
+
+html.light .mouse {
+  border-color: rgba(15, 23, 42, 0.35) !important;
+}
+
+html.light .tech-stack {
+  color: #334155 !important;
+  background: rgba(241, 245, 249, 0.95) !important;
+  border-color: rgba(15, 23, 42, 0.12) !important;
 }
 
 html.light .form-input,
@@ -391,13 +549,37 @@ html.light .stat-item p {
 }
 
 /* Responsive */
+@media (max-width: 1024px) {
+  .section-wrapper {
+    padding: 56px 4.5%;
+  }
+
+  #home.section-wrapper {
+    padding-top: 80px;
+    padding-bottom: 40px;
+  }
+
+  .section-header {
+    margin-bottom: 32px;
+  }
+}
+
 @media (max-width: 768px) {
   .section-title {
     font-size: 2.5rem;
   }
   
   .section-wrapper {
-    padding: 80px 5%;
+    padding: 48px 4%;
+  }
+
+  #home.section-wrapper {
+    min-height: 100vh;
+    padding: 72px 4% 36px;
+  }
+
+  .section-header {
+    margin-bottom: 28px;
   }
 
   .gradient-orb,
@@ -408,5 +590,19 @@ html.light .stat-item p {
   .contact-particles,
   .map-visualization {
     display: none;
+  }
+}
+
+@media (max-width: 430px) {
+  .section-wrapper {
+    padding: 40px 4%;
+  }
+
+  .section-title {
+    font-size: 2rem;
+  }
+
+  .section-header {
+    margin-bottom: 24px;
   }
 }

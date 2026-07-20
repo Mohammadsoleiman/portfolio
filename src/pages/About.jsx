@@ -77,7 +77,7 @@ export default function About() {
             <div className="profile-contacts">
               <div className="contact-item">
                 <span className="icon">📧</span>
-                <span>mohammadsoleiman6@gmail.com</span>
+                <span className="contact-email">mohammadsoleiman6@gmail.com</span>
               </div>
               <div className="contact-item">
                 <span className="icon">📱</span>
