@@ -262,9 +262,14 @@ html body * {
 .projects-cta,
 .info-card,
 .form-card,
-.footer,
-.modal-content {
+.footer {
   background: var(--surface-soft) !important;
+  border-color: var(--border-soft) !important;
+}
+
+/* Modal must stay opaque so page content never bleeds through */
+.modal-content {
+  background: var(--app-bg) !important;
   border-color: var(--border-soft) !important;
 }
 

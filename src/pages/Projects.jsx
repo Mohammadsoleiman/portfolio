@@ -80,7 +80,6 @@ export default function Projects() {
   const [cardWidth, setCardWidth] = useState(0);
   const [cardGap, setCardGap] = useState(30);
   const [trackStart, setTrackStart] = useState(0);
-  const [maxTranslate, setMaxTranslate] = useState(0);
   const [verticalTravel, setVerticalTravel] = useState(0);
   const [navbarHeight, setNavbarHeight] = useState(76);
   const [isDesktop, setIsDesktop] = useState(false);
@@ -94,35 +93,28 @@ export default function Projects() {
     offset: ["start start", "end end"],
   });
   const usesPinnedScroll = isDesktop && !shouldReduceMotion;
-
-  const translateForCard = (index) => {
-    const ideal = trackStart - index * cardStep;
-    // Never move past the real content width (scrollWidth - clientWidth)
-    return Math.max(-maxTranslate, ideal);
-  };
-
   const trackX = useTransform(
     scrollYProgress,
-    [0, 0.08, 0.28, 0.34, 0.54, 0.6, 0.8, 0.9, 1],
+    [0, 0.12, 0.25, 0.37, 0.5, 0.62, 0.75, 0.87, 1],
     [
-      translateForCard(0),
-      translateForCard(0),
-      translateForCard(1),
-      translateForCard(1),
-      translateForCard(2),
-      translateForCard(2),
-      translateForCard(3),
-      translateForCard(3),
-      translateForCard(3),
+      trackStart,
+      trackStart,
+      trackStart - cardStep,
+      trackStart - cardStep,
+      trackStart - cardStep * 2,
+      trackStart - cardStep * 2,
+      trackStart - cardStep * 3,
+      trackStart - cardStep * 3,
+      trackStart - cardStep * 3,
     ],
   );
   useMotionValueEvent(scrollYProgress, "change", (progress) => {
     if (!usesPinnedScroll) return;
 
     const nextActive =
-      progress < 0.18 ? 0 :
+      progress < 0.19 ? 0 :
       progress < 0.44 ? 1 :
-      progress < 0.7 ? 2 : 3;
+      progress < 0.69 ? 2 : 3;
     setActiveProject(nextActive);
   });
 
@@ -138,35 +130,39 @@ export default function Projects() {
         setCardGap(30);
         setCardStep(0);
         setTrackStart(0);
-        setMaxTranslate(0);
         setVerticalTravel(0);
         return;
       }
 
-      const viewport = viewportRef.current;
-      const track = trackRef.current;
-      const viewportWidth = viewport.clientWidth;
+      const viewportWidth = viewportRef.current.clientWidth;
       const navbar = document.querySelector(".navbar");
-      const nextCardWidth = Math.round(
-        Math.min(860, Math.max(560, viewportWidth * 0.68), viewportWidth - 32),
-      );
-      const nextTrackStart = Math.round((viewportWidth - nextCardWidth) / 2);
-      const nextCardGap = Math.max(30, nextTrackStart + 24);
-      const nextCardStep = nextCardWidth + nextCardGap;
+      const firstCard = trackRef.current.firstElementChild;
 
+      // Measure the real rendered card width so mobile CSS overrides stay in sync
+      // with the horizontal scroll transform (especially the last card).
+      const measuredWidth = firstCard
+        ? Math.round(firstCard.getBoundingClientRect().width)
+        : 0;
+      const nextCardWidth =
+        measuredWidth > 0
+          ? measuredWidth
+          : Math.round(
+              Math.min(860, Math.max(560, viewportWidth * 0.68), viewportWidth - 32),
+            );
+      const nextTrackStart = Math.round((viewportWidth - nextCardWidth) / 2);
+      const nextCardGap = Math.max(
+        viewportWidth < 601 ? 16 : 30,
+        nextTrackStart + (viewportWidth < 601 ? 8 : 24),
+      );
+      const nextCardStep = nextCardWidth + nextCardGap;
       setCardWidth(nextCardWidth);
       setCardGap(nextCardGap);
       setCardStep(nextCardStep);
       setTrackStart(nextTrackStart);
       setNavbarHeight(Math.ceil(navbar?.getBoundingClientRect().height || 76));
-
-      // Max horizontal movement from real content size — not card-count math
-      const maxMove = Math.max(0, track.scrollWidth - viewport.clientWidth);
-      setMaxTranslate(maxMove);
-
-      // Pin only while cards are moving; release as soon as the last card is shown
-      const travelPerStep = Math.max(window.innerHeight * 0.7, 480);
-      setVerticalTravel(Math.round(travelPerStep * (projects.length - 1) + window.innerHeight * 0.12));
+      setVerticalTravel(
+        Math.max(window.innerHeight * 4.2, 2800),
+      );
     };
 
     const resizeObserver = new ResizeObserver(measure);
@@ -185,16 +181,6 @@ export default function Projects() {
       window.removeEventListener("resize", measure);
     };
   }, [shouldReduceMotion]);
-
-  // Re-measure max translate after card width/gap CSS vars apply to the track
-  useEffect(() => {
-    if (!usesPinnedScroll || !viewportRef.current || !trackRef.current) return;
-
-    const viewport = viewportRef.current;
-    const track = trackRef.current;
-    const maxMove = Math.max(0, track.scrollWidth - viewport.clientWidth);
-    setMaxTranslate(maxMove);
-  }, [usesPinnedScroll, cardWidth, cardGap, cardStep, trackStart]);
 
   useEffect(() => {
     const viewport = viewportRef.current;
@@ -224,7 +210,7 @@ export default function Projects() {
           usesPinnedScroll
             ? {
                 "--projects-scroll-distance": `${verticalTravel}px`,
-                "--project-card-width": `${cardWidth}px`,
+                ...(cardWidth > 0 ? { "--project-card-width": `${cardWidth}px` } : {}),
                 "--project-card-gap": `${cardGap}px`,
                 "--projects-navbar-height": `${navbarHeight}px`,
               }

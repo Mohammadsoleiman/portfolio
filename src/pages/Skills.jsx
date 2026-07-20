@@ -225,7 +225,7 @@ export default function Skills() {
 
         {/* Tech Stack */}
         <motion.div 
-          className="tech-stack"
+          className="tech-stack-section"
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
