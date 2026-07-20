@@ -311,7 +311,7 @@ export default function Projects() {
                           setSelectedProject(project);
                         }}
                       >
-                        <span className="link-icon">🚀</span>
+                        <span className="link-icon">→</span>
                         View Details
                       </button>
                     </div>

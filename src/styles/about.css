@@ -24,13 +24,19 @@
   width: 100%;
   max-width: 100%;
   min-width: 0;
+  overflow: hidden;
+  isolation: isolate;
 }
 
 .profile-image-wrapper {
+  --profile-size: 200px;
+  --orbit-radius: 108px;
   position: relative;
-  width: 220px;
-  height: 220px;
-  margin: 0 auto 30px;
+  width: min(var(--profile-size), calc(100% - 8px));
+  aspect-ratio: 1;
+  height: auto;
+  margin: 0 auto 28px;
+  z-index: 1;
 }
 
 .profile-image-wrapper img {
@@ -49,36 +55,40 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 240px;
-  height: 240px;
+  width: calc(var(--profile-size) + 12px);
+  height: calc(var(--profile-size) + 12px);
   background: radial-gradient(circle, rgba(255, 255, 255, 0.1), transparent 70%);
   border-radius: 50%;
   filter: blur(20px);
   z-index: 1;
+  pointer-events: none;
 }
 
 .profile-dots {
   position: absolute;
   top: 50%;
   left: 50%;
+  width: calc(var(--orbit-radius) * 2);
+  height: calc(var(--orbit-radius) * 2);
   transform: translate(-50%, -50%);
-  width: 270px;
-  height: 270px;
+  transform-origin: center center;
   animation: rotate 20s linear infinite;
+  z-index: 0;
+  pointer-events: none;
 }
 
 .dot {
   position: absolute;
-  width: 8px;
-  height: 8px;
+  width: 6px;
+  height: 6px;
   background: var(--gradient);
   border-radius: 50%;
   top: 50%;
   left: 50%;
-  transform: 
-    translate(-50%, -50%) 
-    rotate(calc(var(--i) * 45deg)) 
-    translateX(135px);
+  transform:
+    translate(-50%, -50%)
+    rotate(calc(var(--i) * 45deg))
+    translateX(var(--orbit-radius));
 }
 
 @keyframes rotate {
@@ -87,6 +97,8 @@
 
 .profile-info {
   text-align: center;
+  position: relative;
+  z-index: 3;
 }
 
 .profile-info h3 {
@@ -120,6 +132,8 @@
   max-width: 100%;
   box-sizing: border-box;
   overflow: hidden;
+  text-decoration: none;
+  color: inherit;
 }
 
 .contact-item:hover {
@@ -489,6 +503,11 @@
     max-width: 100%;
   }
 
+  .profile-image-wrapper {
+    --profile-size: 180px;
+    --orbit-radius: 96px;
+  }
+
   .profile-contacts {
     gap: 10px;
   }
@@ -522,6 +541,11 @@
 @media (max-width: 380px) {
   .profile-card {
     padding: 16px 10px;
+  }
+
+  .profile-image-wrapper {
+    --profile-size: 160px;
+    --orbit-radius: 84px;
   }
 
   .contact-item {

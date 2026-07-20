@@ -342,7 +342,7 @@ export default function Contact() {
                     Sending...
                   </span>
                 ) : (
-                  'Send Message 🚀'
+                  'Send Message →'
                 )}
               </motion.button>
             </form>
