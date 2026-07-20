@@ -413,8 +413,8 @@
   z-index: -1;
 }
 
-/* Responsive — compact equal-height cards on tablet/laptop/desktop */
-@media (min-width: 769px) {
+/* Responsive — compact equal-height cards on desktop/laptop only */
+@media (min-width: 769px) and (min-height: 601px) {
   .contact-section {
     min-height: 0;
     align-items: stretch;

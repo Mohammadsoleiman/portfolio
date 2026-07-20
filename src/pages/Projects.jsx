@@ -119,10 +119,11 @@ export default function Projects() {
 
   useEffect(() => {
     const mediaQuery = window.matchMedia("(min-width: 1px)");
-    const wideQuery = window.matchMedia("(min-width: 769px)");
+    const wideQuery = window.matchMedia("(min-width: 769px) and (min-height: 601px)");
 
     const measure = () => {
       const desktop = mediaQuery.matches;
+      const isWide = wideQuery.matches;
       setIsDesktop(desktop);
 
       if (!desktop || shouldReduceMotion || !viewportRef.current || !trackRef.current) {
@@ -137,26 +138,30 @@ export default function Projects() {
       const viewportWidth = viewportRef.current.clientWidth;
       const navbar = document.querySelector(".navbar");
       const firstCard = trackRef.current.firstElementChild;
-      const isWide = wideQuery.matches;
 
-      // Above 768px: use the responsive clamp width. At/below 768px: measure
-      // the rendered card so mobile CSS overrides stay in sync with the track.
       let nextCardWidth;
       if (isWide) {
+        // Desktop / laptop only
         nextCardWidth = Math.round(
           Math.min(760, Math.max(560, viewportWidth * 0.48), viewportWidth - 32),
         );
       } else {
+        // Phone: measure real card width so the last-card transform stays centered.
+        // CSS uses vw units (window width), not the padded container width.
         const measuredWidth = firstCard
           ? Math.round(firstCard.getBoundingClientRect().width)
           : 0;
+        const windowWidth = window.innerWidth;
+        const cssFallback =
+          windowWidth <= 330
+            ? Math.min(windowWidth * 0.82, 300)
+            : windowWidth <= 600
+              ? Math.min(windowWidth * 0.78, 340)
+              : Math.min(860, Math.max(560, viewportWidth * 0.68), viewportWidth - 32);
         nextCardWidth =
-          measuredWidth > 0
-            ? measuredWidth
-            : Math.round(
-                Math.min(860, Math.max(560, viewportWidth * 0.68), viewportWidth - 32),
-              );
+          measuredWidth > 0 ? measuredWidth : Math.round(cssFallback);
       }
+
       const nextTrackStart = Math.round((viewportWidth - nextCardWidth) / 2);
       const nextCardGap = Math.max(
         viewportWidth < 601 ? 16 : 30,
@@ -220,6 +225,7 @@ export default function Projects() {
           usesPinnedScroll
             ? {
                 "--projects-scroll-distance": `${verticalTravel}px`,
+                // Keep JS width in sync with the track transform (needed for last card)
                 ...(cardWidth > 0 ? { "--project-card-width": `${cardWidth}px` } : {}),
                 "--project-card-gap": `${cardGap}px`,
                 "--projects-navbar-height": `${navbarHeight}px`,
