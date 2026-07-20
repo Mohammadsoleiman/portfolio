@@ -185,7 +185,7 @@
   position: absolute;
   top: 18px;
   left: 20px;
-  color: rgba(255, 255, 255, 0.5);
+  color: var(--text-muted);
   font-size: 1rem;
   pointer-events: none;
   transition: all 0.3s ease;
@@ -197,19 +197,32 @@
 .form-textarea {
   width: 100%;
   padding: 18px 20px;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: var(--surface-soft);
+  border: 1px solid var(--border-soft);
   border-radius: 12px;
-  color: white;
+  color: var(--text-primary);
+  caret-color: var(--accent);
   font-size: 1rem;
-  transition: all 0.3s ease;
+  transition: border-color 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease, color 0.3s ease;
+}
+
+.form-input::placeholder,
+.form-textarea::placeholder {
+  color: transparent;
+}
+
+.form-input:hover,
+.form-textarea:hover {
+  border-color: var(--border-strong);
 }
 
 .form-input:focus,
 .form-textarea:focus {
   outline: none;
-  border-color: var(--secondary);
-  background: rgba(255, 255, 255, 0.08);
+  border-color: var(--accent);
+  background: var(--surface-raised);
+  color: var(--text-primary);
+  box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.28);
 }
 
 .form-input:focus + .form-label,
@@ -219,8 +232,29 @@
   top: -10px;
   left: 15px;
   font-size: 0.85rem;
-  color: var(--secondary);
-  background: var(--darker);
+  color: var(--accent);
+  background: var(--surface-raised);
+}
+
+.form-input:-webkit-autofill,
+.form-input:-webkit-autofill:hover,
+.form-input:-webkit-autofill:focus,
+.form-textarea:-webkit-autofill,
+.form-textarea:-webkit-autofill:hover,
+.form-textarea:-webkit-autofill:focus {
+  -webkit-text-fill-color: var(--text-primary);
+  caret-color: var(--accent);
+  transition: background-color 9999s ease-in-out 0s;
+  box-shadow: 0 0 0 1000px var(--surface-soft) inset;
+  border: 1px solid var(--border-soft);
+}
+
+.form-input:-webkit-autofill:focus,
+.form-textarea:-webkit-autofill:focus {
+  box-shadow:
+    0 0 0 1000px var(--surface-raised) inset,
+    0 0 0 3px rgba(139, 92, 246, 0.28);
+  border-color: var(--accent);
 }
 
 .form-textarea {
@@ -275,17 +309,17 @@
 /* Form Status */
 .form-status {
   text-align: center;
-  margin-top: 20px;
   min-height: 24px;
 }
 
-.success-message {
+.form-status .success-message {
   color: var(--success);
   font-weight: 600;
   animation: fadeIn 0.3s ease;
 }
 
-.error-message {
+.form-status .error-message,
+.form-group .error-message {
   color: var(--primary);
   font-weight: 600;
   animation: fadeIn 0.3s ease;

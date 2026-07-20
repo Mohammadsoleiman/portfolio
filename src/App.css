@@ -519,11 +519,29 @@ html.light .tech-stack {
 html.light .form-input,
 html.light .form-textarea,
 html.light .newsletter-input {
-  color: #0f172a !important;
+  color: var(--text-primary);
+  background: var(--surface-soft);
+  border-color: var(--border-soft);
+}
+
+html.light .form-input:focus,
+html.light .form-textarea:focus {
+  color: var(--text-primary);
+  background: var(--surface-raised);
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.22);
 }
 
 html.light .form-label {
-  color: #475569 !important;
+  color: var(--text-muted);
+}
+
+html.light .form-input:focus + .form-label,
+html.light .form-input:not(:placeholder-shown) + .form-label,
+html.light .form-textarea:focus + .form-label,
+html.light .form-textarea:not(:placeholder-shown) + .form-label {
+  color: var(--accent);
+  background: var(--surface-raised);
 }
 
 /* Targeted title fixes (light mode) */

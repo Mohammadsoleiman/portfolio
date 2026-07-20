@@ -310,6 +310,18 @@ export default function Contact() {
                 <label htmlFor="message" className="form-label">Your Message</label>
                 {formErrors.message && <p className="error-message">{formErrors.message}</p>}
               </div>
+
+              <div className="form-status" aria-live="polite">
+                {submitStatus.message && (
+                  <motion.p
+                    className={submitStatus.success ? "success-message" : "error-message"}
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                  >
+                    {submitStatus.message}
+                  </motion.p>
+                )}
+              </div>
               
               <motion.button
                 type="submit"
@@ -333,18 +345,6 @@ export default function Contact() {
                   'Send Message 🚀'
                 )}
               </motion.button>
-              
-              <div className="form-status">
-                {submitStatus.message && (
-                  <motion.p 
-                    className={submitStatus.success ? "success-message" : "error-message"}
-                    initial={{ opacity: 0, y: -10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                  >
-                    {submitStatus.message}
-                  </motion.p>
-                )}
-              </div>
             </form>
           </div>
         </motion.div>
