@@ -7,7 +7,6 @@ import {
   useTransform,
 } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
-import Button from "../components/Button";
 import "../styles/projects.css";
 
 const projects = [
@@ -120,6 +119,7 @@ export default function Projects() {
 
   useEffect(() => {
     const mediaQuery = window.matchMedia("(min-width: 1px)");
+    const wideQuery = window.matchMedia("(min-width: 769px)");
 
     const measure = () => {
       const desktop = mediaQuery.matches;
@@ -137,18 +137,26 @@ export default function Projects() {
       const viewportWidth = viewportRef.current.clientWidth;
       const navbar = document.querySelector(".navbar");
       const firstCard = trackRef.current.firstElementChild;
+      const isWide = wideQuery.matches;
 
-      // Measure the real rendered card width so mobile CSS overrides stay in sync
-      // with the horizontal scroll transform (especially the last card).
-      const measuredWidth = firstCard
-        ? Math.round(firstCard.getBoundingClientRect().width)
-        : 0;
-      const nextCardWidth =
-        measuredWidth > 0
-          ? measuredWidth
-          : Math.round(
-              Math.min(860, Math.max(560, viewportWidth * 0.68), viewportWidth - 32),
-            );
+      // Above 768px: use the responsive clamp width. At/below 768px: measure
+      // the rendered card so mobile CSS overrides stay in sync with the track.
+      let nextCardWidth;
+      if (isWide) {
+        nextCardWidth = Math.round(
+          Math.min(760, Math.max(560, viewportWidth * 0.48), viewportWidth - 32),
+        );
+      } else {
+        const measuredWidth = firstCard
+          ? Math.round(firstCard.getBoundingClientRect().width)
+          : 0;
+        nextCardWidth =
+          measuredWidth > 0
+            ? measuredWidth
+            : Math.round(
+                Math.min(860, Math.max(560, viewportWidth * 0.68), viewportWidth - 32),
+              );
+      }
       const nextTrackStart = Math.round((viewportWidth - nextCardWidth) / 2);
       const nextCardGap = Math.max(
         viewportWidth < 601 ? 16 : 30,
@@ -172,12 +180,14 @@ export default function Projects() {
     if (navbar) resizeObserver.observe(navbar);
 
     mediaQuery.addEventListener("change", measure);
+    wideQuery.addEventListener("change", measure);
     window.addEventListener("resize", measure);
     measure();
 
     return () => {
       resizeObserver.disconnect();
       mediaQuery.removeEventListener("change", measure);
+      wideQuery.removeEventListener("change", measure);
       window.removeEventListener("resize", measure);
     };
   }, [shouldReduceMotion]);
@@ -421,24 +431,6 @@ export default function Projects() {
           </Motion.div>
         )}
       </AnimatePresence>
-
-      <Motion.div
-        className="projects-cta"
-        initial={shouldReduceMotion ? false : { opacity: 0, y: 50 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ delay: 0.2 }}
-      >
-        <div className="cta-glow" />
-        <h3 className="cta-title">Have a Project in Mind?</h3>
-        <p className="cta-description">
-          I&apos;m always open to discussing new opportunities and interesting projects.
-          Let&apos;s work together to bring your ideas to life!
-        </p>
-        <Button as="a" href="#contact" className="btn-primary">
-          Let&apos;s Collaborate
-        </Button>
-      </Motion.div>
     </>
   );
 }
