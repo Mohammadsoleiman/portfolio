@@ -410,7 +410,6 @@ html body * {
 .hire-btn,
 .cta-button,
 .submit-btn,
-.newsletter-btn,
 .back-to-top,
 .theme-toggle-btn {
   box-shadow: var(--shadow-primary);
@@ -419,7 +418,6 @@ html body * {
 .btn-primary:hover,
 .download-btn-custom:hover:not(.loading):not(.success),
 .submit-btn:hover,
-.newsletter-btn:hover,
 .back-to-top:hover,
 .cta-button:hover,
 .theme-toggle-btn:hover {
@@ -473,7 +471,6 @@ html.light .btn-primary,
 html.light .hire-btn,
 html.light .cta-button,
 html.light .submit-btn,
-html.light .newsletter-btn,
 html.light .back-to-top {
   color: #ffffff !important;
 }
@@ -541,8 +538,7 @@ html.light .tech-stack {
 }
 
 html.light .form-input,
-html.light .form-textarea,
-html.light .newsletter-input {
+html.light .form-textarea {
   color: var(--text-primary);
   background: var(--surface-soft);
   border-color: var(--border-soft);

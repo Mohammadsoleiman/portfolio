@@ -5,7 +5,6 @@ import "../styles/footer.css";
 
 export default function Footer() {
   const [showBackToTop, setShowBackToTop] = useState(false);
-  const [email, setEmail] = useState("");
 
   useEffect(() => {
     const handleScroll = () => {
@@ -18,12 +17,6 @@ export default function Footer() {
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
-  };
-
-  const handleNewsletter = (e) => {
-    e.preventDefault();
-    // Newsletter subscription logic
-    setEmail("");
   };
 
   const quickLinks = [
@@ -85,7 +78,7 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Social & Newsletter */}
+          {/* Social */}
           <div className="footer-section social-section">
             <h3>Connect With Me</h3>
             <div className="social-links-footer">
@@ -106,25 +99,6 @@ export default function Footer() {
                 </motion.a>
               ))}
             </div>
-            
-            <form onSubmit={handleNewsletter} className="newsletter-form">
-              <input
-                type="email"
-                placeholder="Your Email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                className="newsletter-input"
-                required
-              />
-              <motion.button 
-                type="submit"
-                className="newsletter-btn"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                Subscribe
-              </motion.button>
-            </form>
           </div>
         </div>
 
