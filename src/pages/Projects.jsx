@@ -81,32 +81,52 @@ export default function Projects() {
   const [trackStart, setTrackStart] = useState(0);
   const [verticalTravel, setVerticalTravel] = useState(0);
   const [navbarHeight, setNavbarHeight] = useState(76);
-  const [isDesktop, setIsDesktop] = useState(false);
   const sectionRef = useRef(null);
   const viewportRef = useRef(null);
   const trackRef = useRef(null);
+  const trackStartRef = useRef(0);
+  const cardStepRef = useRef(0);
   const shouldReduceMotion = useReducedMotion();
+
+  trackStartRef.current = trackStart;
+  cardStepRef.current = cardStep;
 
   const { scrollYProgress } = useScroll({
     target: sectionRef,
     offset: ["start start", "end end"],
   });
-  const usesPinnedScroll = isDesktop && !shouldReduceMotion;
-  const trackX = useTransform(
-    scrollYProgress,
-    [0, 0.12, 0.25, 0.37, 0.5, 0.62, 0.75, 0.87, 1],
-    [
-      trackStart,
-      trackStart,
-      trackStart - cardStep,
-      trackStart - cardStep,
-      trackStart - cardStep * 2,
-      trackStart - cardStep * 2,
-      trackStart - cardStep * 3,
-      trackStart - cardStep * 3,
-      trackStart - cardStep * 3,
-    ],
-  );
+  // Same scroll-driven pin on phone and desktop (vertical scroll moves cards)
+  const usesPinnedScroll = !shouldReduceMotion;
+  const trackX = useTransform(scrollYProgress, (progress) => {
+    const start = trackStartRef.current;
+    const step = cardStepRef.current;
+    const stops = [0, 0.12, 0.25, 0.37, 0.5, 0.62, 0.75, 0.87, 1];
+    const values = [
+      start,
+      start,
+      start - step,
+      start - step,
+      start - step * 2,
+      start - step * 2,
+      start - step * 3,
+      start - step * 3,
+      start - step * 3,
+    ];
+
+    if (progress <= stops[0]) return values[0];
+    if (progress >= stops[stops.length - 1]) return values[values.length - 1];
+
+    for (let i = 0; i < stops.length - 1; i += 1) {
+      const left = stops[i];
+      const right = stops[i + 1];
+      if (progress >= left && progress <= right) {
+        const t = (progress - left) / (right - left || 1);
+        return values[i] + (values[i + 1] - values[i]) * t;
+      }
+    }
+
+    return values[0];
+  });
   useMotionValueEvent(scrollYProgress, "change", (progress) => {
     if (!usesPinnedScroll) return;
 
@@ -118,15 +138,10 @@ export default function Projects() {
   });
 
   useEffect(() => {
-    const mediaQuery = window.matchMedia("(min-width: 1px)");
     const wideQuery = window.matchMedia("(min-width: 769px) and (min-height: 601px)");
 
     const measure = () => {
-      const desktop = mediaQuery.matches;
-      const isWide = wideQuery.matches;
-      setIsDesktop(desktop);
-
-      if (!desktop || shouldReduceMotion || !viewportRef.current || !trackRef.current) {
+      if (shouldReduceMotion || !viewportRef.current || !trackRef.current) {
         setCardWidth(0);
         setCardGap(30);
         setCardStep(0);
@@ -135,28 +150,27 @@ export default function Projects() {
         return;
       }
 
+      const isWide = wideQuery.matches;
       const viewportWidth = viewportRef.current.clientWidth;
       const navbar = document.querySelector(".navbar");
       const firstCard = trackRef.current.firstElementChild;
+      const windowWidth = window.innerWidth;
 
       let nextCardWidth;
       if (isWide) {
-        // Desktop / laptop only
         nextCardWidth = Math.round(
           Math.min(760, Math.max(560, viewportWidth * 0.48), viewportWidth - 32),
         );
       } else {
-        // Phone: measure real card width so the last-card transform stays centered.
-        // CSS uses vw units (window width), not the padded container width.
+        // Phone/tablet: measure rendered card so scroll transform stays centered
         const measuredWidth = firstCard
           ? Math.round(firstCard.getBoundingClientRect().width)
           : 0;
-        const windowWidth = window.innerWidth;
         const cssFallback =
           windowWidth <= 330
             ? Math.min(windowWidth * 0.82, 300)
-            : windowWidth <= 600
-              ? Math.min(windowWidth * 0.78, 340)
+            : windowWidth <= 767
+              ? Math.min(windowWidth - 48, windowWidth * 0.92)
               : Math.min(860, Math.max(560, viewportWidth * 0.68), viewportWidth - 32);
         nextCardWidth =
           measuredWidth > 0 ? measuredWidth : Math.round(cssFallback);
@@ -164,8 +178,8 @@ export default function Projects() {
 
       const nextTrackStart = Math.round((viewportWidth - nextCardWidth) / 2);
       const nextCardGap = Math.max(
-        viewportWidth < 601 ? 16 : 30,
-        nextTrackStart + (viewportWidth < 601 ? 8 : 24),
+        windowWidth < 768 ? 16 : 30,
+        nextTrackStart + (windowWidth < 768 ? 8 : 24),
       );
       const nextCardStep = nextCardWidth + nextCardGap;
       setCardWidth(nextCardWidth);
@@ -174,7 +188,7 @@ export default function Projects() {
       setTrackStart(nextTrackStart);
       setNavbarHeight(Math.ceil(navbar?.getBoundingClientRect().height || 76));
       setVerticalTravel(
-        Math.max(window.innerHeight * 4.2, 2800),
+        Math.max(window.innerHeight * (windowWidth < 768 ? 3.6 : 4.2), windowWidth < 768 ? 2200 : 2800),
       );
     };
 
@@ -184,14 +198,12 @@ export default function Projects() {
     const navbar = document.querySelector(".navbar");
     if (navbar) resizeObserver.observe(navbar);
 
-    mediaQuery.addEventListener("change", measure);
     wideQuery.addEventListener("change", measure);
     window.addEventListener("resize", measure);
     measure();
 
     return () => {
       resizeObserver.disconnect();
-      mediaQuery.removeEventListener("change", measure);
       wideQuery.removeEventListener("change", measure);
       window.removeEventListener("resize", measure);
     };

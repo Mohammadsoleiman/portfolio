@@ -4,10 +4,13 @@
   backdrop-filter: blur(20px);
   border-top: 1px solid rgba(255, 255, 255, 0.1);
   padding: 60px 5% 30px;
-  z-index: 100;
+  z-index: 0;
+  isolation: isolate;
 }
 
 .footer-container {
+  position: relative;
+  z-index: 1;
   max-width: 1400px;
   margin: 0 auto;
 }
@@ -178,7 +181,8 @@
   width: 100%;
   height: 100px;
   overflow: hidden;
-  z-index: -1;
+  z-index: 0;
+  pointer-events: none;
 }
 
 .wave {

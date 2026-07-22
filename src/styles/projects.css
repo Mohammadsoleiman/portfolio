@@ -663,11 +663,38 @@ body:has(.projects-section.is-pinned),
   overflow-x: visible;
 }
 
+html:has(.projects-section.is-pinned) {
+  overflow-x: visible;
+}
+
 #projects.section-wrapper:has(.projects-section.is-pinned) {
   min-height: 0;
   justify-content: flex-start;
   padding-block: 0;
   overflow: visible;
+}
+
+/* Desktop / tablet: keep sticky pin + scroll-driven card track */
+@media (min-width: 768px) {
+  .projects-section.is-pinned {
+    height: calc(100vh + var(--projects-scroll-distance, 2800px));
+    overflow: visible;
+  }
+
+  .is-pinned .projects-sticky {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    min-height: 100vh;
+  }
+
+  .is-pinned .projects-viewport {
+    overflow: hidden;
+  }
+
+  .is-pinned .projects-track {
+    will-change: transform;
+  }
 }
 
 @media (max-width: 600px) {
@@ -1201,5 +1228,302 @@ body:has(.projects-section.is-pinned),
   .explore-arrow {
     transition: none;
     animation: none;
+  }
+}
+
+/*
+ * Mobile phones only (< 768px).
+ * Keeps compact card layout, but preserves desktop-like pinned scroll:
+ * vertical page scroll drives card transitions while the section stays sticky.
+ */
+@media (max-width: 767px) {
+  .projects-section,
+  .projects-section.is-static,
+  .projects-section.is-pinned {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: clip;
+    box-sizing: border-box;
+  }
+
+  .projects-section.is-pinned {
+    height: calc(100vh + var(--projects-scroll-distance, 2200px));
+    overflow: visible;
+  }
+
+  .projects-section.is-static {
+    height: auto;
+  }
+
+  .is-pinned .projects-sticky {
+    position: sticky;
+    top: 0;
+    width: 100%;
+    max-width: 100%;
+    height: 100vh;
+    min-height: 100vh;
+    padding: calc(var(--projects-navbar-height, 76px) + 6px) 0 8px;
+    box-sizing: border-box;
+    justify-content: flex-start;
+  }
+
+  .is-static .projects-sticky {
+    position: relative;
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    min-height: 0;
+    padding: 0;
+    box-sizing: border-box;
+    justify-content: flex-start;
+  }
+
+  .projects-section-header {
+    margin-bottom: 10px;
+    padding: 0 4px;
+    box-sizing: border-box;
+  }
+
+  .project-journey {
+    width: 100%;
+    max-width: 100%;
+    margin: 0 0 8px;
+    padding: 4px 8px;
+    box-sizing: border-box;
+  }
+
+  .is-pinned .projects-viewport {
+    width: 100%;
+    max-width: 100%;
+    flex: 0 0 auto;
+    overflow: hidden;
+    padding: 8px 0 12px;
+    box-sizing: border-box;
+  }
+
+  .is-static .projects-viewport {
+    width: 100%;
+    max-width: 100%;
+    flex: 0 0 auto;
+    overflow-x: auto;
+    overflow-y: visible;
+    overscroll-behavior-inline: contain;
+    scroll-snap-type: inline mandatory;
+    scrollbar-width: thin;
+    -webkit-overflow-scrolling: touch;
+    padding: 8px 0 12px;
+    box-sizing: border-box;
+  }
+
+  .is-pinned .projects-track {
+    display: flex;
+    align-items: stretch;
+    gap: var(--project-card-gap, 16px);
+    width: max-content;
+    will-change: transform;
+    box-sizing: border-box;
+  }
+
+  .is-static .projects-track {
+    display: flex;
+    align-items: stretch;
+    gap: 16px;
+    width: max-content;
+    will-change: auto;
+    transform: none !important;
+    box-sizing: border-box;
+  }
+
+  .project-item,
+  .is-static .project-item,
+  .is-pinned .project-item {
+    --project-image-height: auto;
+    --project-content-pad-x: 16px;
+    --project-content-pad-y: 14px;
+    --project-content-gap: 10px;
+    --project-header-row: auto;
+    --project-desc-row: auto;
+    --project-features-row: auto;
+    --project-tech-row: auto;
+    --project-btn-row: auto;
+    --project-card-height: auto;
+
+    flex: 0 0 var(--project-card-width, calc(100vw - 48px));
+    width: var(--project-card-width, calc(100vw - 48px));
+    max-width: var(--project-card-width, calc(100vw - 48px));
+    height: auto;
+    min-height: 0;
+    max-height: none;
+    box-sizing: border-box;
+    overflow: visible;
+  }
+
+  .is-static .project-item {
+    scroll-snap-align: center;
+    scroll-snap-stop: always;
+  }
+
+  .project-image {
+    position: relative;
+    flex: 0 0 auto;
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    min-height: 0;
+    max-height: none;
+    aspect-ratio: 16 / 10;
+    overflow: hidden;
+    box-sizing: border-box;
+  }
+
+  .project-image img {
+    width: 100%;
+    max-width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .project-content {
+    display: flex;
+    flex-direction: column;
+    grid-template-rows: none;
+    align-content: start;
+    flex: 1 1 auto;
+    width: 100%;
+    max-width: 100%;
+    min-height: 0;
+    height: auto;
+    gap: 10px;
+    padding: 14px 16px 16px;
+    overflow: visible;
+    box-sizing: border-box;
+  }
+
+  .project-header,
+  .project-description,
+  .project-features,
+  .project-item .project-tech,
+  .project-item .project-links {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    min-height: 0;
+    max-height: none;
+    margin: 0;
+    overflow: visible;
+    box-sizing: border-box;
+  }
+
+  .project-header {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    padding: 0;
+  }
+
+  .project-header h3 {
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+    padding: 0;
+    font-size: 1.2rem;
+    line-height: 1.3;
+    display: block;
+    -webkit-line-clamp: unset;
+    line-clamp: unset;
+    -webkit-box-orient: unset;
+    overflow: visible;
+    text-overflow: unset;
+    white-space: normal;
+    word-break: break-word;
+    overflow-wrap: anywhere;
+    box-sizing: border-box;
+  }
+
+  .project-type {
+    align-self: flex-start;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
+  .project-description {
+    display: block;
+    -webkit-line-clamp: unset;
+    line-clamp: unset;
+    -webkit-box-orient: unset;
+    font-size: 0.92rem;
+    line-height: 1.45;
+    white-space: normal;
+    word-break: break-word;
+    overflow-wrap: anywhere;
+  }
+
+  .project-features {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .features-title {
+    margin: 0;
+    font-size: 0.95rem;
+  }
+
+  .features-list {
+    overflow: visible;
+  }
+
+  .features-list li {
+    margin-bottom: 4px;
+    padding-left: 18px;
+    font-size: 0.84rem;
+    line-height: 1.4;
+    white-space: normal;
+    overflow: visible;
+    word-break: break-word;
+    overflow-wrap: anywhere;
+  }
+
+  .project-item .project-tech {
+    display: flex;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    gap: 6px 8px;
+    overflow: visible;
+  }
+
+  .project-item .tech-stack {
+    max-width: 100%;
+    white-space: normal;
+    overflow-wrap: anywhere;
+    box-sizing: border-box;
+  }
+
+  .project-item .project-links {
+    display: flex;
+    align-items: stretch;
+  }
+
+  .project-item .project-link {
+    flex: 1 1 auto;
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    min-height: 44px;
+    padding: 12px 14px;
+    font-size: 0.9rem;
+    box-sizing: border-box;
+  }
+
+  .projects-explore-hint {
+    margin: 8px 0 0;
+    text-align: center;
+    justify-content: center;
+  }
+
+  .project-item:hover {
+    transform: none;
   }
 }
