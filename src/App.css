@@ -7,78 +7,78 @@
 
 :root,
 html.dark {
-  --primary: #ff3b5c;
-  --secondary: #60a5fa;
-  --accent: #8b5cf6;
-  --dark: #0f172a;
-  --darker: #020617;
+  --primary: #e9b949;
+  --secondary: #e9b949;
+  --accent: #e9b949;
+  --dark: #0f2433;
+  --darker: #0b1c28;
   --light: #f8fafc;
-  --gray: #64748b;
+  --gray: #8aa3b3;
   --success: #10b981;
   --warning: #f59e0b;
-  --gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  --gradient-dark: linear-gradient(135deg, #1e293b, #0f172a);
-  --app-bg: #020617;
-  --text-primary: #f8fafc;
-  --text-secondary: rgba(248, 250, 252, 0.78);
-  --text-muted: rgba(248, 250, 252, 0.62);
-  --surface-soft: rgba(255, 255, 255, 0.05);
-  --surface-raised: rgba(255, 255, 255, 0.08);
-  --surface-hover: rgba(255, 255, 255, 0.12);
-  --border-soft: rgba(255, 255, 255, 0.12);
-  --border-strong: rgba(255, 255, 255, 0.24);
-  --highlight-soft: rgba(59, 130, 246, 0.16);
-  --section-glow-a: rgba(59, 130, 246, 0.1);
-  --section-glow-b: rgba(139, 92, 246, 0.1);
-  --section-glow-c: rgba(255, 59, 92, 0.1);
-  --orb-glow: rgba(59, 130, 246, 0.2);
-  --shadow-primary: 0 10px 30px rgba(102, 126, 234, 0.28);
-  --shadow-primary-hover: 0 16px 44px rgba(102, 126, 234, 0.38);
-  --nav-bg: rgba(2, 6, 23, 0.8);
-  --nav-bg-solid: rgba(2, 6, 23, 0.96);
-  --map-stroke: rgba(96, 165, 250, 0.22);
-  --map-accent-a: rgba(255, 99, 132, 0.35);
-  --map-accent-b: rgba(167, 139, 250, 0.36);
-  --map-link: rgba(96, 165, 250, 0.28);
-  --code-accent: #93c5fd;
+  --gradient: linear-gradient(135deg, #e9b949 0%, #e9b949 100%);
+  --gradient-dark: linear-gradient(135deg, #16324a, #0f2433);
+  --app-bg: #0f2433;
+  --text-primary: #eaf0f3;
+  --text-secondary: #b7c6cf;
+  --text-muted: #8aa3b3;
+  --surface-soft: #16324a;
+  --surface-raised: #16324a;
+  --surface-hover: #1c3d58;
+  --border-soft: #22415a;
+  --border-strong: #3a5a72;
+  --highlight-soft: rgba(233, 185, 73, 0.16);
+  --section-glow-a: rgba(233, 185, 73, 0.1);
+  --section-glow-b: rgba(233, 185, 73, 0.1);
+  --section-glow-c: rgba(233, 185, 73, 0.1);
+  --orb-glow: rgba(233, 185, 73, 0.2);
+  --shadow-primary: 0 6px 18px rgba(0, 0, 0, 0.25);
+  --shadow-primary-hover: 0 10px 24px rgba(0, 0, 0, 0.3);
+  --nav-bg: rgba(15, 36, 51, 0.96);
+  --nav-bg-solid: #0f2433;
+  --map-stroke: rgba(233, 185, 73, 0.22);
+  --map-accent-a: rgba(233, 185, 73, 0.35);
+  --map-accent-b: rgba(233, 185, 73, 0.36);
+  --map-link: rgba(233, 185, 73, 0.28);
+  --code-accent: #e9b949;
   --btn-surface: rgba(255, 255, 255, 0.1);
   --btn-surface-border: rgba(255, 255, 255, 0.28);
   --tab-inactive-bg: rgba(255, 255, 255, 0.04);
-  --tab-inactive-text: rgba(248, 250, 252, 0.72);
-  --tab-active-bg: rgba(59, 130, 246, 0.18);
-  --tab-active-text: #f8fafc;
+  --tab-inactive-text: rgba(234, 240, 243, 0.72);
+  --tab-active-bg: rgba(233, 185, 73, 0.18);
+  --tab-active-text: #eaf0f3;
 }
 
 html.light {
-  --app-bg: #f8fafc;
-  --text-primary: #0f172a;
-  --text-secondary: rgba(15, 23, 42, 0.78);
-  --text-muted: rgba(15, 23, 42, 0.6);
+  --app-bg: #f4f6f8;
+  --text-primary: #0f2433;
+  --text-secondary: rgba(15, 36, 51, 0.78);
+  --text-muted: rgba(15, 36, 51, 0.6);
   --surface-soft: rgba(255, 255, 255, 0.85);
   --surface-raised: rgba(255, 255, 255, 0.92);
-  --surface-hover: rgba(241, 245, 249, 0.95);
-  --border-soft: rgba(59, 130, 246, 0.2);
-  --border-strong: rgba(99, 102, 241, 0.28);
-  --highlight-soft: rgba(100, 116, 139, 0.14);
-  --section-glow-a: rgba(96, 165, 250, 0.22);
-  --section-glow-b: rgba(167, 139, 250, 0.18);
-  --section-glow-c: rgba(191, 219, 254, 0.24);
-  --orb-glow: rgba(167, 139, 250, 0.2);
-  --shadow-primary: 0 10px 28px rgba(99, 102, 241, 0.2);
-  --shadow-primary-hover: 0 16px 40px rgba(99, 102, 241, 0.26);
-  --nav-bg: rgba(248, 250, 252, 0.8);
-  --nav-bg-solid: rgba(248, 250, 252, 0.96);
-  --map-stroke: rgba(99, 102, 241, 0.25);
-  --map-accent-a: rgba(236, 72, 153, 0.35);
-  --map-accent-b: rgba(139, 92, 246, 0.35);
-  --map-link: rgba(59, 130, 246, 0.3);
-  --code-accent: #1d4ed8;
+  --surface-hover: rgba(232, 237, 240, 0.95);
+  --border-soft: #dbe3e8;
+  --border-strong: #b7c6cf;
+  --highlight-soft: rgba(138, 163, 179, 0.14);
+  --section-glow-a: rgba(233, 185, 73, 0.22);
+  --section-glow-b: rgba(233, 185, 73, 0.18);
+  --section-glow-c: rgba(233, 185, 73, 0.24);
+  --orb-glow: rgba(233, 185, 73, 0.2);
+  --shadow-primary: 0 6px 18px rgba(15, 36, 51, 0.12);
+  --shadow-primary-hover: 0 10px 24px rgba(15, 36, 51, 0.16);
+  --nav-bg: rgba(244, 246, 248, 0.96);
+  --nav-bg-solid: #f4f6f8;
+  --map-stroke: rgba(233, 185, 73, 0.25);
+  --map-accent-a: rgba(233, 185, 73, 0.35);
+  --map-accent-b: rgba(233, 185, 73, 0.35);
+  --map-link: rgba(233, 185, 73, 0.3);
+  --code-accent: #9a6b0c;
   --btn-surface: #ffffff;
-  --btn-surface-border: rgba(15, 23, 42, 0.22);
+  --btn-surface-border: rgba(15, 36, 51, 0.22);
   --tab-inactive-bg: #ffffff;
-  --tab-inactive-text: #475569;
-  --tab-active-bg: rgba(59, 130, 246, 0.14);
-  --tab-active-text: #0f172a;
+  --tab-inactive-text: #3a5a72;
+  --tab-active-bg: rgba(233, 185, 73, 0.14);
+  --tab-active-text: #0f2433;
 }
 
 html {
@@ -87,7 +87,7 @@ html {
 }
 
 body {
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-family: 'Manrope', 'Segoe UI', system-ui, sans-serif;
   background: var(--app-bg);
   color: var(--text-primary);
   overflow-x: clip;
@@ -206,7 +206,7 @@ canvas {
   padding: 8px 20px;
   border-radius: 50px;
   margin-bottom: 20px;
-  backdrop-filter: blur(10px);
+  
 }
 
 .section-title {
@@ -438,7 +438,7 @@ html.light .footer h1,
 html.light .footer h2,
 html.light .footer h3,
 html.light .footer h4 {
-  color: #0f172a !important;
+  color: #0f2433 !important;
 }
 
 html.light .section-wrapper p,
@@ -448,12 +448,12 @@ html.light .section-wrapper label,
 html.light .footer p,
 html.light .footer a,
 html.light .footer li {
-  color: #334155 !important;
+  color: #22415a !important;
 }
 
 html.light .contact-item:hover .contact-content p,
 html.light .contact-item:focus-visible .contact-content p {
-  color: #7c3aed !important;
+  color: #e9b949 !important;
 }
 
 html.light a.contact-item,
@@ -480,9 +480,9 @@ html.light .back-to-top {
 
 html.light .project-link,
 html.light .link-btn {
-  color: #0f172a !important;
+  color: #0f2433 !important;
   background: #ffffff !important;
-  border: 1px solid rgba(15, 23, 42, 0.22) !important;
+  border: 1px solid rgba(15, 36, 51, 0.22) !important;
 }
 
 html.light .project-link:hover,
@@ -500,23 +500,23 @@ html.light .project-link span {
 }
 
 html.light .tab-btn {
-  color: #475569 !important;
+  color: #3a5a72 !important;
   background: #ffffff !important;
-  border: 1px solid rgba(15, 23, 42, 0.16) !important;
+  border: 1px solid rgba(15, 36, 51, 0.16) !important;
 }
 
 html.light .tab-btn:hover,
 html.light .tab-btn.active {
-  color: #0f172a !important;
-  background: rgba(59, 130, 246, 0.14) !important;
-  border-color: rgba(59, 130, 246, 0.4) !important;
+  color: #0f2433 !important;
+  background: rgba(233, 185, 73, 0.14) !important;
+  border-color: rgba(233, 185, 73, 0.4) !important;
 }
 
 html.light .floating-code,
 html.light .floating-code-block {
-  color: #1d4ed8 !important;
+  color: #e9b949 !important;
   background: rgba(255, 255, 255, 0.96) !important;
-  border-color: rgba(37, 99, 235, 0.35) !important;
+  border-color: rgba(233, 185, 73, 0.35) !important;
 }
 
 html.light .profile-card .contact-email,
@@ -527,17 +527,17 @@ html.light .profile-card .contact-email,
 }
 
 html.light .scroll-indicator span {
-  color: #475569 !important;
+  color: #3a5a72 !important;
 }
 
 html.light .mouse {
-  border-color: rgba(15, 23, 42, 0.35) !important;
+  border-color: rgba(15, 36, 51, 0.35) !important;
 }
 
 html.light .tech-stack {
-  color: #334155 !important;
-  background: rgba(241, 245, 249, 0.95) !important;
-  border-color: rgba(15, 23, 42, 0.12) !important;
+  color: #22415a !important;
+  background: rgba(232, 237, 240, 0.95) !important;
+  border-color: rgba(15, 36, 51, 0.12) !important;
 }
 
 html.light .form-input,
@@ -552,7 +552,7 @@ html.light .form-textarea:focus {
   color: var(--text-primary);
   background: var(--surface-raised);
   border-color: var(--accent);
-  box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.22);
+  box-shadow: 0 0 0 3px rgba(233, 185, 73, 0.22);
 }
 
 html.light .form-label {
@@ -576,7 +576,7 @@ html.light .projects-section .project-header h3,
 html.light .projects-title,
 html.light .project-type,
 html.light .company-badge span {
-  color: #0f172a !important;
+  color: #0f2433 !important;
 }
 
 html.light .project-description,
@@ -586,7 +586,7 @@ html.light .project-achievements li,
 html.light .features-list li,
 html.light .dot-label,
 html.light .stat-item p {
-  color: #334155 !important;
+  color: #22415a !important;
 }
 
 /* Responsive */
@@ -646,4 +646,289 @@ html.light .stat-item p {
   .section-header {
     margin-bottom: 24px;
   }
+}
+
+/* ---------- Navy & sand: calm, no AI-style effects ---------- */
+html.light {
+  --primary: #9a6b0c;
+  --accent: #9a6b0c;
+}
+
+.animated-bg,
+.particle-field,
+.gradient-orb,
+.scroll-tracker,
+.hero-bg-flyers,
+.profile-glow,
+.profile-reflection,
+.logo-glow,
+.badge-glow,
+.btn-spark,
+.icon-trail,
+.about-bg-elements,
+.exp-bg-elements,
+.education-bg-elements,
+.skills-bg-elements,
+.projects-bg-elements,
+.contact-bg-elements,
+.footer-waves,
+.profile-shine,
+.dot-glow {
+  display: none !important;
+}
+
+.profile-3d-container::after {
+  display: none;
+}
+
+/* the name and section titles use one solid colour instead of a gradient */
+.gradient-text {
+  background: none !important;
+  -webkit-text-fill-color: currentColor !important;
+  color: var(--primary) !important;
+}
+
+.tech-bubbles {
+  display: none !important;
+}
+
+/* Sand buttons use navy text so they are easy to read */
+.btn-primary,
+.download-btn-custom {
+  color: #0f2433 !important;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25) !important;
+}
+
+/* Photo: clean frame, no glow */
+.profile-image {
+  border: 3px solid #e9b949 !important;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35) !important;
+}
+
+/* Section and badge pills: flat */
+.intro-badge,
+.section-badge {
+  box-shadow: none !important;
+}
+
+/* Tech logos in one calm colour; sand on hover */
+.floating-tech-icon,
+.tech-tag-icon,
+[class*="tone-"] {
+  color: var(--text-secondary) !important;
+}
+
+.floating-icon-3d:hover .floating-tech-icon,
+.tech-tag:hover .tech-tag-icon {
+  color: var(--primary) !important;
+}
+
+/* Fewer moving parts around the photo */
+.ring {
+  display: none !important;
+}
+
+/* Tech strip: slides slowly, stops while the mouse is on it */
+.hero-tech-track.marquee {
+  animation: tech-marquee 36s linear infinite;
+  will-change: transform;
+}
+
+.hero-tech-carousel:hover .hero-tech-track.marquee {
+  animation-play-state: paused;
+}
+
+@keyframes tech-marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-tech-track.marquee {
+    animation: none;
+  }
+}
+
+/* Section labels: plain small text instead of a pill */
+.section-badge,
+.intro-badge {
+  background: transparent !important;
+  border: 0 !important;
+  padding: 0 !important;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-size: 0.8rem !important;
+  color: var(--primary) !important;
+}
+
+.section-badge span,
+.intro-badge span {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Skills: names only, no percentage bars */
+.skill-name .percentage,
+.skill-bar {
+  display: none !important;
+}
+
+.skill-items {
+  display: flex !important;
+  flex-wrap: wrap;
+  gap: 10px !important;
+}
+
+.skill-item {
+  margin: 0 !important;
+  width: auto !important;
+}
+
+.skill-name {
+  display: inline-flex !important;
+  padding: 8px 14px;
+  border: 1px solid var(--border-strong);
+  border-radius: 8px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+/* Headings in the new font */
+.hero-title,
+.section-title {
+  font-family: 'Manrope', 'Segoe UI', system-ui, sans-serif;
+  letter-spacing: -0.03em;
+}
+
+.skill-items {
+  flex-direction: row !important;
+}
+
+.skill-name {
+  margin-bottom: 0 !important;
+}
+
+.skill-name span {
+  color: var(--text-primary) !important;
+}
+
+/* ---------- Final polish ---------- */
+
+/* Hero: one moving element only (the icons around the photo) */
+.hero-tech-carousel,
+.scroll-indicator,
+.typing-container .cursor {
+  display: none !important;
+}
+
+/* About: the right side is open text, not a box holding more boxes */
+.info-section {
+  background: transparent !important;
+  border: 0 !important;
+  padding: 8px 0 0 !important;
+}
+
+.highlight-item {
+  background: transparent !important;
+  border: 0 !important;
+  border-left: 2px solid var(--primary) !important;
+  border-radius: 0 !important;
+  padding: 4px 0 4px 16px !important;
+  box-shadow: none !important;
+}
+
+.highlight-item:hover {
+  background: transparent !important;
+  transform: none !important;
+}
+
+/* Calm hovers everywhere: small lift, no bounce or scale */
+.education-item:hover,
+.certification-card:hover,
+.skill-category:hover,
+.tech-item:hover,
+.devops-item:hover,
+.soft-skill-item:hover,
+.profile-card:hover {
+  transform: translateY(-3px) !important;
+}
+
+/* Phone: shorter page */
+@media (max-width: 720px) {
+  .home-hero .stats-grid {
+    gap: 12px;
+  }
+
+  .tech-stack-section,
+  .soft-skills {
+    display: none !important;
+  }
+
+  .about-section .profile-card .profile-contacts {
+    display: none !important;
+  }
+}
+
+/* Education timeline: plain dots instead of emoji badges */
+.education-item::before {
+  content: "" !important;
+  width: 14px !important;
+  height: 14px !important;
+  left: -37px !important;
+  top: 53px !important;
+  box-shadow: 0 0 0 4px var(--app-bg) !important;
+}
+
+/* Light mode: the accent words stay solid and readable */
+html.light .gradient-text,
+html.light .section-title .gradient-text,
+html.light .logo-text,
+html.light .footer-logo {
+  background: none !important;
+  -webkit-text-fill-color: currentColor !important;
+  color: #9a6b0c !important;
+}
+
+html.light .hero-title .highlight-text {
+  color: #0f2433 !important;
+}
+
+
+html.light .btn-primary,
+html.light .hire-btn,
+html.light .cta-button,
+html.light .submit-btn,
+html.light .back-to-top,
+html.light .download-btn-custom {
+  color: #0f2433 !important;
+}
+
+/* Light mode: clipped-gradient headings become solid dark sand */
+html.light .certifications-title,
+html.light .devops-title,
+html.light .exp-title h3,
+html.light .footer-logo,
+html.light .footer-section h3,
+html.light .form-header h3,
+html.light .gradient-text,
+html.light .loader-title,
+html.light .logo-text,
+html.light .project-header h3,
+html.light .projects-title,
+html.light .soft-skills-title,
+html.light .stack-title,
+html.light .stat-item h3 {
+  background: none !important;
+  -webkit-text-fill-color: currentColor !important;
+  color: #9a6b0c !important;
+}
+
+html.light .hero-title .highlight-text,
+html.light .projects-grid-section .project-header h3 {
+  color: #0f2433 !important;
+}
+
+html.light .hire-btn {
+  color: #ffffff !important;
 }

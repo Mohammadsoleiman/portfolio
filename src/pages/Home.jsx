@@ -1,24 +1,23 @@
 import { motion, useAnimation } from "framer-motion";
 import { useEffect, useState } from "react";
 import {
-  SiAmazonaws,
   SiDocker,
+  SiDotnet,
   SiGit,
   SiJira,
-  SiKubernetes,
   SiLaravel,
   SiMongodb,
   SiMysql,
   SiNextdotjs,
   SiNodedotjs,
+  SiPostgresql,
   SiReact,
-  SiSupabase,
-  SiTrello,
   SiTypescript,
 } from "react-icons/si";
 import Button from "../components/Button";
 import TechBubbles from "../components/TechBubbles";
 import "../styles/home.css";
+import { FiTerminal } from "react-icons/fi";
 
 export default function Home({ setActiveSection }) {
   const [textIndex, setTextIndex] = useState(0);
@@ -30,11 +29,7 @@ export default function Home({ setActiveSection }) {
   const controls = useAnimation();
   
   const roles = [
-    "Full Stack Developer",
-    "Laravel Specialist",
-    "React Developer",
-    "Next.js Enthusiast",
-    "MERN Stack Developer"
+    "Laravel · React · Node.js · .NET"
   ];
 
   useEffect(() => {
@@ -137,12 +132,10 @@ const cvUrl = `${import.meta.env.BASE_URL}${cvFileName}`;
     { label: "TypeScript", Icon: SiTypescript, tone: "tone-ts" },
     { label: "MySQL", Icon: SiMysql, tone: "tone-mysql" },
     { label: "MongoDB", Icon: SiMongodb, tone: "tone-mongo" },
+    { label: ".NET", Icon: SiDotnet, tone: "tone-dotnet" },
+    { label: "PostgreSQL", Icon: SiPostgresql, tone: "tone-postgres" },
     { label: "Docker", Icon: SiDocker, tone: "tone-docker" },
-    { label: "Kubernetes", Icon: SiKubernetes, tone: "tone-k8s" },
-    { label: "AWS", Icon: SiAmazonaws, tone: "tone-aws" },
     { label: "Git", Icon: SiGit, tone: "tone-git" },
-    { label: "Trello", Icon: SiTrello, tone: "tone-trello" },
-    { label: "Supabase", Icon: SiSupabase, tone: "tone-supabase" },
     { label: "Jira", Icon: SiJira, tone: "tone-jira" },
   ];
 
@@ -182,7 +175,7 @@ const cvUrl = `${import.meta.env.BASE_URL}${cvFileName}`;
             animate={{ x: 0, opacity: 1 }}
             transition={{ delay: 0.3 }}
           >
-            <span>🚀 Full Stack Developer</span>
+            <span><FiTerminal aria-hidden /> Full Stack Developer</span>
             <div className="badge-glow" />
           </motion.div>
 
@@ -213,8 +206,8 @@ const cvUrl = `${import.meta.env.BASE_URL}${cvFileName}`;
             animate={{ y: 0, opacity: 1 }}
             transition={{ delay: 0.9 }}
           >
-            Building scalable web applications with Laravel, React, and modern DevOps tools. 
-            Specializing in full-stack solutions with focus on performance, security, and user experience.
+            Full Stack Developer from Lebanon working with Laravel, React, Node.js and .NET.
+            My recent work is a retail point of sale for shops and a clinic booking platform that is live.
           </motion.p>
 
           <motion.div 
@@ -290,7 +283,7 @@ const cvUrl = `${import.meta.env.BASE_URL}${cvFileName}`;
             transition={{ duration: 1, type: "spring" }}
           >
             <div className="profile-3d">
-              <img src={`${import.meta.env.BASE_URL}img/MohammadSoleiman.png`} alt="Mohammad Soleiman" className="profile-image" />
+              <img src={`${import.meta.env.BASE_URL}img/mohammad-soleiman.jpg`} alt="Mohammad Soleiman" className="profile-image" />
               <div className="profile-glow" />
               <div className="profile-reflection" />
             </div>
@@ -350,32 +343,28 @@ const cvUrl = `${import.meta.env.BASE_URL}${cvFileName}`;
         {/* Stats */}
         <div className="stats-grid">
           <div className="stat-item">
-            <h3>4</h3>
-            <p>Projects Completed</p>
+            <h3>6</h3>
+            <p>Projects Built</p>
           </div>
           <div className="stat-item">
-            <h3>10+</h3>
-            <p>Technologies</p>
+            <h3>2</h3>
+            <p>Products of My Own</p>
           </div>
           <div className="stat-item">
-            <h3>3+</h3>
-            <p>Years Experience</p>
+            <h3>BSc</h3>
+            <p>Computer Science</p>
           </div>
         </div>
 
         <div className="hero-tech-carousel">
-          <motion.div
-            className="hero-tech-track"
-            animate={{ x: ["0%", "-50%"] }}
-            transition={{ duration: 24, repeat: Infinity, ease: "linear" }}
-          >
+          <div className="hero-tech-track marquee">
             {[...techStack, ...techStack].map((tech, i) => (
               <span key={`${tech.label}-${i}`} className="tech-tag">
                 <tech.Icon className={`tech-tag-icon ${tech.tone}`} aria-hidden />
                 <span>{tech.label}</span>
               </span>
             ))}
-          </motion.div>
+          </div>
         </div>
       </motion.div>
 

@@ -12,8 +12,8 @@ function getInitialTheme() {
     return storedTheme;
   }
 
-  const prefersDark = window.matchMedia?.("(prefers-color-scheme: dark)")?.matches;
-  return prefersDark ? "dark" : "light";
+  // Navy is the site's main look; visitors can still switch to light.
+  return "dark";
 }
 
 export function ThemeProvider({ children }) {

@@ -1,25 +1,16 @@
 import { motion } from "framer-motion";
 import { useState } from "react";
 import "../styles/about.css";
+import { FiLayers, FiLock, FiMail, FiMapPin, FiPhone, FiTarget, FiTrendingUp, FiUser } from "react-icons/fi";
 
 export default function About() {
   const [activeTab, setActiveTab] = useState("professional");
 
   const tabs = [
     { id: "professional", label: "Professional" },
-    { id: "approach", label: "My Approach" },
-    { id: "philosophy", label: "Philosophy" }
+    { id: "approach", label: "How I Work" }
   ];
 
-  const professionalInfo = {
-    title: "Full Stack Developer",
-    details: [
-      "Specializing in Laravel, React, and modern web technologies",
-      "Building scalable applications with focus on performance and security",
-      "Experience in fintech dashboards and multi-role systems",
-      "Strong background in Agile SDLC and SOLID principles"
-    ]
-  };
 
   return (
     <motion.section 
@@ -36,7 +27,7 @@ export default function About() {
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true }}
         >
-          <span>👨‍💻 About Me</span>
+          <span><FiUser aria-hidden /> About Me</span>
         </motion.div>
         
         <motion.h2 
@@ -46,7 +37,7 @@ export default function About() {
           viewport={{ once: true }}
           transition={{ delay: 0.2 }}
         >
-          Crafting Digital <span className="gradient-text">Experiences</span>
+          About <span className="gradient-text">Me</span>
         </motion.h2>
       </div>
 
@@ -61,7 +52,7 @@ export default function About() {
           whileHover={{ y: -10 }}
         >
           <div className="profile-image-wrapper">
-            <img src={`${import.meta.env.BASE_URL}img/MohammadSoleiman.png`} alt="Mohammad Soleiman" />
+            <img src={`${import.meta.env.BASE_URL}img/mohammad-soleiman.jpg`} alt="Mohammad Soleiman" />
             <div className="profile-shine" />
             <div className="profile-dots">
               {[...Array(8)].map((_, i) => (
@@ -76,15 +67,15 @@ export default function About() {
             
             <div className="profile-contacts">
               <div className="contact-item">
-                <span className="icon">📧</span>
+                <span className="icon"><FiMail aria-hidden /></span>
                 <span className="contact-email">mohammadsoleiman6@gmail.com</span>
               </div>
               <div className="contact-item">
-                <span className="icon">📱</span>
+                <span className="icon"><FiPhone aria-hidden /></span>
                 <span>+961 70639058</span>
               </div>
               <div className="contact-item">
-                <span className="icon">📍</span>
+                <span className="icon"><FiMapPin aria-hidden /></span>
                 <span>Beirut, Lebanon</span>
               </div>
             </div>
@@ -131,38 +122,39 @@ export default function About() {
               <div className="professional-content">
                 <h3>Professional Summary</h3>
                 <p>
-                  Full Stack Developer with hands-on projects in Laravel, React, and MySQL. 
-                  Skilled in building responsive applications with modern tools. 
-                  Currently training in full-stack web development and seeking an entry-level developer role.
+                  Full Stack Developer with a BSc in Computer Science. I build business software end to end:
+                  a retail point of sale now in testing at shops, a clinic booking platform that is live,
+                  and systems for car dealers and online stores. I am training at The Digital Hub (UNRWA)
+                  and looking for a full-time developer role.
                 </p>
                 
                 <div className="highlight-grid">
                   <div className="highlight-item">
-                    <div className="highlight-icon">⚡</div>
+                    <div className="highlight-icon"><FiLayers aria-hidden /></div>
                     <div>
-                      <h4>Modern Tech Stack</h4>
-                      <p>Expert in MERN, LAMP, and modern frameworks</p>
+                      <h4>Full-Stack Range</h4>
+                      <p>Laravel, React, Node.js and .NET, with MySQL, PostgreSQL or MongoDB</p>
                     </div>
                   </div>
                   <div className="highlight-item">
-                    <div className="highlight-icon">🎯</div>
+                    <div className="highlight-icon"><FiTarget aria-hidden /></div>
                     <div>
                       <h4>Agile Development</h4>
                       <p>Experience with Jira, sprints, and retrospectives</p>
                     </div>
                   </div>
                   <div className="highlight-item">
-                    <div className="highlight-icon">🔐</div>
+                    <div className="highlight-icon"><FiLock aria-hidden /></div>
                     <div>
-                      <h4>Security Focus</h4>
-                      <p>RBAC, 2FA, and secure authentication flows</p>
+                      <h4>Security Built In</h4>
+                      <p>Roles and permissions, PIN and two-factor sign-in, audit logs</p>
                     </div>
                   </div>
                   <div className="highlight-item">
-                    <div className="highlight-icon">🚀</div>
+                    <div className="highlight-icon"><FiTrendingUp aria-hidden /></div>
                     <div>
-                      <h4>Performance</h4>
-                      <p>Optimized, scalable applications</p>
+                      <h4>Arabic and English</h4>
+                      <p>Right-to-left screens, two languages and two currencies</p>
                     </div>
                   </div>
                 </div>
@@ -171,68 +163,39 @@ export default function About() {
             
             {activeTab === "approach" && (
               <div className="approach-content">
-                <h3>My Development Approach</h3>
+                <h3>How I Work</h3>
                 <p>
-                  I follow a structured approach combining best practices with cutting-edge technologies.
+                  The same four steps on every project, from the first talk with the owner to the last fix.
                 </p>
                 
                 <div className="timeline">
                   <div className="timeline-item">
                     <div className="timeline-marker" />
                     <div className="timeline-content">
-                      <h4>Planning & Architecture</h4>
-                      <p>Design patterns, SOLID principles, system architecture</p>
+                      <h4>Understand the business</h4>
+                      <p>Sit with the people who will use it and write down their real day</p>
                     </div>
                   </div>
                   <div className="timeline-item">
                     <div className="timeline-marker" />
                     <div className="timeline-content">
-                      <h4>Development</h4>
-                      <p>Clean code, TDD, pair programming when applicable</p>
+                      <h4>Design the data</h4>
+                      <p>Database, roles and permissions first, then the screens</p>
                     </div>
                   </div>
                   <div className="timeline-item">
                     <div className="timeline-marker" />
                     <div className="timeline-content">
-                      <h4>Testing & Security</h4>
-                      <p>Unit testing, security audits, penetration testing</p>
+                      <h4>Build and test</h4>
+                      <p>APIs and React screens, tested on the devices people really use</p>
                     </div>
                   </div>
                   <div className="timeline-item">
                     <div className="timeline-marker" />
                     <div className="timeline-content">
-                      <h4>Deployment & DevOps</h4>
-                      <p>Docker, CI/CD, monitoring, and optimization</p>
+                      <h4>Ship and support</h4>
+                      <p>Installers and live sites, then fixes from real use</p>
                     </div>
-                  </div>
-                </div>
-              </div>
-            )}
-            
-            {activeTab === "philosophy" && (
-              <div className="philosophy-content">
-                <h3>Development Philosophy</h3>
-                <p>
-                  I believe in building software that not only works but excels in performance, 
-                  maintainability, and user experience.
-                </p>
-                
-                <div className="philosophy-grid">
-                  <div className="philosophy-card">
-                    <h4>Code Quality</h4>
-                    <p>Clean, maintainable, and well-documented code</p>
-                  </div>
-                  <div className="philosophy-card">
-                    <h4>User-Centric</h4>
-                    <p>Intuitive interfaces and exceptional UX</p>
-                  </div>
-                  <div className="philosophy-card">
-                    <h4>Performance</h4>
-                    <p>Optimized for speed and scalability</p>
-                  </div>
-                  <div className="philosophy-card">
-                    <h4>Continuous Learning</h4>
-                    <p>Always evolving with new technologies</p>
                   </div>
                 </div>
               </div>

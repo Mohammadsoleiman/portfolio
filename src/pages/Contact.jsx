@@ -3,6 +3,7 @@ import { useRef, useState } from "react";
 import emailjs from '@emailjs/browser';
 import { profile } from "../data/profile";
 import "../styles/contact.css";
+import { FiGithub, FiLinkedin, FiMail, FiMapPin, FiPhone } from "react-icons/fi";
 
 const EMAILJS_CONFIG = {
   serviceId: import.meta.env.VITE_EMAILJS_SERVICE_ID,
@@ -139,22 +140,22 @@ export default function Contact() {
 
   const contactInfo = [
     {
-      icon: "📧",
+      icon: <FiMail aria-hidden />,
       title: "Email",
       content: profile.email,
       link: `mailto:${profile.email}`
     },
     {
-      icon: "📱",
+      icon: <FiPhone aria-hidden />,
       title: "Phone",
       content: profile.phone,
       link: `tel:${profile.phone.replace(/\s/g, '')}`
     },
     {
-      icon: "📍",
+      icon: <FiMapPin aria-hidden />,
       title: "Location",
       content: profile.location,
-      link: "#"
+      link: `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(profile.location)}`
     }
   ];
 
@@ -211,7 +212,7 @@ export default function Contact() {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                🐙
+                <FiGithub aria-hidden />
               </motion.a>
               <motion.a
                 href={profile.links.linkedin}
@@ -221,7 +222,7 @@ export default function Contact() {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                💼
+                <FiLinkedin aria-hidden />
               </motion.a>
               <motion.a
                 href={`mailto:${profile.email}`}
@@ -231,7 +232,7 @@ export default function Contact() {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                📧
+                <FiMail aria-hidden />
               </motion.a>
             </div>
           </div>

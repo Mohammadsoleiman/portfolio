@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import {
-  SiAmazonaws,
   SiDocker,
+  SiDotnet,
   SiFigma,
   SiGit,
   SiJira,
@@ -11,11 +11,10 @@ import {
   SiNodedotjs,
   SiPostgresql,
   SiReact,
-  SiSupabase,
-  SiTrello,
   SiTypescript,
 } from "react-icons/si";
 import "../styles/skills.css";
+import { FiBox, FiClock, FiCloud, FiCompass, FiCpu, FiDatabase, FiLayout, FiRefreshCw, FiServer, FiSettings, FiUploadCloud, FiUsers } from "react-icons/fi";
 
 export default function Skills() {
   const technicalSkills = [
@@ -34,7 +33,7 @@ export default function Skills() {
     { name: "Git/GitHub", level: 90, category: "tools" },
     { name: "TypeScript", level: 75, category: "frontend" },
     { name: "REST APIs", level: 90, category: "backend" },
-    { name: "UI/UX Design", level: 78, category: "design" }
+    { name: ".NET / C#", level: 0, category: "backend" }
   ];
 
   const techStack = [
@@ -45,27 +44,25 @@ export default function Skills() {
     { name: "TypeScript", Icon: SiTypescript, tone: "tone-ts" },
     { name: "MongoDB", Icon: SiMongodb, tone: "tone-mongo" },
     { name: "PostgreSQL", Icon: SiPostgresql, tone: "tone-postgres" },
+    { name: ".NET", Icon: SiDotnet, tone: "tone-dotnet" },
     { name: "Docker", Icon: SiDocker, tone: "tone-docker" },
-    { name: "AWS", Icon: SiAmazonaws, tone: "tone-aws" },
     { name: "Git", Icon: SiGit, tone: "tone-git" },
-    { name: "Trello", Icon: SiTrello, tone: "tone-trello" },
-    { name: "Supabase", Icon: SiSupabase, tone: "tone-supabase" },
     { name: "Figma", Icon: SiFigma, tone: "tone-figma" },
     { name: "Jira", Icon: SiJira, tone: "tone-jira" }
   ];
 
   const devopsSkills = [
-    { icon: "🐳", name: "Docker", description: "Containerization & Orchestration" },
-    { icon: "⚙️", name: "CI/CD", description: "Automated Deployment Pipelines" },
-    { icon: "☁️", name: "Cloud", description: "AWS & Cloud Services" },
-    { icon: "🚀", name: "Deployment", description: "Production Deployment & Scaling" }
+    { icon: <FiBox aria-hidden />, name: "Docker", description: "Containers for local and team setups" },
+    { icon: <FiSettings aria-hidden />, name: "Git & GitHub", description: "Branches, reviews and pull requests" },
+    { icon: <FiCloud aria-hidden />, name: "Jira & Scrum", description: "Sprints, planning and retrospectives" },
+    { icon: <FiUploadCloud aria-hidden />, name: "Shipping", description: "Live websites and Windows installers" }
   ];
 
   const softSkills = [
-    { icon: "🤝", name: "Teamwork", description: "Collaboration & Communication" },
-    { icon: "💡", name: "Problem Solving", description: "Analytical & Critical Thinking" },
-    { icon: "⚡", name: "Adaptability", description: "Quick Learning & Flexibility" },
-    { icon: "🎯", name: "Time Management", description: "Efficient Task Prioritization" }
+    { icon: <FiUsers aria-hidden />, name: "Teamwork", description: "Collaboration & Communication" },
+    { icon: <FiCompass aria-hidden />, name: "Problem Solving", description: "Analytical & Critical Thinking" },
+    { icon: <FiRefreshCw aria-hidden />, name: "Adaptability", description: "Quick Learning & Flexibility" },
+    { icon: <FiClock aria-hidden />, name: "Time Management", description: "Efficient Task Prioritization" }
   ];
 
   return (
@@ -82,7 +79,7 @@ export default function Skills() {
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true }}
         >
-          <span>⚡ Technical Expertise</span>
+          <span><FiCpu aria-hidden /> Technical Expertise</span>
         </motion.div>
         
         <motion.h2 
@@ -108,7 +105,7 @@ export default function Skills() {
             transition={{ delay: 0.3 }}
           >
             <div className="category-header">
-              <div className="category-icon">🎨</div>
+              <div className="category-icon"><FiLayout aria-hidden /></div>
               <h3 className="category-title">Frontend</h3>
             </div>
             
@@ -149,7 +146,7 @@ export default function Skills() {
             transition={{ delay: 0.4 }}
           >
             <div className="category-header">
-              <div className="category-icon">⚙️</div>
+              <div className="category-icon"><FiServer aria-hidden /></div>
               <h3 className="category-title">Backend</h3>
             </div>
             
@@ -190,8 +187,8 @@ export default function Skills() {
             transition={{ delay: 0.5 }}
           >
             <div className="category-header">
-              <div className="category-icon">🗄️</div>
-              <h3 className="category-title">Database & DevOps</h3>
+              <div className="category-icon"><FiDatabase aria-hidden /></div>
+              <h3 className="category-title">Database &amp; Tools</h3>
             </div>
             
             <div className="skill-items">
@@ -259,7 +256,7 @@ export default function Skills() {
           viewport={{ once: true }}
           transition={{ delay: 0.7 }}
         >
-          <h3 className="devops-title">DevOps & Tools</h3>
+          <h3 className="devops-title">Tools &amp; Process</h3>
           
           <div className="devops-grid">
             {devopsSkills.map((skill, i) => (

@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
 import { profile } from "../data/profile";
 import "../styles/footer.css";
+import { FiGithub, FiLinkedin, FiMail, FiPhone } from "react-icons/fi";
 
 export default function Footer() {
   const [showBackToTop, setShowBackToTop] = useState(false);
@@ -31,7 +32,6 @@ export default function Footer() {
   const socialLinks = [
     { icon: "github", href: profile.links.github },
     { icon: "linkedin", href: profile.links.linkedin },
-    { icon: "twitter", href: "#" },
     { icon: "mail", href: `mailto:${profile.email}` },
   ];
 
@@ -54,8 +54,8 @@ export default function Footer() {
               Building scalable applications with Laravel, React, and modern DevOps tools.
             </p>
             <div className="contact-mini">
-              <p>📧 {profile.email}</p>
-              <p>📱 {profile.phone}</p>
+              <p><FiMail aria-hidden /> {profile.email}</p>
+              <p><FiPhone aria-hidden /> {profile.phone}</p>
             </div>
           </div>
 
@@ -92,10 +92,9 @@ export default function Footer() {
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  {social.icon === "github" && "🐙"}
-                  {social.icon === "linkedin" && "💼"}
-                  {social.icon === "twitter" && "🐦"}
-                  {social.icon === "mail" && "📧"}
+                  {social.icon === "github" && <FiGithub aria-hidden />}
+                  {social.icon === "linkedin" && <FiLinkedin aria-hidden />}
+                  {social.icon === "mail" && <FiMail aria-hidden />}
                 </motion.a>
               ))}
             </div>
@@ -115,12 +114,6 @@ export default function Footer() {
           <p className="copyright">
             © {new Date().getFullYear()} Mohammad Soleiman. All rights reserved.
           </p>
-          
-          <div className="footer-legal">
-            <a href="#">Privacy Policy</a>
-            <a href="#">Terms of Service</a>
-            <a href="#">Cookies</a>
-          </div>
         </div>
       </div>
 

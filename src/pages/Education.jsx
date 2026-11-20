@@ -1,5 +1,6 @@
 import { motion, AnimatePresence } from "framer-motion";
 import "../styles/education.css";
+import { FiAward, FiBook, FiBookOpen, FiCpu, FiGlobe, FiMonitor, FiShield } from "react-icons/fi";
 
 const education = [
   {
@@ -8,12 +9,9 @@ const education = [
     period: "Aug 2025 - Present",
     location: "Beirut, Lebanon",
     highlights: [
-      "Built and deployed web applications using full-stack technologies",
-      "Designed RESTful APIs with Express.js, Next.js, and Laravel",
-      "Developed fintech dashboards and multi-role systems",
-      "Agile SDLC with Jira, sprints, and retrospectives",
-      "Design patterns and SOLID principles",
-      "UI/UX best practices implementation"
+      "Full-stack web apps with MERN, Next.js and Laravel",
+      "REST APIs and multi-role dashboards",
+      "Agile teamwork with Jira and sprints"
     ],
     tech: ["MERN", "Next.js", "Laravel", "PostgreSQL", "Docker", "Jira"]
   },
@@ -23,12 +21,9 @@ const education = [
     period: "Oct 2022 - June 2024",
     location: "Saida, Lebanon",
     highlights: [
-      "Mobile Application Development",
-      "Web Development",
-      "Data Structures & Algorithms",
-      "Information Systems Development",
-      "Database Management",
-      "Software Engineering"
+      "Web and mobile development",
+      "Data structures and algorithms",
+      "Databases and software engineering"
     ],
     tech: ["Java", "Python", "SQL", "Data Structures", "OOP"]
   },
@@ -38,12 +33,9 @@ const education = [
     period: "Oct 2020 - July 2022",
     location: "Saida, Lebanon",
     highlights: [
-      "Machine Learning & Deep Learning",
-      "Computer Vision",
-      "Natural Language Processing",
-      "Agent Systems",
-      "Multi-Agent Systems",
-      "Data Analysis"
+      "Machine learning and deep learning",
+      "Computer vision and NLP",
+      "Agent systems and data analysis"
     ],
     tech: ["Python", "TensorFlow", "OpenCV", "NLP", "AI/ML"]
   }
@@ -70,7 +62,7 @@ export default function Education() {
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true }}
         >
-          <span>🎓 Education & Certifications</span>
+          <span><FiBookOpen aria-hidden /> Education & Certifications</span>
         </motion.div>
         
         <motion.h2 
@@ -167,7 +159,7 @@ export default function Education() {
                 whileHover={{ y: -10 }}
               >
                 <div className="certification-icon">
-                  {cert.title.includes("Security") ? "🔐" : "🤖"}
+                  {cert.title.includes("Security") ? <FiShield aria-hidden /> : <FiCpu aria-hidden />}
                 </div>
                 
                 <div className="certification-content">
@@ -187,7 +179,7 @@ export default function Education() {
               transition={{ delay: 0.7 }}
               whileHover={{ y: -10 }}
             >
-              <div className="certification-icon">🌐</div>
+              <div className="certification-icon"><FiGlobe aria-hidden /></div>
               
               <div className="certification-content">
                 <h4>Additional Skills</h4>
@@ -218,7 +210,7 @@ export default function Education() {
             ease: "easeInOut"
           }}
         >
-          📚
+          <FiBook aria-hidden />
         </motion.div>
         
         <motion.div 
@@ -234,7 +226,7 @@ export default function Education() {
             delay: 1
           }}
         >
-          🎓
+          <FiAward aria-hidden />
         </motion.div>
         
         <motion.div 
@@ -250,7 +242,7 @@ export default function Education() {
             delay: 2
           }}
         >
-          💻
+          <FiMonitor aria-hidden />
         </motion.div>
       </div>
     </motion.section>

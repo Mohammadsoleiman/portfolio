@@ -1,6 +1,7 @@
 import { motion, AnimatePresence } from "framer-motion";  // FIXED: Added AnimatePresence
 import { useState } from "react";
 import "../styles/experience.css";
+import { FiBriefcase } from "react-icons/fi";
 
 const experiences = [
   {
@@ -9,12 +10,10 @@ const experiences = [
     period: "Aug 2025 - Present",
     location: "Beirut, Lebanon",
     achievements: [
-      "Built and deployed web applications using full-stack technologies including MERN, Next.js, and Laravel",
-      "Designed RESTful APIs through Express.js, Next.js, and Laravel to optimize backend efficiency",
-      "Developed large dashboards and informative web solutions targeting fintech and multi-role setups",
-      "Operated under Agile SDLC practices utilizing Jira, sprints, and retrospectives",
-      "Applied design patterns and SOLID guidelines for structured codebases",
-      "Implemented UI/UX best practices for responsive and intuitive design"
+      "Build and deploy web applications with MERN, Next.js and Laravel",
+      "Design REST APIs in Express.js, Next.js and Laravel",
+      "Build dashboards for fintech and multi-role systems",
+      "Work in Agile sprints with Jira, reviews and retrospectives"
     ],
     tech: ["React", "Next.js", "Laravel", "TypeScript", "PostgreSQL", "Docker"],
     type: "education"
@@ -25,9 +24,9 @@ const experiences = [
     period: "Dec 2024 – Feb 2025",
     location: "Afkar Al Tatweer, Remote",
     achievements: [
-      "Built websites using front-end and back-end languages",
-      "Collaborated with clients to deliver custom web solutions",
-      "Implemented responsive designs and optimized performance"
+      "Built complete websites, front end and back end",
+      "Worked directly with clients on what each site needed",
+      "Made every site work well on phones and load fast"
     ],
     tech: ["HTML/CSS", "JavaScript", "PHP", "MySQL"],
     type: "work"
@@ -38,9 +37,9 @@ const experiences = [
     period: "May 2023 – July 2023",
     location: "Saida, Lebanon",
     achievements: [
-      "Assisted in project planning and collaborated with team on design and testing",
-      "Resolved technical IT issues and provided user support",
-      "Participated in system maintenance and troubleshooting"
+      "Helped plan projects and tested them with the team",
+      "Solved day-to-day IT problems for staff",
+      "Kept computers and systems running"
     ],
     tech: ["IT Support", "Troubleshooting", "System Maintenance"],
     type: "work"
@@ -64,7 +63,7 @@ export default function Experience() {
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true }}
         >
-          <span>💼 Professional Journey</span>
+          <span><FiBriefcase aria-hidden /> Professional Journey</span>
         </motion.div>
         
         <motion.h2 
@@ -129,7 +128,7 @@ export default function Experience() {
               </div>
 
               <div className="exp-achievements">
-                <h4>Key Responsibilities & Achievements:</h4>
+                <h4>What I did</h4>
                 <ul>
                   {experiences[activeExp].achievements.map((achievement, i) => (
                     <motion.li

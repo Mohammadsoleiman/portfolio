@@ -1,16 +1,47 @@
-# React + Vite
+# Mohammad Soleiman | Portfolio
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Personal portfolio of Mohammad Soleiman, Full Stack Developer based in Lebanon.
 
-Currently, two official plugins are available:
+**Live site:** https://mohammadsoleiman.github.io/portfolio/
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Featured projects
 
-## React Compiler
+| Project | Stack | Code |
+|---|---|---|
+| Medical Center: appointments, pharmacy and patient management | Laravel, JavaScript, Bootstrap, MySQL | [AL-SAFOURI-CLINIC](https://github.com/Mohammadsoleiman/AL-SAFOURI-CLINIC) |
+| Vehicles Management System: POS, inventory, expenses and financial reports | MongoDB, Express, React, Node.js | [mern-pos-vehicles](https://github.com/Mohammadsoleiman/mern-pos-vehicles) |
+| LAM Online Shopping: e-commerce store with role-based content management | Laravel, Blade, MySQL, Bootstrap | [E-commerce11](https://github.com/Mohammadsoleiman/E-commerce11) |
+| The Digital Hub Platform: training programs and participant services | NestJS, Next.js, TypeScript, Prisma, PostgreSQL, Docker | Private |
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## What the site includes
 
-## Expanding the ESLint configuration
+- Home, About, Experience, Education, Skills, Projects and Contact sections
+- Dark and light theme
+- Project details window with links to the source code
+- Working contact form (EmailJS) and animated CV download
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Built with
+
+React 18, Vite, Framer Motion, React Icons, EmailJS. Deployed to GitHub Pages.
+
+## Run it locally
+
+```bash
+npm install
+npm run dev
+```
+
+The contact form needs a `.env` file in the project root. It is not committed; copy `.env.example` and fill in your EmailJS public keys.
+
+## Deploy
+
+```bash
+npm run deploy
+```
+
+This builds the site and publishes the `dist` folder to the `gh-pages` branch. The build reads `.env`, so run it on a machine that has the file.
+
+## Contact
+
+- GitHub: [Mohammadsoleiman](https://github.com/Mohammadsoleiman)
+- LinkedIn: [mohammad-soleiman](https://linkedin.com/in/mohammad-soleiman)

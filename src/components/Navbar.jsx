@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useTheme } from "../context/ThemeContext";
 import Button from "./Button";
 import "../styles/navbar.css";
+import { FiMoon, FiSun } from "react-icons/fi";
 
 const navItems = [
   { id: "home", label: "Home" },
@@ -112,7 +113,7 @@ export default function Navbar({ activeSection, setActiveSection }) {
             whileTap={{ scale: 0.95 }}
           >
             <span className="theme-icon" aria-hidden>
-              {isDark ? "☀️" : "🌙"}
+              {isDark ? <FiSun aria-hidden /> : <FiMoon aria-hidden />}
             </span>
           </motion.button>
 

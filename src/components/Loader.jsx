@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import { useTheme } from "../context/ThemeContext";
 import "../styles/loader.css";
+import { FiCode, FiDatabase, FiServer, FiTerminal } from "react-icons/fi";
 
 export default function Loader() {
   const [progress, setProgress] = useState(0);
@@ -110,7 +111,7 @@ export default function Loader() {
         />
 
         {/* Floating Icons */}
-        {["🚀", "💻", "⚡", "🎯"].map((icon, i) => (
+        {[<FiTerminal aria-hidden />, <FiCode aria-hidden />, <FiDatabase aria-hidden />, <FiServer aria-hidden />].map((icon, i) => (
           <motion.div
             key={i}
             className="floating-icon"

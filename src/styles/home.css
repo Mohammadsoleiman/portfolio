@@ -29,7 +29,7 @@
   border-radius: 10px;
   border: 1px solid var(--border-soft);
   background: color-mix(in srgb, var(--surface-soft) 90%, transparent);
-  backdrop-filter: blur(6px);
+  
   display: flex;
   align-items: center;
   justify-content: center;
@@ -89,9 +89,9 @@
       color-mix(in srgb, var(--surface-soft) 92%, var(--app-bg))
     );
   box-shadow:
-    0 4px 12px rgba(2, 6, 23, 0.2),
+    0 4px 12px rgba(11, 28, 40, 0.2),
     inset 1px 1px 0 rgba(255, 255, 255, 0.28),
-    inset -2px -3px 7px rgba(2, 6, 23, 0.14);
+    inset -2px -3px 7px rgba(11, 28, 40, 0.14);
   opacity: var(--bubble-opacity, 0.94);
   filter: none;
   animation: techBubbleFloat var(--float-duration, 18s) ease-in-out infinite;
@@ -103,7 +103,7 @@
   display: block;
   max-width: calc(100% - 8px);
   overflow: hidden;
-  font-family: "Courier New", Consolas, monospace;
+  font-family: 'JetBrains Mono', Consolas, monospace;
   font-size: clamp(0.52rem, 1vw, 0.68rem);
   font-weight: 700;
   letter-spacing: 0.02em;
@@ -265,17 +265,17 @@
 /* Primary Button (Get In Touch) */
 .btn-primary {
   padding: 16px 32px;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #e9b949 0%, #e9b949 100%);
   border: none;
   border-radius: 12px;
-  color: white;
+  color: #0f2433;
   font-size: 16px;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
   position: relative;
   overflow: hidden;
-  box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+  box-shadow: 0 10px 30px rgba(233, 185, 73, 0.3);
   text-decoration: none;
   display: flex;
   align-items: center;
@@ -289,7 +289,7 @@
 .btn-primary:hover {
   transform: translateY(-2px);
   box-shadow: 
-    0 15px 40px rgba(102, 126, 234, 0.4),
+    0 15px 40px rgba(233, 185, 73, 0.4),
     0 0 0 1px rgba(255, 255, 255, 0.15);
 }
 
@@ -323,17 +323,17 @@
 
 .download-btn-custom {
   padding: 16px 32px;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #e9b949 0%, #e9b949 100%);
   border: none;
   border-radius: 12px;
-  color: white;
+  color: #0f2433;
   font-size: 16px;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
   position: relative;
   overflow: hidden;
-  box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+  box-shadow: 0 10px 30px rgba(233, 185, 73, 0.3);
   min-width: 180px;
   height: 56px;
   display: flex;
@@ -345,7 +345,7 @@
 .download-btn-custom:hover:not(.loading):not(.success) {
   transform: translateY(-2px);
   box-shadow: 
-    0 15px 40px rgba(102, 126, 234, 0.4),
+    0 15px 40px rgba(233, 185, 73, 0.4),
     0 0 0 1px rgba(255, 255, 255, 0.15);
 }
 
@@ -475,7 +475,7 @@
   bottom: 0;
   left: 0;
   height: 3px;
-  background: linear-gradient(90deg, #667eea, #a78bfa);
+  background: linear-gradient(90deg, #e9b949, #e9b949);
   border-radius: 0 0 12px 12px;
   transition: width 0.3s ease;
   z-index: 1;
@@ -536,8 +536,8 @@
 .intro-badge {
   display: inline-block;
   padding: 10px 24px;
-  background: rgba(59, 130, 246, 0.1);
-  border: 1px solid rgba(59, 130, 246, 0.3);
+  background: rgba(233, 185, 73, 0.1);
+  border: 1px solid rgba(233, 185, 73, 0.3);
   border-radius: 50px;
   margin-bottom: 30px;
   position: relative;
@@ -546,7 +546,7 @@
 
 .intro-badge span {
   font-weight: 600;
-  color: var(--secondary, #60a5fa);
+  color: var(--secondary, #e9b949);
   position: relative;
   z-index: 1;
 }
@@ -558,7 +558,7 @@
   transform: translate(-50%, -50%);
   width: 100%;
   height: 100%;
-  background: radial-gradient(circle, rgba(59, 130, 246, 0.2), transparent 70%);
+  background: radial-gradient(circle, rgba(233, 185, 73, 0.2), transparent 70%);
   filter: blur(20px);
 }
 
@@ -570,7 +570,7 @@
 }
 
 .gradient-text {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #e9b949 0%, #e9b949 100%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -589,7 +589,7 @@
   left: 0;
   width: 100%;
   height: 8px;
-  background: rgba(255, 59, 92, 0.3);
+  background: rgba(233, 185, 73, 0.3);
   z-index: -1;
   border-radius: 4px;
 }
@@ -609,7 +609,7 @@
 .role-text {
   font-size: 1.2rem;
   font-weight: 600;
-  color: var(--secondary, #60a5fa);
+  color: var(--secondary, #e9b949);
   min-width: 250px;
   height: 24px;
   display: flex;
@@ -621,7 +621,7 @@
 }
 
 .cursor {
-  color: var(--primary, #667eea);
+  color: var(--primary, #e9b949);
   font-weight: bold;
   opacity: 0;
   transition: opacity 0.3s;
@@ -664,7 +664,7 @@
 .stat-item h3 {
   font-size: 2.5rem;
   font-weight: 800;
-  background: var(--gradient, linear-gradient(135deg, #667eea 0%, #764ba2 100%));
+  background: var(--gradient, linear-gradient(135deg, #e9b949 0%, #e9b949 100%));
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -711,8 +711,8 @@
   z-index: 2;
   border: 4px solid rgba(255, 255, 255, 0.1);
   box-shadow: 
-    0 0 80px rgba(59, 130, 246, 0.3),
-    0 0 150px rgba(139, 92, 246, 0.2);
+    0 0 80px rgba(233, 185, 73, 0.3),
+    0 0 150px rgba(233, 185, 73, 0.2);
 }
 
 .profile-glow {
@@ -720,7 +720,7 @@
   width: 350px;
   height: 350px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(59, 130, 246, 0.4), transparent 70%);
+  background: radial-gradient(circle, rgba(233, 185, 73, 0.4), transparent 70%);
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -733,7 +733,7 @@
   position: absolute;
   inset: 18%;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(99, 102, 241, 0.24), transparent 70%);
+  background: radial-gradient(circle, rgba(233, 185, 73, 0.24), transparent 70%);
   filter: blur(28px);
   z-index: 0;
   pointer-events: none;
@@ -765,7 +765,7 @@
   height: var(--size, 60px);
   border-radius: 14px;
   background: color-mix(in srgb, var(--surface-raised) 90%, white 10%);
-  backdrop-filter: blur(14px);
+  
   border: 1px solid var(--border-soft);
   display: flex;
   align-items: center;
@@ -773,7 +773,7 @@
   z-index: 4;
   transform-origin: center center;
   transition: all 300ms ease-in-out;
-  box-shadow: 0 10px 26px rgba(15, 23, 42, 0.18);
+  box-shadow: 0 10px 26px rgba(15, 36, 51, 0.18);
 }
 
 .floating-tech-icon {
@@ -813,7 +813,7 @@
   position: absolute;
   width: 100%;
   height: 100%;
-  background: radial-gradient(circle, rgba(59, 130, 246, 0.2), transparent 70%);
+  background: radial-gradient(circle, rgba(233, 185, 73, 0.2), transparent 70%);
   border-radius: 12px;
   animation: trailPulse 2s ease infinite;
   pointer-events: none;
@@ -830,7 +830,7 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  border: 2px solid rgba(59, 130, 246, 0.1);
+  border: 2px solid rgba(233, 185, 73, 0.1);
   border-radius: 50%;
 }
 
@@ -916,7 +916,7 @@
 .wheel {
   width: 4px;
   height: 10px;
-  background: var(--gradient, linear-gradient(135deg, #667eea 0%, #764ba2 100%));
+  background: var(--gradient, linear-gradient(135deg, #e9b949 0%, #e9b949 100%));
   border-radius: 2px;
   position: absolute;
   top: 10px;
@@ -1141,7 +1141,7 @@
   }
 
   .floating-icon-3d {
-    backdrop-filter: none;
+    
   }
 }
 
@@ -1235,5 +1235,11 @@
   .tech-tag {
     padding: 7px 11px;
     font-size: 0.78rem;
+  }
+}
+/* the photo comes first when the hero stacks into one column */
+@media (max-width: 1024px) {
+  .home-right {
+    order: -1;
   }
 }

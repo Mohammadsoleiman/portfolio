@@ -84,9 +84,9 @@
 
 .project-journey-dot.active {
   border-color: transparent;
-  background: #8b5cf6;
+  background: #e9b949;
   transform: scale(1.45);
-  box-shadow: 0 0 0 4px var(--app-bg), 0 0 16px rgba(139, 92, 246, 0.75);
+  box-shadow: 0 0 0 4px var(--app-bg), 0 0 16px rgba(233, 185, 73, 0.75);
 }
 
 .projects-viewport {
@@ -134,7 +134,7 @@
   display: flex;
   flex-direction: column;
   background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(20px);
+  
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 24px;
   overflow: hidden;
@@ -195,7 +195,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: linear-gradient(to bottom, transparent, rgba(15, 23, 42, 0.9));
+  background: linear-gradient(to bottom, transparent, rgba(15, 36, 51, 0.9));
   display: flex;
   align-items: flex-end;
   padding: 20px;
@@ -219,7 +219,7 @@
   border-radius: 12px;
   font-size: 0.8rem;
   color: white;
-  backdrop-filter: blur(10px);
+  
 }
 
 .project-content {
@@ -263,7 +263,7 @@
   line-height: 1.3;
   position: static;
   transform: none;
-  color: white;
+  color: #0f2433;
   background: var(--gradient);
   -webkit-background-clip: text;
   background-clip: text;
@@ -286,8 +286,8 @@
   flex: 0 0 auto;
   margin: 0;
   padding: 4px 12px;
-  background: rgba(59, 130, 246, 0.1);
-  border: 1px solid rgba(59, 130, 246, 0.3);
+  background: rgba(233, 185, 73, 0.1);
+  border: 1px solid rgba(233, 185, 73, 0.3);
   border-radius: 12px;
   font-size: 0.85rem;
   line-height: 1.2;
@@ -429,7 +429,7 @@
 .project-link:hover {
   background: var(--gradient);
   border-color: transparent;
-  color: #ffffff;
+  color: #0f2433;
   transform: translateY(-3px);
 }
 
@@ -634,7 +634,7 @@
   background: rgba(255, 255, 255, 0.03);
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 20px;
-  backdrop-filter: blur(10px);
+  
   animation: floatProject 20s linear infinite;
 }
 
@@ -1525,5 +1525,312 @@ html:has(.projects-section.is-pinned) {
 
   .project-item:hover {
     transform: none;
+  }
+}
+.modal-code-link {
+  margin-top: 20px;
+  padding: 12px 18px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid var(--border-soft);
+  border-radius: 12px;
+  color: var(--text-primary);
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+/* ===================================================
+   Projects grid (all projects visible at once)
+   =================================================== */
+.projects-grid-section {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 96px 5% 72px;
+}
+
+.projects-grid-section .projects-intro {
+  margin: 14px auto 0;
+  max-width: 560px;
+  text-align: center;
+  color: var(--text-secondary);
+  font-size: 1.05rem;
+  line-height: 1.6;
+}
+
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px;
+  margin-top: 48px;
+}
+
+.projects-grid-section .project-item {
+  max-width: none;
+  margin: 0;
+  width: auto;
+  height: auto;
+  min-height: 0;
+  max-height: none;
+  flex: initial;
+  display: flex;
+  flex-direction: column;
+  background: var(--surface-raised);
+  border: 1px solid var(--border-soft);
+  border-radius: 16px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: border-color 0.25s ease, transform 0.25s ease;
+}
+
+.projects-grid-section .project-item:hover {
+  border-color: var(--primary);
+  transform: translateY(-4px);
+}
+
+.projects-grid-section .project-item.is-featured {
+  grid-column: span 3;
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+}
+
+.projects-grid-section .project-image {
+  flex: none;
+  height: auto;
+  min-height: 0;
+  max-height: none;
+  aspect-ratio: 16 / 10;
+  background: #ffffff;
+  border-bottom: 1px solid var(--border-soft);
+}
+
+.projects-grid-section .project-item.is-featured .project-image {
+  aspect-ratio: auto;
+  min-height: 340px;
+  border-bottom: 0;
+  border-right: 1px solid var(--border-soft);
+}
+
+.projects-grid-section .project-image img {
+  object-fit: cover;
+  object-position: top left;
+}
+
+.projects-grid-section .project-item:hover .project-image img {
+  transform: none;
+}
+
+.projects-grid-section .project-cover {
+  aspect-ratio: auto;
+  height: 132px;
+  background: var(--surface-hover);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 8px;
+  padding: 22px;
+}
+
+.project-cover-mark {
+  font-size: 3.4rem;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.04em;
+  color: transparent;
+  -webkit-text-stroke: 1.5px var(--primary);
+}
+
+.project-cover-stack {
+  font-family: 'JetBrains Mono', Consolas, monospace;
+  font-size: 0.8rem;
+  color: var(--primary);
+}
+
+.projects-grid-section .project-content {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 22px;
+  overflow: visible;
+  flex: 1 1 auto;
+}
+
+.projects-grid-section .project-item.is-featured .project-content {
+  padding: 32px;
+  justify-content: center;
+}
+
+.projects-grid-section .project-header {
+  height: auto;
+  padding: 0;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 12px;
+  overflow: visible;
+}
+
+.projects-grid-section .project-header h3 {
+  width: auto;
+  font-size: 1.3rem;
+  -webkit-line-clamp: unset;
+  line-clamp: unset;
+  display: block;
+  background: none;
+  -webkit-text-fill-color: currentColor;
+  color: var(--text-primary);
+}
+
+.projects-grid-section .project-item.is-featured .project-header h3 {
+  font-size: 1.7rem;
+}
+
+.project-status {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  padding: 3px 10px;
+  border-radius: 999px;
+  color: var(--primary);
+  border: 1px solid var(--primary);
+}
+
+.project-subtitle {
+  margin: -4px 0 0;
+  color: var(--primary);
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.projects-grid-section .project-description {
+  height: auto;
+  display: block;
+  -webkit-line-clamp: unset;
+  line-clamp: unset;
+  overflow: visible;
+  color: var(--text-secondary);
+  font-size: 0.98rem;
+  line-height: 1.6;
+}
+
+.projects-grid-section .project-item .project-tech {
+  height: auto;
+  overflow: visible;
+  margin-top: 2px;
+}
+
+.projects-grid-section .project-item .tech-stack {
+  font-family: 'JetBrains Mono', Consolas, monospace;
+  font-size: 0.78rem;
+  padding: 4px 10px;
+  border-radius: 6px;
+  background: transparent;
+  border: 1px solid var(--border-strong);
+  color: var(--text-secondary);
+}
+
+.projects-grid-section .project-item .project-links {
+  height: auto;
+  margin-top: auto;
+  padding-top: 8px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+}
+
+.projects-grid-section .project-item .project-link {
+  flex: 0 0 auto;
+  height: auto;
+  padding: 9px 14px;
+  font-size: 0.92rem;
+  border-radius: 8px;
+}
+
+.projects-grid-section .project-item .project-link.live,
+.modal-code-link.live {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: #0f2433;
+}
+
+.project-private {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.88rem;
+  color: var(--text-muted);
+}
+
+.project-private.in-modal {
+  margin-top: 20px;
+}
+
+.modal-links {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+}
+
+.modal-close svg {
+  width: 20px;
+  height: 20px;
+}
+
+@media (max-width: 1024px) {
+  .projects-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .projects-grid-section .project-item.is-featured {
+    grid-column: span 2;
+  }
+}
+
+@media (max-width: 720px) {
+  .projects-grid-section {
+    padding: 72px 5% 56px;
+  }
+
+  .projects-grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 18px;
+    margin-top: 32px;
+  }
+
+  .projects-grid-section .project-item.is-featured {
+    grid-column: auto;
+    display: flex;
+  }
+
+  .projects-grid-section .project-item.is-featured .project-image {
+    aspect-ratio: 16 / 10;
+    min-height: 0;
+    border-right: 0;
+    border-bottom: 1px solid var(--border-soft);
+  }
+
+  .projects-grid-section .project-item.is-featured .project-content {
+    padding: 22px;
+  }
+
+  .projects-grid-section .project-item.is-featured .project-header h3 {
+    font-size: 1.35rem;
+  }
+}
+
+/* every second wide card puts its screenshot on the right */
+.projects-grid-section .project-item.is-featured:nth-child(2) .project-image {
+  order: 2;
+  border-right: 0;
+  border-left: 1px solid var(--border-soft);
+}
+
+@media (max-width: 720px) {
+  .projects-grid-section .project-item.is-featured:nth-child(2) .project-image {
+    order: 0;
+    border-left: 0;
   }
 }
