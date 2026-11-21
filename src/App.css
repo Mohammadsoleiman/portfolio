@@ -932,3 +932,47 @@ html.light .projects-grid-section .project-header h3 {
 html.light .hire-btn {
   color: #ffffff !important;
 }
+
+/* ---------- Hero words: "Full Stack Developer" lit one by one ---------- */
+.role-text.hero-words {
+  gap: 0.35em;
+  line-height: 24px;
+}
+
+.hero-word {
+  display: inline-block;
+  color: #3a5a72;
+  opacity: 0.45;
+  transform: translateY(3px);
+  transition: color 0.45s ease, opacity 0.45s ease, transform 0.45s ease;
+}
+
+.hero-word.is-lit {
+  color: #e9b949;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.hero-word.is-done {
+  color: #eaf0f3;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+html.light .hero-word.is-dim {
+  color: #3a5a72 !important;
+}
+
+html.light .hero-word.is-lit {
+  color: #9a6b0c !important;
+}
+
+html.light .hero-word.is-done {
+  color: #0f2433 !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-word {
+    transition: none;
+  }
+}

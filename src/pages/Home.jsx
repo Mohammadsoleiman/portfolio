@@ -20,7 +20,7 @@ import "../styles/home.css";
 import { FiTerminal } from "react-icons/fi";
 
 export default function Home({ setActiveSection }) {
-  const [textIndex, setTextIndex] = useState(0);
+  const [wordStep, setWordStep] = useState(0);
   const [cursorVisible, setCursorVisible] = useState(true);
   const [isDownloading, setIsDownloading] = useState(false);
   const [downloadProgress, setDownloadProgress] = useState(0);
@@ -28,18 +28,12 @@ export default function Home({ setActiveSection }) {
   
   const controls = useAnimation();
   
-  const roles = [
-    "Laravel · React · Node.js · .NET"
-  ];
+  const heroWords = ["Full", "Stack", "Developer"];
 
   useEffect(() => {
     const cursorInterval = setInterval(() => {
       setCursorVisible(v => !v);
     }, 530);
-    
-    const textInterval = setInterval(() => {
-      setTextIndex((prev) => (prev + 1) % roles.length);
-    }, 3000);
     
     // Animated entrance
     controls.start({
@@ -50,9 +44,31 @@ export default function Home({ setActiveSection }) {
 
     return () => {
       clearInterval(cursorInterval);
-      clearInterval(textInterval);
     };
   }, [controls]);
+
+  // Hero words: light up "Full", "Stack", "Developer" one after another,
+  // hold, fade all back to dim, repeat. Reduced motion: all lit and still.
+  useEffect(() => {
+    const reduce = window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
+    if (reduce) {
+      setWordStep(-1);
+      return undefined;
+    }
+    const steps = 6; // 0 dim, 1-3 lighting, 4-5 hold
+    const wordInterval = setInterval(() => {
+      setWordStep((prev) => (prev + 1) % steps);
+    }, 650);
+    return () => clearInterval(wordInterval);
+  }, []);
+
+  const wordState = (i) => {
+    if (wordStep === -1) return "lit";
+    const lit = Math.min(wordStep, 3) - 1;
+    if (i === lit) return "lit";
+    if (i < lit) return "done";
+    return "dim";
+  };
 
 const handleDownloadCV = () => {
   if (isDownloading) return;
@@ -196,7 +212,13 @@ const cvUrl = `${import.meta.env.BASE_URL}${cvFileName}`;
             animate={{ opacity: 1 }}
             transition={{ delay: 0.7 }}
           >
-            <span className="role-text">{roles[textIndex]}</span>
+            <span className="role-text hero-words" aria-label="Full Stack Developer">
+              {heroWords.map((word, i) => (
+                <span key={word} className={`hero-word is-${wordState(i)}`} aria-hidden="true">
+                  {word}
+                </span>
+              ))}
+            </span>
             <span className={`cursor ${cursorVisible ? "visible" : ""}`}>|</span>
           </motion.div>
 
