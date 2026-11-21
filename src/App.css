@@ -991,3 +991,50 @@ html.light .open-dot {
   background: #16a34a;
   box-shadow: 0 0 0 3px rgba(22, 163, 74, 0.15);
 }
+
+/* ---------- Phones and tablets ---------- */
+
+/* The three numbers stay in one row on every screen */
+@media (max-width: 1024px) {
+  .home-hero .stats-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    gap: 8px !important;
+  }
+
+  .home-hero .stat-item h3 {
+    font-size: clamp(1.5rem, 7vw, 2.2rem) !important;
+  }
+
+  .home-hero .stat-item p {
+    font-size: clamp(0.72rem, 3vw, 0.9rem) !important;
+    line-height: 1.3;
+  }
+}
+
+/* Footer links: big enough for a finger */
+@media (max-width: 1024px) {
+  .footer-links li a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 40px;
+  }
+}
+
+@media (max-width: 768px) {
+
+  .social-link-footer,
+  .social-link {
+    min-width: 44px;
+    min-height: 44px;
+  }
+
+  /* Back-to-top: smaller and tucked into the corner */
+  .back-to-top {
+    width: 40px !important;
+    height: 40px !important;
+    right: 12px !important;
+    bottom: 16px !important;
+    font-size: 1rem !important;
+    opacity: 0.9;
+  }
+}
