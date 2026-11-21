@@ -23,8 +23,8 @@ export default function Footer() {
   const quickLinks = [
     { label: "Home", href: "#home" },
     { label: "About", href: "#about" },
-    { label: "Experience", href: "#experience" },
     { label: "Projects", href: "#projects" },
+    { label: "Experience", href: "#experience" },
     { label: "Skills", href: "#skills" },
     { label: "Contact", href: "#contact" },
   ];
@@ -50,8 +50,8 @@ export default function Footer() {
           <div className="footer-section">
             <h3>Mohammad Soleiman</h3>
             <p>
-              Full Stack Developer specializing in modern web technologies. 
-              Building scalable applications with Laravel, React, and modern DevOps tools.
+              Full Stack Developer from Lebanon. I build business software with
+              Laravel, React, Node.js and .NET: a point of sale, a clinic platform and more.
             </p>
             <div className="contact-mini">
               <p><FiMail aria-hidden /> {profile.email}</p>

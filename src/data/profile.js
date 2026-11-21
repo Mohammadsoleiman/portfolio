@@ -3,19 +3,19 @@ export const profile = {
   title: "Full Stack Developer",
   email: "mohammadsoleiman6@gmail.com",
   phone: "+961 70639058",
-  location: "Beirut, Lebanon",
-  about: "Full Stack Developer with hands-on projects in Laravel, React, and MySQL. Skilled in building responsive applications with modern tools. Currently training in full-stack web development and seeking an entry-level developer role.",
+  location: "Lebanon",
+  about: "Full Stack Developer with hands-on projects in Laravel, React, and MySQL. Skilled in building responsive applications with modern tools. Trained at The Digital Hub (UNRWA) in 2025 and looking for a full-time developer role.",
   
   links: {
     github: "https://github.com/Mohammadsoleiman",
-    linkedin: "https://linkedin.com/in/mohammad-soleiman",
+    linkedin: "https://www.linkedin.com/in/mohammad-suleiman",
     cv: "/MohammadSoleimanCV.pdf", // ← غيرت هنا
     portfolio: "#"
   },
   
   social: {
     github: "Mohammadsoleiman",
-    linkedin: "mohammad-soleiman",
+    linkedin: "mohammad-suleiman",
     twitter: "",
     email: "mohammadsoleiman6@gmail.com"
   },

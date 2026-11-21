@@ -178,7 +178,7 @@ export default function Contact() {
           <div className="info-card">
             <div className="info-header">
               <h2>Get In Touch</h2>
-              <p>Feel free to reach out for collaborations or just a friendly hello</p>
+              <p>Hiring, or need a system built for your business? Send me a message.</p>
             </div>
             
             <div className="contact-details">

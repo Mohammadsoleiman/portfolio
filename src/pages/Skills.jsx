@@ -11,6 +11,7 @@ import {
   SiNodedotjs,
   SiPostgresql,
   SiReact,
+  SiSupabase,
   SiTypescript,
 } from "react-icons/si";
 import "../styles/skills.css";
@@ -29,6 +30,7 @@ export default function Skills() {
     { name: "MySQL", level: 88, category: "database" },
     { name: "MongoDB", level: 75, category: "database" },
     { name: "PostgreSQL", level: 80, category: "database" },
+    { name: "Supabase", level: 0, category: "database" },
     { name: "Docker", level: 70, category: "devops" },
     { name: "Git/GitHub", level: 90, category: "tools" },
     { name: "TypeScript", level: 75, category: "frontend" },
@@ -44,6 +46,7 @@ export default function Skills() {
     { name: "TypeScript", Icon: SiTypescript, tone: "tone-ts" },
     { name: "MongoDB", Icon: SiMongodb, tone: "tone-mongo" },
     { name: "PostgreSQL", Icon: SiPostgresql, tone: "tone-postgres" },
+    { name: "Supabase", Icon: SiSupabase, tone: "tone-supabase" },
     { name: ".NET", Icon: SiDotnet, tone: "tone-dotnet" },
     { name: "Docker", Icon: SiDocker, tone: "tone-docker" },
     { name: "Git", Icon: SiGit, tone: "tone-git" },

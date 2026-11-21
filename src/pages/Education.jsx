@@ -6,7 +6,7 @@ const education = [
   {
     institution: "The Digital Hub | UNRWA",
     degree: "Full-Stack Web Development Training",
-    period: "Aug 2025 - Present",
+    period: "Aug 2025 - Dec 2025",
     location: "Beirut, Lebanon",
     highlights: [
       "Full-stack web apps with MERN, Next.js and Laravel",

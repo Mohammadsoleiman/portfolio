@@ -44,4 +44,4 @@ This builds the site and publishes the `dist` folder to the `gh-pages` branch. T
 ## Contact
 
 - GitHub: [Mohammadsoleiman](https://github.com/Mohammadsoleiman)
-- LinkedIn: [mohammad-soleiman](https://linkedin.com/in/mohammad-soleiman)
+- LinkedIn: [mohammad-suleiman](https://www.linkedin.com/in/mohammad-suleiman)

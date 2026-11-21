@@ -1834,3 +1834,69 @@ html:has(.projects-section.is-pinned) {
     border-left: 0;
   }
 }
+
+/* Case study inside the details window (POS and CWW) */
+.case-study {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
+  margin: 8px 0 24px;
+  padding: 20px 0;
+  border-top: 1px solid var(--border-soft);
+  border-bottom: 1px solid var(--border-soft);
+}
+
+.case-study h4 {
+  margin: 0 0 8px;
+  font-size: 0.8rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--primary);
+}
+
+.case-study p {
+  margin: 0;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  font-size: 0.95rem;
+}
+
+.case-gallery {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 2.2fr);
+  gap: 14px;
+  margin-bottom: 24px;
+}
+
+.case-gallery:not(:has(.is-tall)) {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.case-gallery figure {
+  margin: 0;
+  border: 1px solid var(--border-soft);
+  border-radius: 10px;
+  overflow: hidden;
+  background: #ffffff;
+}
+
+.case-gallery figure.is-tall {
+  order: -1;
+}
+
+.case-gallery img {
+  width: 100%;
+  height: 100%;
+  max-height: 340px;
+  object-fit: cover;
+  object-position: top;
+  display: block;
+}
+
+@media (max-width: 720px) {
+  .case-study,
+  .case-gallery,
+  .case-gallery:not(:has(.is-tall)) {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

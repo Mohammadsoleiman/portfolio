@@ -21,6 +21,22 @@ export default function App() {
     return () => clearTimeout(timer);
   }, []);
 
+  // The menu follows the section in the middle of the screen while scrolling.
+  useEffect(() => {
+    if (loading || !("IntersectionObserver" in window)) return undefined;
+    const sections = document.querySelectorAll("main .section-wrapper[id]");
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) setActiveSection(entry.target.id);
+        });
+      },
+      { rootMargin: "-45% 0px -50% 0px" }
+    );
+    sections.forEach((section) => observer.observe(section));
+    return () => observer.disconnect();
+  }, [loading]);
+
   return (
     <div className="bg-white dark:bg-gray-900 text-gray-900 dark:text-white transition-colors duration-300">
       {loading && <Loader />}
@@ -37,20 +53,20 @@ export default function App() {
             <About />
           </section>
           
+          <section id="projects" className="section-wrapper">
+            <Projects />
+          </section>
+
           <section id="experience" className="section-wrapper">
             <Experience />
           </section>
-          
+
           <section id="education" className="section-wrapper">
             <Education />
           </section>
-          
+
           <section id="skills" className="section-wrapper">
             <Skills />
-          </section>
-          
-          <section id="projects" className="section-wrapper">
-            <Projects />
           </section>
           
           <section id="contact" className="section-wrapper">

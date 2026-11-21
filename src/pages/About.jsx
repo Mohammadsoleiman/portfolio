@@ -76,7 +76,7 @@ export default function About() {
               </div>
               <div className="contact-item">
                 <span className="icon"><FiMapPin aria-hidden /></span>
-                <span>Beirut, Lebanon</span>
+                <span>Lebanon</span>
               </div>
             </div>
           </div>
@@ -124,8 +124,8 @@ export default function About() {
                 <p>
                   Full Stack Developer with a BSc in Computer Science. I build business software end to end:
                   a retail point of sale now in testing at shops, a clinic booking platform that is live,
-                  and systems for car dealers and online stores. I am training at The Digital Hub (UNRWA)
-                  and looking for a full-time developer role.
+                  and systems for car dealers and online stores. I trained at The Digital Hub (UNRWA) in 2025
+                  and I am looking for a full-time developer role.
                 </p>
                 
                 <div className="highlight-grid">

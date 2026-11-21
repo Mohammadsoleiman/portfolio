@@ -28,6 +28,18 @@ const projects = [
     tech: [".NET", "ASP.NET Core", "React", "TypeScript", "SQLite"],
     status: "In testing at shops",
     featured: true,
+    story: {
+      problem:
+        "Small clothing and household shops in Lebanon work in two currencies, often without stable internet, and most point-of-sale systems do not handle either well.",
+      built:
+        "A Windows app that runs fully on the shop's computer: barcode selling, returns and exchanges, stock with FIFO cost, shifts and cash drawer, reports, and roles with PIN sign-in. Prices and change work in US dollars and Lebanese pounds at the same time.",
+      result:
+        "Version 1.2.4 runs on shop laptops for testing, with a one-file installer, encrypted data and automatic backups.",
+    },
+    gallery: [
+      { src: img("pos-products.jpg"), alt: "MIS POS products list with barcodes, prices and stock" },
+      { src: img("pos-receipt.jpg"), alt: "MIS POS receipt in Arabic and English with totals in dollars and Lebanese pounds" },
+    ],
   },
   {
     id: "cww",
@@ -47,6 +59,17 @@ const projects = [
     live: "https://cww.care",
     status: "Live",
     featured: true,
+    story: {
+      problem:
+        "Patients wait in crowded clinic rooms, and prescriptions travel to the pharmacy on paper or by phone.",
+      built:
+        "One platform for the whole visit: online booking, a live queue for reception, a doctor's screen that writes and sends prescriptions, and a pharmacy inbox. Arabic and English, with each clinic's data kept apart by row-level security in PostgreSQL.",
+      result: "Live at cww.care with a free trial for clinics.",
+    },
+    gallery: [
+      { src: img("cww-booking-phone.jpg"), alt: "CWW booking on a phone: choosing a date and time with a doctor", tall: true },
+      { src: img("cww-doctor.jpg"), alt: "CWW doctor screen: prescription written and sent to the pharmacy" },
+    ],
   },
   {
     id: "vehicles",
@@ -231,7 +254,7 @@ export default function Projects() {
                       setSelectedProject(project);
                     }}
                   >
-                    Details
+                    {project.story ? "Case study" : "Details"}
                     <FiArrowUpRight aria-hidden />
                   </button>
                   <Links project={project} />
@@ -282,6 +305,33 @@ export default function Projects() {
                   <h3>{selectedProject.title}</h3>
                   <p>{selectedProject.description}</p>
                 </div>
+
+                {selectedProject.story && (
+                  <div className="case-study">
+                    <div>
+                      <h4>The problem</h4>
+                      <p>{selectedProject.story.problem}</p>
+                    </div>
+                    <div>
+                      <h4>What I built</h4>
+                      <p>{selectedProject.story.built}</p>
+                    </div>
+                    <div>
+                      <h4>Where it is now</h4>
+                      <p>{selectedProject.story.result}</p>
+                    </div>
+                  </div>
+                )}
+
+                {selectedProject.gallery && (
+                  <div className="case-gallery">
+                    {selectedProject.gallery.map((shot) => (
+                      <figure key={shot.src} className={shot.tall ? "is-tall" : undefined}>
+                        <img src={shot.src} alt={shot.alt} loading="lazy" />
+                      </figure>
+                    ))}
+                  </div>
+                )}
 
                 <div className="modal-details">
                   <div className="detail-section">

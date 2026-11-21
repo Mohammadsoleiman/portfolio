@@ -7,13 +7,13 @@ const experiences = [
   {
     company: "The Digital Hub | UNRWA",
     position: "Full Stack Developer Trainee",
-    period: "Aug 2025 - Present",
+    period: "Aug 2025 - Dec 2025",
     location: "Beirut, Lebanon",
     achievements: [
-      "Build and deploy web applications with MERN, Next.js and Laravel",
-      "Design REST APIs in Express.js, Next.js and Laravel",
-      "Build dashboards for fintech and multi-role systems",
-      "Work in Agile sprints with Jira, reviews and retrospectives"
+      "Built and deployed web applications with MERN, Next.js and Laravel",
+      "Designed REST APIs in Express.js, Next.js and Laravel",
+      "Built dashboards for fintech and multi-role systems",
+      "Worked in Agile sprints with Jira, reviews and retrospectives"
     ],
     tech: ["React", "Next.js", "Laravel", "TypeScript", "PostgreSQL", "Docker"],
     type: "education"

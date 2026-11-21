@@ -8,10 +8,10 @@ import { FiMoon, FiSun } from "react-icons/fi";
 const navItems = [
   { id: "home", label: "Home" },
   { id: "about", label: "About" },
+  { id: "projects", label: "Projects" },
   { id: "experience", label: "Experience" },
   { id: "education", label: "Education" },
   { id: "skills", label: "Skills" },
-  { id: "projects", label: "Projects" },
   { id: "contact", label: "Contact" }
 ];
 
