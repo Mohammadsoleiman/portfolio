@@ -17,7 +17,6 @@ import {
 import Button from "../components/Button";
 import TechBubbles from "../components/TechBubbles";
 import "../styles/home.css";
-import { FiTerminal } from "react-icons/fi";
 
 export default function Home({ setActiveSection }) {
   const [wordStep, setWordStep] = useState(0);
@@ -191,7 +190,7 @@ const cvUrl = `${import.meta.env.BASE_URL}${cvFileName}`;
             animate={{ x: 0, opacity: 1 }}
             transition={{ delay: 0.3 }}
           >
-            <span><FiTerminal aria-hidden /> Full Stack Developer</span>
+            <span><span className="open-dot" aria-hidden="true" /> Open to work</span>
             <div className="badge-glow" />
           </motion.div>
 

@@ -976,3 +976,18 @@ html.light .hero-word.is-done {
     transition: none;
   }
 }
+
+/* Hero badge: "Open to work" with a small green status dot */
+.open-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #4ade80;
+  box-shadow: 0 0 0 3px rgba(74, 222, 128, 0.18);
+  flex: none;
+}
+
+html.light .open-dot {
+  background: #16a34a;
+  box-shadow: 0 0 0 3px rgba(22, 163, 74, 0.15);
+}
